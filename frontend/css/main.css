@@ -1,0 +1,423 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("D:/2 курс/web/web_kurs_work/frontend/set/fonts/circe_light.woff");
+@font-face {
+  font-family: "Vera Humana";
+  src: url("../set/fonts/verahumana95.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@import url("D:/2 курс/web/web_kurs_work/frontend/set/fonts/ofont.ru_Circe.ttf");
+@font-face {
+  font-family: "Circe";
+  src: url(../set/fonts/circerounded-regular.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  border: box;
+  padding: 0;
+  margin: 0;
+}
+:root {
+  --gap-haircut: 5.25rem;
+  --gap-styling: 5.94rem;
+  --gap-dye: 2.06rem;
+  --gap-care: 7.75rem;
+  --gap-master: 24.44rem;
+  --gap-profi: 25.17rem;
+
+  --haircut: var(--gap-haircut);
+  --styling: var(--gap-styling);
+  --dye: var(--gap-dye);
+  --care: var(--gap-care);
+  --master: var(--gap-master);
+  --profi: var(--gap-profi);
+}
+header {
+  display: flex;
+
+  margin: 0 49px;
+  background-image: url("/frontend/set/image/Womanfon.jpg");
+  background-repeat: no-repeat;
+  background-position: right center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10.86rem;
+  background-color: black;
+}
+.head {
+  display: flex;
+  padding: 12px 0 14px 90px;
+  align-items: center;
+  gap: 18.325rem;
+  align-self: stretch;
+}
+.item-icon {
+  color: #fff;
+  font-family: "Vera Humana";
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 180%;
+  text-transform: uppercase;
+}
+.navigation {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  gap: 3.88rem;
+  flex: 1 0 0;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+.navigation-item {
+  text-decoration: none;
+  color: #fff;
+  font-family: "Circe";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  flex: 1 0 0;
+}
+
+.description-annet {
+  display: flex;
+  padding-left: 6.25rem;
+  align-items: center;
+  gap: 7.5625rem;
+}
+.social-media {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.5rem;
+}
+.item-social {
+  align-self: stretch;
+  align-content: center;
+  color: #fff;
+  font-family: "Vera Humana";
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 180%;
+  text-transform: uppercase;
+}
+
+.annetka-zapis {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.375rem;
+}
+.sign {
+  display: flex;
+  align-items: center;
+  gap: 0.9375rem;
+  align-self: stretch;
+}
+.line-sign {
+  width: 1.375rem;
+  height: 0.0625rem;
+}
+.item-sign {
+  color: #fff;
+  font-family: "Circe";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+  opacity: 0.6;
+}
+.annetka-texts-buttons {
+  display: flex;
+
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.8875rem;
+  align-self: stretch;
+  aspect-ratio: 362/169;
+}
+.annet-item {
+  color: #fff;
+  font-family: "Vera Humana";
+  font-size: 6.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 6.875rem */
+  text-transform: uppercase;
+}
+.annet-inem2 {
+  align-self: stretch;
+  color: #fff;
+  font-family: "Circe";
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  padding-right: 250px;
+  width: 100%;
+  max-width: 490px;
+}
+.buttons-annet {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.875rem;
+  align-self: stretch;
+}
+.write-button {
+  display: flex;
+
+  padding: 1.1875rem 4.125rem 1.125rem 4.125rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  background: #71165b;
+  box-shadow: 0 22px 44px 0 rgba(113, 22, 92, 0.3);
+}
+.favor-button {
+  display: flex;
+
+  padding: 1.1875rem 3.625rem 1.125rem 3.6875rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  background: none;
+  border: 1px solid #fff;
+}
+.items-button-annet {
+  color: #fff;
+  font-family: "Circe";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 180%;
+  text-transform: uppercase;
+}
+
+.phone-address {
+  display: flex;
+  height: 5rem;
+  padding-left: 6.25rem;
+  align-items: flex-start;
+  gap: 9.7375rem;
+  align-self: stretch;
+}
+.address {
+  color: #fff;
+  font-family: "Circe";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%; /* 1.6rem */
+  opacity: 0.6;
+}
+.phone-number {
+  color: #fff;
+  font-family: "Circe";
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 180%; /* 2.25rem */
+  text-transform: uppercase;
+}
+.favors-costs {
+  display: flex;
+  margin: 0 49px;
+  padding: 6.6875rem 6.25rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
+  background-color: #111111;
+}
+.container-hairStyle-favors {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3.425rem;
+  align-self: stretch;
+}
+.item-favorsCosts {
+  align-self: stretch;
+  color: #fff;
+  font-family: "Vera Humana";
+  font-size: 3.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 4.225rem */
+  text-transform: uppercase;
+}
+.hair-style {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.8025rem;
+  align-self: stretch;
+}
+.hair {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.625rem;
+}
+.container-kinds-hairStyle {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.9375rem;
+}
+.kinds-hairStyle {
+  display: flex;
+  gap: var(--haircut);
+  align-self: stretch;
+  align-items: flex-start;
+  flex: 1;
+}
+.kinds-styling {
+  gap: var(--styling);
+}
+.kinds-dye {
+  gap: var(--dye);
+}
+.kinds-care {
+  gap: var(--care);
+}
+.items-kinds-hair {
+  text-decoration: none;
+  color: #fff;
+
+  /* h3 */
+  font-family: "Vera Humana";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 1.4625rem */
+  text-transform: uppercase;
+}
+.line-style {
+  opacity: 0.2;
+  background: #fff;
+  width: 0.005rem;
+  height: 26.68781rem;
+}
+.description-hairstyle {
+  display: flex;
+  width: 36.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3.4375rem;
+  flex: 1 0 0;
+}
+.sign-desription {
+  display: flex;
+  max-width: 36.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.55rem;
+  align-self: stretch;
+}
+.tittle {
+  color: #fff;
+  opacity: 0.7;
+  /* h3 */
+  font-family: "Vera Humana";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 90%; /* 1.4625rem */
+  text-transform: uppercase;
+  align-self: stretch;
+}
+.description-hairCut {
+  align-self: stretch;
+  color: #fff;
+  opacity: 0.6;
+  width: 100%;
+  max-width: 29rem;
+  /* основной текст */
+  font-family: "Circe";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 165%; /* 1.6rem */
+}
+.costs-master {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.625rem;
+  align-self: stretch;
+}
+.haircut-masterCost {
+  display: flex;
+  align-items: flex-start;
+  gap: 24.6875rem;
+  align-self: stretch;
+}
+.haircut-masterCost1 {
+  gap: var(--master);
+}
+.haircut-masterCost2 {
+  gap: var(--profi);
+}
+.master-hair {
+  color: #fff;
+  font-family: "Circe";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 1.4625rem */
+}
+.cost-hair {
+  color: #fff;
+  font-family: "Circe";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 1.3rem */
+}
+.line-haircut {
+  width: 36.75rem;
+  height: 0.0625rem;
+  opacity: 0.4;
+  background: #727272;
+}
+.with-line {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3625rem;
+  align-self: stretch;
+}
+.write-button-style {
+  display: flex;
+  padding: 16px 57px 15px 57px;
+  align-items: center;
+  filter: drop-shadow(0 22px 44px rgba(113, 22, 92, 0.3));
+  background-color: #71165b;
+  color: #fff;
+  font-family: "Circe";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 180%; /* 1.8rem */
+  text-transform: uppercase;
+}
+.cost-with-button {
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+}
+.master-button {
+  padding: 16px 45px 15px 45px;
+  filter: none;
+  background: none;
+  border: 1px solid #fff;
+}
+.buttons-written-master {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
