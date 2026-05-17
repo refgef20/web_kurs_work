@@ -14,42 +14,52 @@
   font-style: normal;
 }
 * {
-  border: box;
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+button {
+  border: none;
 }
 :root {
   --gap-haircut: 5.25rem;
   --gap-styling: 5.94rem;
   --gap-dye: 2.06rem;
   --gap-care: 7.75rem;
-  --gap-master: 24.44rem;
-  --gap-profi: 25.17rem;
-
+  --gap-master: clamp(16.6rem, 34vw, 24.44rem);
+  --gap-profi: clamp(17.25rem, 38vw, 25.17rem);
+  --gap-time-work: 0.9125rem;
+  --gap-contact: 0.91375rem;
+  --gap-revmast: 2.575rem;
   --haircut: var(--gap-haircut);
   --styling: var(--gap-styling);
   --dye: var(--gap-dye);
   --care: var(--gap-care);
   --master: var(--gap-master);
   --profi: var(--gap-profi);
+  --time-work: var(--gap-time-work);
+  --contact: var(--gap-contact);
+  --revmast: var(--gap-revmast);
 }
 header {
   display: flex;
-
-  margin: 0 49px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100rem;
   background-image: url("/frontend/set/image/Womanfon.jpg");
   background-repeat: no-repeat;
-  background-position: right center;
+  background-position: right;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10.86rem;
+  gap: 10.96rem;
   background-color: black;
 }
 .head {
   display: flex;
-  padding: 12px 0 14px 90px;
+  padding: 10px 0 14px 90px;
   align-items: center;
-  gap: 18.325rem;
+  gap: clamp(3rem, 29.39vw, 18.25rem);
   align-self: stretch;
 }
 .item-icon {
@@ -66,9 +76,7 @@ header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  align-content: center;
-  gap: 3.88rem;
-  flex: 1 0 0;
+  gap: 4.18rem;
   align-self: stretch;
   flex-wrap: wrap;
 }
@@ -79,8 +87,7 @@ header {
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 160%;
-  flex: 1 0 0;
+  line-height: 120%;
 }
 
 .description-annet {
@@ -94,6 +101,7 @@ header {
   flex-direction: column;
   align-items: flex-start;
   gap: 2.5rem;
+  padding-bottom: 10px;
 }
 .item-social {
   align-self: stretch;
@@ -141,6 +149,11 @@ header {
   align-self: stretch;
   aspect-ratio: 362/169;
 }
+.desc-but {
+  display: flex;
+  flex-direction: column;
+  gap: 1.9rem;
+}
 .annet-item {
   color: #fff;
   font-family: "Vera Humana";
@@ -157,8 +170,8 @@ header {
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 150%;
-  padding-right: 250px;
+  line-height: 160%;
+
   width: 100%;
   max-width: 490px;
 }
@@ -200,11 +213,13 @@ header {
 
 .phone-address {
   display: flex;
-  height: 5rem;
+
   padding-left: 6.25rem;
   align-items: flex-start;
   gap: 9.7375rem;
   align-self: stretch;
+  padding-top: 5px;
+  padding-bottom: 46px;
 }
 .address {
   color: #fff;
@@ -226,8 +241,10 @@ header {
 }
 .favors-costs {
   display: flex;
-  margin: 0 49px;
-  padding: 6.6875rem 6.25rem;
+  width: 100%;
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: 6.6875rem 0rem 6.6875rem 6.25rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.625rem;
@@ -237,7 +254,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 3.425rem;
+  gap: 3.625rem;
   align-self: stretch;
 }
 .item-favorsCosts {
@@ -266,7 +283,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2.9375rem;
+  gap: 3.0375rem;
 }
 .kinds-hairStyle {
   display: flex;
@@ -296,6 +313,21 @@ header {
   line-height: 130%; /* 1.4625rem */
   text-transform: uppercase;
 }
+.view-favor {
+  color: #fff;
+  font-family: "Vera Humana";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 1.4625rem */
+  text-transform: uppercase;
+}
+.view-favor {
+  display: none;
+}
+.hair > img {
+  display: none;
+}
 .line-style {
   opacity: 0.2;
   background: #fff;
@@ -304,19 +336,15 @@ header {
 }
 .description-hairstyle {
   display: flex;
-  width: 36.75rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: 3.4375rem;
-  flex: 1 0 0;
+  gap: 3.5375rem;
 }
 .sign-desription {
   display: flex;
-  max-width: 36.75rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 1.55rem;
-  align-self: stretch;
 }
 .tittle {
   color: #fff;
@@ -353,7 +381,7 @@ header {
 .haircut-masterCost {
   display: flex;
   align-items: flex-start;
-  gap: 24.6875rem;
+  gap: clamp(16.8rem, 22vw, 24.69rem);
   align-self: stretch;
 }
 .haircut-masterCost1 {
@@ -379,10 +407,12 @@ header {
   line-height: 130%; /* 1.3rem */
 }
 .line-haircut {
-  width: 36.75rem;
-  height: 0.0625rem;
+  width: 100%;
+  max-width: 36.75rem;
+  max-height: 0.0625rem;
   opacity: 0.4;
   background: #727272;
+  height: 100%;
 }
 .with-line {
   display: flex;
@@ -421,10 +451,14 @@ header {
   align-items: center;
   gap: 1.25rem;
 }
+
 .container-ourMaster {
-  margin: 0 49px;
-  display: inline-flex;
-  padding: 4.875rem 2.5rem 5.875rem 2.5rem;
+  margin: 0 auto;
+
+  width: 100%;
+  max-width: 100rem;
+  display: flex;
+  padding: 4.875rem 0rem 5.875rem 2.5rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.625rem;
@@ -440,7 +474,10 @@ header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 3.125rem;
+  gap: 3.325rem;
+}
+.master > img {
+  display: none;
 }
 .tittle-master {
   color: #fff;
@@ -521,9 +558,11 @@ header {
   text-transform: uppercase;
 }
 .container-for-review {
-  margin: 0 49px;
+  margin: 0 auto;
   display: flex;
-  padding: 2.875rem 2.5rem;
+  width: 100%;
+  max-width: 100rem;
+  padding: 2.575rem 0rem 2.5rem 2.5rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.625rem;
@@ -539,7 +578,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 3.4375rem;
+  gap: 3.6375rem;
 }
 .tittle-review {
   color: #fff;
@@ -558,12 +597,15 @@ header {
   align-items: center;
   gap: 2.5rem;
 }
-
+.container-for-review-with-title > img {
+  display: none;
+}
 .container-our-works {
+  width: 100%;
+  max-width: 100rem;
   margin: 0 auto;
-  margin: 0 49px;
   display: flex;
-  padding: 1.65rem 6.25rem 13.8125rem 6.25rem;
+  padding: 1.95rem 0rem 13.8125rem 6.25rem;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -578,7 +620,7 @@ header {
 }
 .tittle-works {
   color: #fff;
-  padding-left: 10px;
+
   /* h2 */
   font-family: "Vera Humana";
   font-size: 3.25rem;
@@ -588,7 +630,6 @@ header {
   text-transform: uppercase;
 }
 .inst {
-  padding-left: 10px;
   color: #fff;
   font-family: Circe;
   font-size: 1.125rem;
@@ -598,11 +639,11 @@ header {
 }
 .our-works-ex {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   align-content: center;
   gap: 1.875rem;
-  align-self: stretch;
+
   flex-wrap: wrap;
 }
 .highlight {
@@ -616,9 +657,11 @@ header {
 }
 
 .container-product {
-  margin: 0 49px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100rem;
   display: flex;
-  padding: 5.9625rem 9.0625rem 2.125rem 6.25rem;
+  padding: 5.9625rem 0rem 2.125rem 6.25rem;
   justify-content: space-between;
   align-items: flex-start;
   background-image: url("/frontend/set/image/fon-production.png");
@@ -709,4 +752,508 @@ header {
   z-index: 7;
   margin-top: -70px;
   margin-left: -90px;
+}
+
+footer {
+  display: flex;
+  width: 100%;
+  max-width: 100rem;
+  background-color: #010101;
+  padding: 6.25rem 0rem 8rem 6.25rem;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 auto;
+}
+.container-for-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6.25rem;
+}
+.cards-allInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(10.675rem, 30.19vw, 35.095rem);
+}
+.menu-with-bitton {
+  display: flex;
+  max-width: 15.6875rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7.35rem;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.7125rem;
+  align-self: stretch;
+}
+.punkt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1375rem;
+  align-self: stretch;
+}
+.punkt1 {
+  gap: var(--time-work);
+}
+.item-punkt1 {
+  color: #fff;
+
+  /* h3 */
+  font-family: "Vera Humana";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 1.4625rem */
+  text-transform: uppercase;
+}
+.item-punkt2 {
+  color: #fff;
+
+  /* основной текст */
+  font-family: "Circe";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 152%; /* 1.6rem */
+  opacity: 0.6;
+  align-self: stretch;
+}
+.social-media2 {
+  display: flex;
+  flex-direction: row;
+  gap: 2.75rem;
+  color: #fff;
+  font-family: "Vera Humana";
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 180%; /* 2.25rem */
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+.button-under-menu {
+  display: flex;
+  padding: 1.1875rem 4.125rem 1.125rem 4.125rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  background: #71165b;
+  box-shadow: 0 22px 44px 0 rgba(113, 22, 92, 0.3);
+  color: #fff;
+  font-family: "Circe";
+  font-size: 1.125rem;
+  font-style: normal;
+  line-height: 180%; /* 2.025rem */
+  text-transform: uppercase;
+}
+.cards-navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9375rem;
+}
+.tittle-card {
+  color: #fff;
+
+  /* h3 */
+  font-family: "Vera Humana";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 1.4625rem */
+  text-transform: uppercase;
+}
+.item-social2 {
+  align-self: stretch;
+  align-content: center;
+  color: #fff;
+  font-family: "Vera Humana";
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+  text-transform: uppercase;
+}
+.line-footer {
+  width: 100%;
+  max-width: 87.5rem;
+  height: 0;
+  stroke-width: 1px;
+  stroke: #fff;
+  opacity: 0.2;
+}
+.footer-with-line {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.675rem;
+  align-self: stretch;
+}
+.footer-with-nav {
+  display: grid;
+  padding-left: 0.9rem;
+  column-gap: 202px;
+  grid-template-rows: repeat(1, fit-content(100%));
+  grid-template-columns: 1fr 2fr 1fr;
+}
+.logo {
+  color: #fff;
+  font-family: "Vera Humana";
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 180%; /* 2.25rem */
+  text-transform: uppercase;
+}
+.copyright {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  grid-row: 1 / span 1;
+  grid-column: 3 / span 1;
+}
+.year {
+  direction: ltr;
+  color: #fff;
+  font-family: "Circe";
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 350;
+  line-height: 180%;
+  opacity: 0.5;
+  /* 1.35rem */
+}
+.navigation2 {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  gap: 3.38rem;
+
+  align-self: stretch;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+}
+.image-wom {
+}
+.head > img {
+  display: none;
+}
+@media (max-width: 1570px) {
+  .image-wom {
+    display: none;
+  }
+  .cards-masters .card:nth-child(3) {
+    display: none;
+  }
+
+  .container-cards-review img:nth-child(3) {
+    display: none;
+  }
+  .tin {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --side-padding: clamp(1.5rem, 5vw, 6.25rem);
+    --gap-master: clamp(2rem, 60vw, 24.44rem);
+    --gap-profi: clamp(2rem, 50vw, 25.17rem);
+  }
+
+  .head {
+    padding-left: var(--side-padding);
+    padding-right: var(--side-padding);
+  }
+
+  .description-annet,
+  .phone-address,
+  .favors-costs,
+  .container-ourMaster,
+  .container-for-review,
+  .container-our-works,
+  .container-product,
+  footer {
+    padding-left: var(--side-padding);
+    padding-right: var(--side-padding);
+  }
+
+  .annet-item {
+    font-size: clamp(3.5rem, 8vw, 6.875rem);
+  }
+}
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1100px) {
+  :root {
+    --side-padding: clamp(1rem, 5vw, 6.25rem);
+  }
+  .our-works-ex > img {
+    width: 100%;
+    height: 100%;
+    max-width: 21.34rem;
+    max-height: 22.44rem;
+  }
+  .footer-with-nav {
+    column-gap: 130px;
+    grid-template-rows: repeat(2, fit-content(100%));
+    grid-template-columns: 1fr 4fr;
+  }
+  .copyright {
+    align-items: flex-start;
+    grid-row: 2 / span 1;
+    grid-column: 2 / span 1;
+  }
+  .head {
+    padding: 15px var(--side-padding);
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .description-annet {
+    padding-left: var(--side-padding);
+    gap: 3rem;
+  }
+
+  .phone-address {
+    padding-left: var(--side-padding);
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .cards-allInfo {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .card {
+    width: 100%;
+    height: 100%;
+    max-width: 21.06rem;
+    max-height: 30.5rem;
+  }
+  .cards-masters {
+    gap: var(--revmast);
+  }
+
+  .container-cards-review {
+    gap: var(--revmast);
+  }
+  .container-cards-review > img {
+    display: block;
+  }
+  .review-master {
+    gap: 3.475rem;
+  }
+  .container-cards-review > img {
+    width: 100%;
+    height: 100%;
+    max-height: 29.31rem;
+    max-width: 21.12rem;
+  }
+
+  .cards-navigation {
+    width: 100%;
+  }
+
+  /* КАРТА: уменьшаем ее, чтобы она не вылетала */
+  .cards-navigation img {
+    width: 100%;
+    max-width: clamp(300px, 100%, 600px);
+    object-fit: cover;
+  }
+  .our-master > img {
+    display: none;
+  }
+
+  .review-clients > img {
+    display: none;
+  }
+  .master > img {
+    display: block;
+  }
+  .container-for-review-with-title > img {
+    display: block;
+  }
+}
+
+@media (max-width: 840px) {
+  .haircut-masterCost {
+    gap: clamp(16.8rem, 35vw, 24.69rem);
+  }
+}
+@media (max-width: 769px) {
+  .head > img {
+    display: block;
+  }
+  .head {
+    justify-content: space-between;
+  }
+  .container-cards-review img {
+    width: clamp(280px, 90vw, 450px);
+  }
+
+  .navigation {
+    display: none;
+  }
+  .our-works-ex {
+    justify-content: center;
+  }
+
+  .our-works-ex img {
+    width: 45%;
+  }
+  .navigation2 {
+    gap: 1.875rem;
+  }
+  .haircut-masterCost {
+    gap: clamp(14.2rem, 20vw, 24.69rem);
+  }
+  .haircut-masterCost2 {
+    gap: clamp(14.8rem, 20vw, 24.69rem);
+  }
+}
+
+@media (max-width: 750px) {
+  .cards-masters .card:nth-child(2) {
+    display: none;
+  }
+  .our-master {
+    justify-content: center;
+  }
+  .container-cards-review img:nth-child(2) {
+    display: none;
+  }
+  .review-clients {
+    justify-content: center;
+  }
+  .container-cards-review {
+    align-self: center;
+  }
+}
+@media (max-width: 692px) {
+  .buttons-written-master {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 630px) {
+  .hair-style {
+    flex-direction: column;
+  }
+  .line-style {
+    display: none;
+  }
+  .container-kinds-hairStyle {
+    display: none;
+  }
+  .hair {
+    border: 1px solid #fff;
+    padding: 1rem 1.25rem 0.9375rem 1.25rem;
+    align-items: center;
+    gap: 9.6875rem;
+  }
+  .hair > p {
+    display: block;
+  }
+  .hair > img {
+    display: block;
+  }
+}
+@media (max-width: 572px) {
+  .social-media {
+    display: none;
+  }
+  .buttons-annet {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 480px) {
+  .annet-item {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  .social-media {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+
+  .buttons-annet,
+  .buttons-written-master {
+    width: 100%;
+  }
+
+  .write-button,
+  .favor-button,
+  .write-button-style {
+    width: 100%;
+    justify-content: center;
+  }
+  .our-works-ex img {
+    width: 100%;
+  }
+  .card-tin {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button-ozon,
+  .button-wild {
+    padding: 1.1rem 0.5rem;
+    width: 100%;
+    justify-content: center;
+  }
+  .cards-navigation > img {
+    max-width: 18rem;
+  }
+  .card-product {
+    padding-left: 0.65rem;
+    padding-right: 0.66rem;
+  }
+  .footer-with-nav {
+    row-gap: 70px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, fit-content(100%));
+  }
+  .copyright {
+    grid-row: 3 / span 1;
+    grid-column: 1 / span 1;
+  }
+  .container-product {
+    padding-left: 7px;
+  }
+  .container-review-master {
+    max-width: clamp(280px, 90vw, 450px);
+  }
+  .card > img {
+    max-width: clamp(280px, 90vw, 450px);
+  }
+}
+@media (max-width: 375px) {
+  .haircut-masterCost {
+    gap: clamp(3.2rem, 34vw, 24.69rem);
+  }
+  .haircut-masterCost2 {
+    gap: clamp(3.2rem, 36vw, 24.69rem);
+  }
+  .review-master {
+    gap: 2.175rem;
+  }
+  .tittle-product {
+    font-size: 2.95rem;
+  }
+  .master-hair {
+    font-size: 0.98rem;
+  }
+  .cost-hair {
+    font-size: 0.98rem;
+  }
 }
