@@ -3,21 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Document</title>
     <link rel="stylesheet" href="css/main.css" />
+    <script type="module" src="js/pages/main.js"></script>
   </head>
   <body>
     <header>
       <div class="head">
         <p class="item-icon">Annetka.Hair</p>
         <ul class="navigation">
-          <li><a class="navigation-item" href="!#">Услуги</a></li>
+          <li><a class="navigation-item" href="#favor">Услуги</a></li>
           <li><a class="navigation-item" href="">Мастера</a></li>
           <li><a class="navigation-item" href="">Отзывы</a></li>
           <li><a class="navigation-item" href="">Работы</a></li>
           <li><a class="navigation-item" href="">Контакты</a></li>
         </ul>
-        <img src="/frontend/set/icon/Меню бургер.svg" alt="" />
+        <div class="burger">
+          <span></span>
+        </div>
       </div>
       <div class="description-annet">
         <div class="social-media">
@@ -55,27 +59,45 @@
       </div>
     </header>
     <main>
-      <section class="favors-costs">
+      <section class="favors-costs" id="favor">
         <div class="container-hairStyle-favors">
           <p class="item-favorsCosts">услуги и цены</p>
           <div class="hair-style">
             <div class="hair">
               <ul class="container-kinds-hairStyle">
-                <li class="kinds-hairStyle">
-                  <a href="!#" class="items-kinds-hair">стрижка</a>
-                  <img src="../frontend/set/icon/plus.svg" alt="" />
-                </li>
-                <li class="kinds-hairStyle kinds-styling">
+                <div class="list-subcat">
+                  <li class="kinds-hairStyle" data-id="haircut">
+                    <a href="!#" class="items-kinds-hair">стрижка</a>
+                    <img
+                      src="../frontend/set/icon/plus.svg"
+                      alt=""
+                      class="toggle-icon"
+                    />
+                  </li>
+                </div>
+                <li class="kinds-hairStyle kinds-styling" data-id="styling">
                   <a href="!#" class="items-kinds-hair">укладка</a>
-                  <img src="../frontend/set/icon/plus.svg" alt="" />
+                  <img
+                    src="../frontend/set/icon/plus.svg"
+                    alt=""
+                    class="toggle-icon"
+                  />
                 </li>
-                <li class="kinds-hairStyle kinds-dye">
+                <li class="kinds-hairStyle kinds-dye" data-id="coloring">
                   <a href="!#" class="items-kinds-hair">окрашивание</a>
-                  <img src="../frontend/set/icon/plus.svg" alt="" />
+                  <img
+                    src="../frontend/set/icon/plus.svg"
+                    alt=""
+                    class="toggle-icon"
+                  />
                 </li>
-                <li class="kinds-hairStyle kinds-care">
+                <li class="kinds-hairStyle kinds-care" data-id="care">
                   <a href="" class="items-kinds-hair">уход</a>
-                  <img src="../frontend/set/icon/plus.svg" alt="" />
+                  <img
+                    src="../frontend/set/icon/plus.svg"
+                    alt=""
+                    class="toggle-icon"
+                  />
                 </li>
               </ul>
               <p class="view-favor">Стрижка</p>
@@ -84,37 +106,34 @@
             <hr class="line-style" />
             <div class="description-hairstyle">
               <div class="sign-desription">
-                <p class="tittle">Cтрижка</p>
+                <!-- <p class="tittle">Cтрижка</p>
                 <p class="description-hairCut">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non,
                   lorem arcu quam platea adipiscing sed lacus. Cursus mattis
                   aenean viverra accumsan. Amet velit ac faucibus vitae.
-                </p>
+                </p> -->
               </div>
               <div class="cost-with-button">
                 <div class="costs-master">
-                  <div class="with-line">
+                  <!-- <div class="with-line">
                     <div class="haircut-masterCost">
-                      <p class="master-hair">Cтрижка у стажёра</p>
-                      <p class="cost-hair">1199 ₽</p>
+                     
                     </div>
                     <hr class="line-haircut" />
-                  </div>
+                  </div> -->
 
-                  <div class="with-line">
+                  <!-- <div class="with-line">
                     <div class="haircut-masterCost haircut-masterCost1">
-                      <p class="master-hair">Стрижка у мастера</p>
-                      <p class="cost-hair">2299 ₽</p>
+                    
                     </div>
                     <hr class="line-haircut" />
-                  </div>
-                  <div class="with-line">
+                  </div> -->
+                  <!-- <div class="with-line">
                     <div class="haircut-masterCost haircut-masterCost2">
-                      <p class="master-hair">Стрижка у профи</p>
-                      <p class="cost-hair">3399 ₽</p>
+                     
                     </div>
                     <hr class="line-haircut" />
-                  </div>
+                  </div> -->
                 </div>
                 <div class="buttons-written-master">
                   <button class="write-button-style">Записаться</button>

@@ -1,0 +1,7 @@
+{
+  "name": "db.json",
+  "version": "1.0.0",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.15"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "services": [
+    {
+      "id": "haircut",
+      "title": "Стрижка",
+      "description": "Профессиональная стрижка волос любой сложности. Индивидуальный подбор формы.",
+      "fromstash": "Стрижка у стажёра",
+      "frommast": "Стрижка у мастера",
+      "frompro": "Стрижка у профи",
+      "startingPricestach": 999,
+      "startingPricemast": 1899,
+      "startingPricepro": 2799,
+      "subcategories": [
+        {
+          "title": "Женская стрижка",
+          "items": [
+            { "name": "Стрижка у стажёра", "price": 1199 },
+            { "name": "Стрижка у мастера", "price": 2299 },
+            { "name": "Стрижка у профи", "price": 3399 }
+          ]
+        },
+        {
+          "title": "Мужская стрижка",
+          "items": [
+            { "name": "Стрижка у стажёра", "price": 999 },
+            { "name": "Стрижка у мастера", "price": 1899 },
+            { "name": "Стрижка у профи", "price": 2799 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "styling",
+      "title": "Укладка",
+      "description": "Создание идеальной укладки для любого случая.",
+      "fromstash": "Укладка у стажёра",
+      "frommast": "Укладка у мастера",
+      "frompro": "Укладка у профи",
+      "startingPricestach": 899,
+      "startingPricemast": 1099,
+      "startingPricepro": 1699,
+      "subcategories": [
+        {
+          "title": "Повседневная укладка",
+          "items": [
+            { "name": "Укладка у стажёра", "price": 899 },
+            { "name": "Укладка у мастера", "price": 1099 },
+            { "name": "Укладка у мастера", "price": 1699 }
+          ]
+        },
+        {
+          "title": "Вечерняя укладка",
+          "items": [
+            { "name": "Укладка у стажёра", "price": 1499 },
+            { "name": "Укладка у мастера", "price": 2499 },
+            { "name": "Укладка у профи", "price": 3500 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coloring",
+      "title": "Окрашивание",
+      "description": "Профессиональное окрашивание премиальными красителями.",
+      "fromstash": "Окрашивание у стажёра",
+      "frommast": "Окрашивание у мастера",
+      "frompro": "Окрашивание у профи",
+      "startingPricestach": 2199,
+      "startingPricemast": 13299,
+      "startingPricepro": 4399,
+
+      "subcategories": [
+        {
+          "title": "Однотонное окрашивание",
+          "items": [
+            {
+              "name": "Окрашивание корней (стажёр)",
+              "price": 2199
+            },
+            {
+              "name": "Окрашивание корней (мастер)",
+              "price": 3299
+            },
+            {
+              "name": "Окрашивание корней (профи)",
+              "price": 4399
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "care",
+      "title": "Уход",
+      "description": "Восстанавливающие процедуры для здоровья и красоты волос.",
+      "fromstash": "Уход у стажёра",
+      "frommast": "Уход у мастера",
+      "frompro": "Уход у профи",
+      "startingPricestach": 1499,
+      "startingPricemast": 2499,
+      "startingPricepro": 4399,
+      "subcategories": [
+        {
+          "title": "Базовый уход",
+          "items": [
+            { "name": "Уход у стажёра", "price": 1499 },
+            { "name": "Уход у мастера", "price": 2499 },
+            { "name": "Уход у профи", "price": 4399 }
+          ]
+        }
+      ]
+    }
+  ]
+}
