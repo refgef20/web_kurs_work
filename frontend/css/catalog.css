@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("D:/2 курс/web/web_kurs_work/frontend/set/fonts/circe_light.woff");
+@font-face {
+  font-family: "Vera Humana";
+  src: url("../set/fonts/verahumana95.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@import url("D:/2 курс/web/web_kurs_work/frontend/set/fonts/ofont.ru_Circe.ttf");
+@font-face {
+  font-family: "Circe";
+  src: url(../set/fonts/circerounded-regular.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.img-prod {
+  width: 268px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.container-for-every-products {
+  display: flex;
+  width: 268px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 35px;
+}
+.container-for-button-catalog {
+  display: flex;
+  gap: 135px;
+  justify-content: flex-start;
+  border-radius: 90px;
+  align-items: center;
+  padding: 10px 6px;
+  border: 2px solid rgb(255, 255, 255);
+}
+.container-for-button-catalog2 {
+  display: flex;
+  gap: 30px;
+  justify-content: flex-start;
+  border-radius: 90px;
+  align-items: center;
+  padding: 0 6px;
+  border: 2px solid black;
+}
+.container-buttons-amount {
+  display: flex;
+  gap: 30px;
+  justify-content: flex-start;
+  align-items: center;
+}
+.button-emo {
+  border-radius: 20px;
+}
+.container-for-button-catalog1 {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+
+  align-items: center;
+  padding: 0 6px;
+}
+.container-for-catalog {
+  background-color: black;
+  justify-self: center;
+  display: flex;
+  margin: 0 auto;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 50px;
+  width: 100%;
+  max-width: 100rem;
+  padding: 30px 60px;
+}
+.container-for-catalog-cards {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.container-for-buttons {
+  margin-top: 2px;
+  display: flex;
+  padding-left: 24px;
+  align-items: center;
+  align-content: center;
+  gap: 24px;
+}
+.button-login1 {
+  border-radius: 120px;
+  background-color: #fff;
+  padding: 10px 10px;
+  border: 1px solid #000000;
+  font-size: 0.9375rem;
+}
+.category-filter {
+  appearance: base-select;
+  background-color: transparent;
+  padding: 4px 6px;
+  border-radius: 32px;
+  border: 1px solid #ffffff;
+  font-size: 0.9375rem;
+  font-family: Circe;
+  color: #fff;
+}
+
+.find-card {
+  border-radius: 32px;
+  background: transparent;
+  border: 1px solid;
+  padding: 10px 18px 11px 16px;
+  width: 100%;
+  max-width: 270px;
+  font-family: Circe;
+  color: white;
+  font-size: 18px;
+}
+.my-custom-button {
+  border-radius: 32px;
+  border: 1px solid #000000;
+  padding: 10px 20px 11px 17px;
+  font-family: Circe;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0%;
+}
+.container-buttons {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+.buy-button-on-img {
+  top: 15px;
+  right: 15px;
+  background-color: #000;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+  z-index: 10;
+}

@@ -1,0 +1,185 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("D:/2 курс/web/web_kurs_work/frontend/set/fonts/circe_light.woff");
+@font-face {
+  font-family: "Vera Humana";
+  src: url("../set/fonts/verahumana95.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@import url("D:/2 курс/web/web_kurs_work/frontend/set/fonts/ofont.ru_Circe.ttf");
+@font-face {
+  font-family: "Circe";
+  src: url(../set/fonts/circerounded-regular.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.container-for-every-card-mets {
+  display: flex;
+  width: 268px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 35px;
+}
+.item-first-card-mets {
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  font-family: Vera Humana;
+  font-size: 23px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 27.8px;
+}
+.item-first-card-mets1 {
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  font-family: Circe;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  margin-right: 17px;
+  line-height: 21.6px;
+}
+.itame-for-button-for-last3cardmets {
+  color: #000;
+
+  font-family: Roboto;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 5px;
+}
+.itame-for-button-for-last3cardmets1 {
+  color: #ffffff;
+
+  font-family: Circe;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 5px;
+}
+.nav-bar-for-mets {
+  list-style: none;
+  width: 100%;
+  max-width: 710px;
+  height: 40px;
+  margin-top: 2px;
+  display: inline-flex;
+  padding-left: 24px;
+  align-items: center;
+  align-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.button-for-nav-second {
+  border-radius: 32px;
+  background: transparent;
+  padding: 10px 20px 11px 17px;
+  border: 1px solid white;
+}
+.item-for-nav-mets-last3 {
+  text-decoration: none;
+  color: #ffffff;
+  font-family: Circe;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0%;
+}
+
+@media screen and (max-width: 709px) {
+  .container-for-button {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .nav-bar-for-mets {
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .container-for-button {
+    margin: 0;
+    padding-top: 1px;
+  }
+
+  .nav-bar-for-mets {
+    height: 63px;
+    gap: 0.625rem 0.875rem;
+  }
+
+  .button-for-nav-second {
+    padding: 5px 16px 5px 16px;
+  }
+
+  .container-for-item-first-card-mets {
+    margin: 0;
+    padding: 0;
+    max-width: 185px;
+    padding: 0 4px;
+    gap: 11px;
+  }
+  .item-first-card-mets {
+    font-size: 18px;
+    line-height: 1.8rem;
+  }
+  .item-first-card-mets1 {
+    font-size: 12px;
+    line-height: 1.35rem;
+    margin-right: 2px;
+  }
+
+  .container-for-every-card-mets {
+    width: 0;
+    width: 100%;
+    max-width: 13.34rem;
+    gap: 10px;
+  }
+
+  .itame-for-button-for-last3cardmets {
+    font-size: 0.75rem;
+  }
+  .itame-for-button-for-last3cardmets1 {
+    font-size: 0.75rem;
+  }
+  .item-first-card-mets {
+    font-size: 1.125rem;
+    line-height: 1.8rem;
+  }
+}
+
+::selection {
+  background-color: #10a5ea;
+  color: palevioletred;
+}
+
+a {
+  transition: color 0.6s ease-in-out;
+}
+a:hover {
+  color: palevioletred;
+}
+button {
+  transition: 0.4s ease-out;
+}
+button:hover {
+  transform: scale(1.2);
+}
+button:active {
+  transform: scale(0.43);
+}
+
+.container-for-every-card-mets {
+  transition: 0.5s ease-in-out;
+}
+.container-for-every-card-mets:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(255, 0, 247, 0.572);
+  transform: scale(1.06);
+}

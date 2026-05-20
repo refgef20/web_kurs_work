@@ -14,17 +14,35 @@
         {
           "title": "Женская стрижка",
           "items": [
-            { "name": "Стрижка у стажёра", "price": 1199 },
-            { "name": "Стрижка у мастера", "price": 2299 },
-            { "name": "Стрижка у профи", "price": 3399 }
+            {
+              "name": "Стрижка у стажёра",
+              "price": 1199
+            },
+            {
+              "name": "Стрижка у мастера",
+              "price": 2299
+            },
+            {
+              "name": "Стрижка у профи",
+              "price": 3399
+            }
           ]
         },
         {
           "title": "Мужская стрижка",
           "items": [
-            { "name": "Стрижка у стажёра", "price": 999 },
-            { "name": "Стрижка у мастера", "price": 1899 },
-            { "name": "Стрижка у профи", "price": 2799 }
+            {
+              "name": "Стрижка у стажёра",
+              "price": 999
+            },
+            {
+              "name": "Стрижка у мастера",
+              "price": 1899
+            },
+            {
+              "name": "Стрижка у профи",
+              "price": 2799
+            }
           ]
         }
       ]
@@ -43,17 +61,35 @@
         {
           "title": "Повседневная укладка",
           "items": [
-            { "name": "Укладка у стажёра", "price": 899 },
-            { "name": "Укладка у мастера", "price": 1099 },
-            { "name": "Укладка у мастера", "price": 1699 }
+            {
+              "name": "Укладка у стажёра",
+              "price": 899
+            },
+            {
+              "name": "Укладка у мастера",
+              "price": 1099
+            },
+            {
+              "name": "Укладка у мастера",
+              "price": 1699
+            }
           ]
         },
         {
           "title": "Вечерняя укладка",
           "items": [
-            { "name": "Укладка у стажёра", "price": 1499 },
-            { "name": "Укладка у мастера", "price": 2499 },
-            { "name": "Укладка у профи", "price": 3500 }
+            {
+              "name": "Укладка у стажёра",
+              "price": 1499
+            },
+            {
+              "name": "Укладка у мастера",
+              "price": 2499
+            },
+            {
+              "name": "Укладка у профи",
+              "price": 3500
+            }
           ]
         }
       ]
@@ -68,7 +104,6 @@
       "startingPricestach": 2199,
       "startingPricemast": 13299,
       "startingPricepro": 4399,
-
       "subcategories": [
         {
           "title": "Однотонное окрашивание",
@@ -103,12 +138,171 @@
         {
           "title": "Базовый уход",
           "items": [
-            { "name": "Уход у стажёра", "price": 1499 },
-            { "name": "Уход у мастера", "price": 2499 },
-            { "name": "Уход у профи", "price": 4399 }
+            {
+              "name": "Уход у стажёра",
+              "price": 1499
+            },
+            {
+              "name": "Уход у мастера",
+              "price": 2499
+            },
+            {
+              "name": "Уход у профи",
+              "price": 4399
+            }
           ]
         }
       ]
     }
-  ]
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Kerastase Elixir Ultime",
+      "cost": 4500,
+      "description": "Роскошное многофункциональное масло для волос с арганой, камелией и маслом зародышей кукурузы. Мгновенно придаёт блеск, гладкость и защиту до 230°C.Делает волос мягким",
+      "category": "Professional care",
+      "rating": 4.9,
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEhB9zUb7dy_nBzqLq6D1SPLIHGkd8KrTMsQ&s"
+    },
+    {
+      "id": "2",
+      "name": "Olaplex No.3 Hair Perfector",
+      "cost": 2800,
+      "description": "Домашняя восстанавливающая терапия для волос, которая уменьшает ломкость и визуально укрепляет волосы, восстанавливая повреждения изнутри.Защищает волос от внешних факторов",
+      "category": "Hair treatment",
+      "rating": 4.8,
+      "photo": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "3",
+      "name": "Dyson Airwrap Multi-styler",
+      "cost": 59900,
+      "description": "Революционный стайлер, который завивает, создаёт волны, разглаживает и сушит без экстремально высоких температур. Использует эффект Коанда для универсальной укладки.",
+      "category": "Styling tools",
+      "rating": 4.9,
+      "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "4",
+      "name": "Oribe Lust Repair Shampoo",
+      "cost": 5200,
+      "description": "Ультрапитательный шампунь с био-восстанавливающим комплексом, который восстанавливает повреждённые волосы, бережно очищая и добавляя невероятный блеск.",
+      "category": "Professional care",
+      "rating": 4.7,
+      "photo": "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "5",
+      "name": "Moroccanoil Treatment ",
+      "cost": 3800,
+      "description": "Оригинальное масло для волос с арганой, которое питает, кондиционирует и добавляет блеск. Обогащено аргановым маслом и витаминами для всех типов волос.Создаёт эффект не утяжеляя волос",
+      "category": "Hair treatment",
+      "rating": 4.8,
+      "photo": "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "6",
+      "name": "GHD Platinum+ Styler",
+      "cost": 27900,
+      "description": "Умный выпрямитель с прогнозирующей технологией, которая распознаёт толщину волос и скорость укладки. Создаёт здоровую укладку.",
+      "category": "Styling tools",
+      "rating": 4.9,
+      "photo": "https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "7",
+      "name": "Living Proof Perfect Hair",
+      "cost": 2900,
+      "description": "Продвинутый сухой шампунь, который впитывает жир и пот, добавляя объём и текстуру. Оставляет волосы чистыми и свежими между мытьём.",
+      "category": "Daily care",
+      "rating": 4.6,
+      "photo": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "8",
+      "name": "Redken Acidic Concentrate",
+      "cost": 3400,
+      "description": "Интенсивная восстанавливающая система, которая укрепляет связи волос, восстанавливает повреждения и убирает повреждения.",
+      "category": "Hair treatment",
+      "rating": 4.7,
+      "photo": "data:image/jpeg;base64,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"
+    },
+    {
+      "id": "9",
+      "name": "Hairdresser's Invisible Oil",
+      "cost": 4200,
+      "description": "Многофункциональное масло для волос с 6 невесомыми маслами, которые разглаживают, распутывают и контролируют пушистость.",
+      "category": "Professional care",
+      "rating": 4.8,
+      "photo": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "10",
+      "name": "T3 Micro Cura Luxe Dryer",
+      "cost": 28500,
+      "description": "Профессиональный ионный фен с датчиком Auto Pause и 5 настройками тепла/скорости. Обеспечивает быструю сушку с салонным качеством.",
+      "category": "Styling tools",
+      "rating": 4.7,
+      "photo": "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "11",
+      "name": "K18 Molecular Repair Mask",
+      "cost": 7500,
+      "description": "Революционная пептидная терапия, которая восстанавливает повреждения от обесцвечивания, окрашивания.",
+      "category": "Hair treatment",
+      "rating": 4.9,
+      "photo": "data:image/jpeg;base64,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"
+    },
+    {
+      "id": "12",
+      "name": "Verb Ghost Oil",
+      "cost": 1800,
+      "description": "Невесомое масло моринги, которое разглаживает пушистость, добавляет блеск и защищает волосы от термовоздействия до 230°C.",
+      "category": "Daily care",
+      "rating": 4.6,
+      "photo": "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "13",
+      "name": "Pureology Shampoo",
+      "cost": 3200,
+      "description": "Концентрированный бессульфатный шампунь для сухих окрашенных волос. Обеспечивает интенсивное увлажнение",
+      "category": "Professional care",
+      "rating": 4.8,
+      "photo": "https://images.unsplash.com/photo-1535585209827-a1143ab7be?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "14",
+      "name": "Color Wow Dream Seal",
+      "cost": 2800,
+      "description": "Анти-пуш спрей, который создаёт водонепроницаемую защиту вокруг волос для гладких, блестящих и устойчивых.",
+      "category": "Styling products",
+      "rating": 4.7,
+      "photo": "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      "id": "15",
+      "name": "Briogeo Charcoal Shampoo",
+      "cost": 4200,
+      "description": "Детокс и отшелушивающий уход за кожей головы с бинчотан углём и маслом мяты. Удаляет загрязнения и успокаивает.",
+      "category": "Professional care",
+      "rating": 4.8,
+      "photo": "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80"
+    }
+  ],
+  "cart": [],
+  "favorites": [
+    {
+      "id": "5zk4WEmk4iA",
+      "name": "Olaplex No.3 Hair Perfector",
+      "cost": 2800,
+      "description": "Домашняя восстанавливающая терапия для волос, которая уменьшает ломкость и визуально укрепляет волосы, восстанавливая повреждения изнутри.Защищает волос от внешних факторов",
+      "category": "Hair treatment",
+      "rating": 4.8,
+      "photo": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
