@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="/frontend/css/main.css" />
+     <link rel="stylesheet" href="/frontend/css/catalog.css" />
+      <link rel="stylesheet" href="/frontend/css/media_catalog.css" />
+    <link rel="stylesheet" href="/frontend/css/auth.css" />
+   
+    <script type="module" src="/frontend/js/pages/components.js"></script>
+    <script type="module" src="/frontend/js/pages/auth.js"></script>
+</head>
+<body>
+    <site-header></site-header>
+    <main>
+          <section class="container-for-catalog" style="align-items: center;">
+        <div class="auth-tabs">
+          <button id="tab-login-btn" class="tab-btn active">Sign In</button>
+          <button id="tab-register-btn" class="tab-btn">Register</button>
+        </div>
+
+
+        <div id="login-form-container" class="form-wrapper">
+          <h2 class="form-title">Authorization</h2>
+          <form id="login-form" novalidate>
+            <div class="input-group">
+              <label for="login-username">Username or Email *</label>
+              <input type="text" id="login-username" required />
+            </div>
+            <div class="input-group">
+              <label for="login-password">Password *</label>
+              <input type="password" id="login-password" required />
+            </div>
+            <button type="submit" class="submit-btn">Login</button>
+          </form>
+        </div>
+
+
+        <div id="register-form-container" class="form-wrapper hidden">
+          <h2 class="form-title">Registration</h2>
+          <form id="register-form" novalidate>
+
+            <div class="input-group">
+              <label for="reg-lastname">Last Name*</label>
+              <input type="text" id="reg-lastname" required />
+            </div>
+            <div class="input-group">
+              <label for="reg-firstname">First Name*</label>
+              <input type="text" id="reg-firstname" required />
+            </div>
+            <div class="input-group">
+              <label for="reg-patronymic">Patronymic</label>
+              <input type="text" id="reg-patronymic" />
+            </div>
+
+
+            <div class="input-group">
+              <label for="reg-phone">Phone Number (Belarus, e.g. +375XXXXXXXXX) *</label>
+              <input type="tel" id="reg-phone" placeholder="+375291234567" required />
+            </div>
+
+
+            <div class="input-group">
+              <label for="reg-email">Email Address *</label>
+              <input type="email" id="reg-email" placeholder="example@domain.com" required />
+            </div>
+
+            <div class="input-group">
+              <label for="reg-birthdate">Date of Birth (Must be 16+) *</label>
+              <input type="date" id="reg-birthdate" required />
+            </div>
+
+
+            <div class="input-group">
+              <label for="reg-username">Nickname *</label>
+              <div class="nickname-control">
+                <input type="text" id="reg-username" readonly required />
+                <button type="button" id="generate-nick-btn">Generate</button>
+              </div>
+              <small id="nick-attempts-info" style="color: #666; font-size: 0.8rem;"></small>
+            </div>
+
+
+            <div class="input-group">
+              <label>Password Creation Mode *</label>
+              <div class="radio-group">
+                <label>
+                  <input type="radio" name="pass-mode" value="manual" checked /> Manual
+                </label>
+                <label>
+                  <input type="radio" name="pass-mode" value="auto" /> Auto-generate
+                </label>
+              </div>
+            </div>
+
+            <div id="manual-password-fields">
+              <div class="input-group">
+                <label for="reg-password">Password *</label>
+                <input type="password" id="reg-password" placeholder="Min 8 chars, mixed case, spec symbol" />
+              </div>
+              <div class="input-group">
+                <label for="reg-confirm-password">Confirm Password *</label>
+                <input type="password" id="reg-confirm-password" placeholder="Type again" />
+              </div>
+            </div>
+
+            <div id="auto-password-info" class="hidden">
+              <p>Your password will be generated automatically upon successful submission.</p>
+            </div>
+
+
+            <div class="input-group checkbox-group">
+              <input type="checkbox" id="reg-agreement" required />
+              <label for="reg-agreement">I have read and agree to the <a href="#" id="agreement-link">User Agreement</a> *</label>
+            </div>
+
+            <button type="submit" id="register-submit-btn" class="submit-btn" disabled>Register</button>
+          </form>
+        </div>
+      </section>
+    </main>
+    <site-footer></site-footer>
+
+
+    <div id="agreement-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>User Agreement</h3>
+        <div class="modal-body">
+          <p>This is the standard User Agreement. By using our website, you agree to comply with our Terms & Conditions and Privacy Policy. All designs and code belong to their respective creators.</p>
+        </div>
+        <button id="close-modal-btn" class="my-custom-button">Agree & Close</button>
+      </div>
+    </div>
+    </main>
+
+</body>
+</html>

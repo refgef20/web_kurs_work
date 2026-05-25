@@ -5,11 +5,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       throw new Error(`Ошибка загрузки: ${response.status}`);
     }
     const data = await response.json();
-
     const services = data.services;
+
     if (!services || !Array.isArray(services)) {
       console.error("Нет данных services в JSON");
-      console.log("Полученные данные:", services);
       return;
     }
 
@@ -17,7 +16,100 @@ document.addEventListener("DOMContentLoaded", async () => {
     const pricesBox = document.querySelector(".costs-master");
     const menuItems = document.querySelectorAll(".kinds-hairStyle");
 
-    const renderPrices = (items) =>
+    async function AddToCart(product) {
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (!currentUser) {
+        alert("Пожалуйста, сначала авторизуйтесь!");
+        location.href = "pages/auth.html";
+        return;
+      }
+
+      try {
+        const checkRes = await fetch(
+          `http://localhost:3000/cart?userId=${currentUser.id}&name=${encodeURIComponent(product.name)}`,
+        );
+        const existing = await checkRes.json();
+
+        if (existing.length > 0) {
+          const item = existing[0];
+          const updatedAmount = (item.amount || 1) + 1;
+          await fetch(`http://localhost:3000/cart/${item.id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ amount: updatedAmount }),
+          });
+          alert(`Количество услуги "${product.name}" в корзине обновлено!`);
+        } else {
+          const cartItem = {
+            userId: currentUser.id,
+            productId:
+              "service_" +
+              product.name.toLowerCase().replace(/[^a-z0-9]/gi, "_"),
+            name: product.name,
+            subcategory: product.subcategory || null, // Сохранение подкатегории в БД
+            price: product.price,
+            description: "Услуга салона красоты Annetka.Hair",
+            photo:
+              product.photo ||
+              "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80",
+            amount: 1,
+          };
+          await fetch(`http://localhost:3000/cart`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(cartItem),
+          });
+          alert(`Услуга "${product.name}" добавлена в корзину!`);
+        }
+      } catch (error) {
+        console.error("Ошибка при добавлении в корзину:", error);
+      }
+    }
+
+    async function AddToFavorite(product) {
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (!currentUser) {
+        alert("Пожалуйста, сначала авторизуйтесь!");
+        location.href = "pages/auth.html";
+        return;
+      }
+
+      try {
+        const checkRes = await fetch(
+          `http://localhost:3000/favorites?userId=${currentUser.id}&name=${encodeURIComponent(product.name)}`,
+        );
+        const existing = await checkRes.json();
+
+        if (existing.length > 0) {
+          alert(`Услуга "${product.name}" уже добавлена в избранное!`);
+          return;
+        }
+
+        const favItem = {
+          userId: currentUser.id,
+          productId:
+            "service_" + product.name.toLowerCase().replace(/[^a-z0-9]/gi, "_"),
+          name: product.name,
+          subcategory: product.subcategory || null, // Сохранение подкатегории в БД
+          price: product.price,
+          description: "Услуга салона красоты Annetka.Hair",
+          photo:
+            product.photo ||
+            "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80",
+        };
+
+        await fetch(`http://localhost:3000/favorites`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(favItem),
+        });
+        alert(`Услуга "${product.name}" добавлена в избранное!`);
+      } catch (error) {
+        console.error("Ошибка при добавлении в избранное:", error);
+      }
+    }
+
+    const renderPrices = (items, subcategoryName = null) =>
       items
         .map((item, index) => {
           const gapClass =
@@ -26,11 +118,29 @@ document.addEventListener("DOMContentLoaded", async () => {
               : index === 2
                 ? "haircut-masterCost2"
                 : "";
+
+          // Привязываем подкатегорию к объекту услуги перед кодированием в data-атрибут
+          const itemData = { ...item, subcategory: subcategoryName };
+          const safeItem = encodeURIComponent(JSON.stringify(itemData));
+
+          // Если подкатегория не выбрана (subcategoryName === null), кнопки корзины и избранного скрываются (не рендерятся)
+          const actionButtons = subcategoryName
+            ? `
+              <div class="buttons-row">
+                <button class="btn-cart" data-item="${safeItem}" style="cursor:pointer;background:transparent">🛒</button>
+                <button class="btn-fav" data-item="${safeItem}" style="cursor:pointer;background:none;">❤️</button>
+              </div>
+            `
+            : "";
+
           return `
-            <div class="with-line">
+             <div class="with-line">
               <div class="haircut-masterCost ${gapClass}">
                 <p class="master-hair">${item.name}</p>
-                <p class="cost-hair">${item.price} ₽</p>
+                <div class="price-and-buttons">
+                  <p class="cost-hair">${item.price} ₽</p>
+                  ${actionButtons}
+                </div>
               </div>
               <hr class="line-haircut" />
             </div>
@@ -40,62 +150,88 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const updateView = (service, subcategory = null) => {
       const target = subcategory ?? service;
-
       descriptionBox.innerHTML = `
         <p class="tittle">${target.title}</p>
         <p class="description-hairCut">${target.description ?? ""}</p>
       `;
 
       if (subcategory?.items) {
-        pricesBox.innerHTML = renderPrices(subcategory.items);
+        // Передаем название выбранной подкатегории
+        pricesBox.innerHTML = renderPrices(
+          subcategory.items,
+          subcategory.title,
+        );
       } else {
         const mainItems = [
-          { name: service.fromstash, price: service.startingPricestach },
-          { name: service.frommast, price: service.startingPricemast },
-          { name: service.frompro, price: service.startingPricepro },
+          {
+            name: service.fromstash,
+            price: service.startingPricestach,
+            photo: service.photo,
+          },
+          {
+            name: service.frommast,
+            price: service.startingPricemast,
+            photo: service.photo,
+          },
+          {
+            name: service.frompro,
+            price: service.startingPricepro,
+            photo: service.photo,
+          },
         ];
-        pricesBox.innerHTML = renderPrices(mainItems);
+        // Подкатегория не выбрана — передаем null, кнопки будут скрыты
+        pricesBox.innerHTML = renderPrices(mainItems, null);
       }
+      attachButtonListeners();
     };
+
+    function attachButtonListeners() {
+      pricesBox.querySelectorAll(".btn-cart").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const item = JSON.parse(decodeURIComponent(btn.dataset.item));
+          AddToCart(item);
+        });
+      });
+
+      pricesBox.querySelectorAll(".btn-fav").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const item = JSON.parse(decodeURIComponent(btn.dataset.item));
+          AddToFavorite(item);
+        });
+      });
+    }
 
     const toggleSubcategories = (menuItem, service) => {
       const icon = menuItem.querySelector(".toggle-icon");
-      let list = menuItem.querySelector(".subcategories-list");
+      document
+        .querySelectorAll(".subcategories-list")
+        .forEach((list) => list.remove());
+      menuItems.forEach((item) =>
+        item.querySelector(".toggle-icon")?.classList.remove("rotate"),
+      );
 
-      menuItems.forEach((other) => {
-        if (other !== menuItem) {
-          const otherList = other.querySelector(".subcategories-list");
-          const otherIcon = other.querySelector(".toggle-icon");
-          if (otherList) {
-            otherList.classList.remove("open");
-            setTimeout(() => otherList?.remove(), 400);
-          }
-          otherIcon?.classList.remove("rotate");
-        }
-      });
+      const isActive = menuItem.classList.contains("active-category");
 
-      icon?.classList.toggle("rotate");
+      if (!isActive) {
+        menuItems.forEach((item) => item.classList.remove("active-category"));
+        menuItem.classList.add("active-category");
+        icon?.classList.add("rotate");
 
-      if (!list) {
-        list = document.createElement("ul");
+        const list = document.createElement("ul");
         list.className = "subcategories-list";
 
         service.subcategories?.forEach((sub) => {
           const li = document.createElement("li");
           li.textContent = sub.title;
-          li.addEventListener("click", () => {
-            updateView(service, sub);
-          });
+          li.addEventListener("click", () => updateView(service, sub));
           list.appendChild(li);
         });
 
-        menuItem.appendChild(list);
+        menuItem.insertAdjacentElement("afterend", list);
         requestAnimationFrame(() => list.classList.add("open"));
       } else {
-        list.classList.toggle("open");
-        if (!list.classList.contains("open")) {
-          setTimeout(() => list.remove(), 400);
-        }
+        menuItem.classList.remove("active-category");
+        icon?.classList.remove("rotate");
       }
     };
 
@@ -103,10 +239,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const serviceId = menuItem.dataset.id;
       const service = services.find((s) => s.id === serviceId);
 
-      if (!service) {
-        console.warn(`Услуга с id "${serviceId}" не найдена`);
-        return;
-      }
+      if (!service) return;
 
       const link = menuItem.querySelector(".items-kinds-hair");
       const icon = menuItem.querySelector(".toggle-icon");
@@ -120,10 +253,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         updateView(service);
       });
 
-      // Клик по иконке +
-      icon?.addEventListener("click", () => {
-        toggleSubcategories(menuItem, service);
-      });
+      icon?.addEventListener("click", () =>
+        toggleSubcategories(menuItem, service),
+      );
     });
 
     const firstService = services[0];
@@ -137,6 +269,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   } catch (err) {
     console.error("Ошибка инициализации услуг:", err);
-    console.error("💡 Проверьте путь к db.json и структуру данных!");
   }
 });

@@ -1,65 +1,63 @@
 class SiteHeader extends HTMLElement {
   connectedCallback() {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    let authSection = `<button class="button-login" id="login-nav-btn">Войти</button>`;
+    let adminLink = "";
+
+    if (currentUser) {
+      authSection = `
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 0.9rem; font-weight: 500; color: #fff;">@${currentUser.username}</span>
+          <button class="button-login" id="logout-btn" style="width: auto; padding: 0 12px;">Выйти</button>
+        </div>
+      `;
+      if (currentUser.role === "admin") {
+        adminLink = `<li><a class="navigation-item" href="admin.html" style="color: palevioletred; font-weight: bold;">Админ</a></li>`;
+      }
+    }
     this.innerHTML = `
      <header>
       <div class="head">
         <p class="item-icon">Annetka.Hair</p>
         <ul class="navigation">
-          <li><a class="navigation-item" href="#favor">Услуги</a></li>
-          <li><a class="navigation-item" href="">Мастера</a></li>
-          <li><a class="navigation-item" href="">Отзывы</a></li>
-          <li><a class="navigation-item" href="">Работы</a></li>
-          <li><a class="navigation-item" href="">Контакты</a></li>
+          <li><a class="navigation-item" href="../main.HTML#favor">Услуги</a></li>
+          <li><a class="navigation-item" href="../main.HTML#master">Мастера</a></li>
+          <li><a class="navigation-item" href="feedback.html">Отзывы</a></li>
+          <li><a class="navigation-item" href="../main.HTML">Главная</a></li>
+          <li><a class="navigation-item" href="cart.html">Корзина</a></li>
+          <li><a class="navigation-item" href="catalog.html">Каталог</a></li>
+          <li><a class="navigation-item" href="favorites.html">Избранное</a></li>
+          <li><a class="navigation-item" href="history.html">История заказов</a></li>
+          ${adminLink}
+          <div class="container-for-button">
+             ${authSection}
+          </div>
         </ul>
-        <div class="burger">
-          <span></span>
-        </div>
-      </div>
-      <div class="description-annet">
-        <div class="social-media">
-          <p class="item-social">in</p>
-          <p class="item-social">vk</p>
-          <p class="item-social">fc</p>
-        </div>
-        <div class="annetka-zapis">
-          <div class="sign">
-            <hr class="line-sign" />
-            <p class="item-sign">Салон красоты премиум класса</p>
-          </div>
-          <div class="annetka-texts-buttons">
-            <p class="annet-item">Annetka.Hair</p>
-            <div class="desc-but">
-              <p class="annet-inem2">
-                Annetka Hair - эксклюзивный салон красоты премиум класса,
-                основная миссия которого - подарить Вам красивые волосы
-              </p>
-              <div class="buttons-annet">
-                <button class="write-button">
-                  <p class="items-button-annet">Записаться</p>
-                </button>
-                <button class="favor-button">
-                  <p class="items-button-annet">Наши услуги</p>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="phone-address">
-        <p class="address">Москва, м. Парк Победы, Улица 1812 года, дом 1</p>
-        <p class="phone-number">+7 (995) 099-27-57</p>
       </div>
     </header>
     `;
+    const logoutBtn = this.querySelector("#logout-btn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("currentUser");
+        location.href = "../main.HTML";
+      });
+    }
+
+    const loginNavBtn = this.querySelector("#login-nav-btn");
+    if (loginNavBtn) {
+      loginNavBtn.addEventListener("click", () => {
+        location.href = "auth.html";
+      });
+    }
   }
 }
-
 customElements.define("site-header", SiteHeader);
 
 class SiteFooter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-      <footer>
+     <footer>
       <div class="container-for-footer">
         <div class="cards-allInfo">
           <div class="menu-with-bitton">

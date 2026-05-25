@@ -1,0 +1,833 @@
+document.addEventListener("DOMContentLoaded", async () => {
+  // Безопасное чтение пользователя из localStorage
+  let currentUser = null;
+  try {
+    currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  } catch (e) {
+    console.error("Не удалось разобрать данные пользователя:", e);
+  }
+
+  if (!currentUser || currentUser.role !== "admin") {
+    alert("Доступ запрещен!");
+    location.href = "../main.HTML";
+    return;
+  }
+
+  // Вкладки
+  const tabProducts = document.getElementById("tab-products-btn");
+  const tabServices = document.getElementById("tab-services-btn");
+  const productsSection = document.getElementById("products-admin-section");
+  const servicesSection = document.getElementById("services-admin-section");
+
+  if (tabProducts && tabServices && productsSection && servicesSection) {
+    tabProducts.addEventListener("click", () => {
+      tabProducts.classList.add("active");
+      tabServices.classList.remove("active");
+      productsSection.classList.remove("hidden");
+      servicesSection.classList.add("hidden");
+    });
+
+    tabServices.addEventListener("click", () => {
+      tabServices.classList.add("active");
+      tabProducts.classList.remove("active");
+      servicesSection.classList.remove("hidden");
+      productsSection.classList.add("hidden");
+    });
+  }
+
+  // Элементы формы товаров
+  const productForm = document.getElementById("product-form");
+  const formModeTitle = document.getElementById("form-mode-title");
+  const prodIdInput = document.getElementById("prod-id");
+  const prodNameInput = document.getElementById("prod-name");
+  const prodCostInput = document.getElementById("prod-cost");
+  const prodDescInput = document.getElementById("prod-desc");
+  const prodCategorySelect = document.getElementById("prod-category");
+  const prodPhotoInput = document.getElementById("prod-photo");
+  const productSubmitBtn = document.getElementById("product-submit-btn");
+  const productsContainer = document.getElementById("admin-products-container");
+
+  // Элементы формы услуг (категорий)
+  const serviceForm = document.getElementById("service-form");
+  const serviceFormModeTitle = document.getElementById(
+    "service-form-mode-title",
+  );
+  const servIdInput = document.getElementById("serv-id");
+  const servTitleInput = document.getElementById("serv-title");
+  const servPhotoInput = document.getElementById("serv-photo");
+  const servDescInput = document.getElementById("serv-desc");
+  const servStashName = document.getElementById("serv-stash-name");
+  const servStashPrice = document.getElementById("serv-stash-price");
+  const servMastName = document.getElementById("serv-mast-name");
+  const servMastPrice = document.getElementById("serv-mast-price");
+  const servProName = document.getElementById("serv-pro-name");
+  const servProPrice = document.getElementById("serv-pro-price");
+  const serviceSubmitBtn = document.getElementById("service-submit-btn");
+  const servicesContainer = document.getElementById("admin-services-container");
+
+  const reviewsContainer = document.getElementById("admin-reviews-container");
+  const filterByProduct = document.getElementById("filter-by-product");
+  const filterByUser = document.getElementById("filter-by-user");
+
+  function showError(input, text) {
+    if (!input) return;
+    let errorSpan = input.parentNode.querySelector(".error-message");
+    if (!errorSpan) {
+      errorSpan = document.createElement("span");
+      errorSpan.className = "error-message";
+      input.parentNode.appendChild(errorSpan);
+    }
+    errorSpan.textContent = text;
+    errorSpan.style.display = "block";
+  }
+
+  function hideError(input) {
+    if (!input) return;
+    const errorSpan = input.parentNode.querySelector(".error-message");
+    if (errorSpan) {
+      errorSpan.style.display = "none";
+    }
+  }
+
+  // Валидация товаров
+  const prodInputs = [
+    prodNameInput,
+    prodCostInput,
+    prodDescInput,
+    prodPhotoInput,
+  ];
+  prodInputs.forEach((el) => {
+    if (el) {
+      el.addEventListener("input", () => {
+        hideError(el);
+        validateProductForm();
+      });
+    }
+  });
+
+  function validateProductForm() {
+    if (!productForm) return;
+    let isValid = true;
+    if (!prodNameInput || !prodNameInput.value.trim()) isValid = false;
+    const cost = prodCostInput ? parseFloat(prodCostInput.value) : NaN;
+    if (isNaN(cost) || cost <= 0) isValid = false;
+    if (!prodDescInput || !prodDescInput.value.trim()) isValid = false;
+    if (!prodPhotoInput || !prodPhotoInput.value.trim()) isValid = false;
+
+    if (productSubmitBtn) {
+      productSubmitBtn.disabled = !isValid;
+    }
+  }
+
+  // Валидация базовых услуг
+  const servInputs = [
+    servTitleInput,
+    servPhotoInput,
+    servDescInput,
+    servStashName,
+    servStashPrice,
+    servMastName,
+    servMastPrice,
+    servProName,
+    servProPrice,
+  ];
+  servInputs.forEach((el) => {
+    if (el) {
+      el.addEventListener("input", () => {
+        hideError(el);
+        validateServiceForm();
+      });
+    }
+  });
+
+  function validateServiceForm() {
+    if (!serviceForm) return;
+    let isValid = true;
+    if (!servTitleInput || !servTitleInput.value.trim()) isValid = false;
+    if (!servPhotoInput || !servPhotoInput.value.trim()) isValid = false;
+    if (!servDescInput || !servDescInput.value.trim()) isValid = false;
+
+    const stashP = servStashPrice ? parseFloat(servStashPrice.value) : NaN;
+    const mastP = servMastPrice ? parseFloat(servMastPrice.value) : NaN;
+    const proP = servProPrice ? parseFloat(servProPrice.value) : NaN;
+
+    if (
+      !servStashName ||
+      !servStashName.value.trim() ||
+      isNaN(stashP) ||
+      stashP <= 0
+    )
+      isValid = false;
+    if (
+      !servMastName ||
+      !servMastName.value.trim() ||
+      isNaN(mastP) ||
+      mastP <= 0
+    )
+      isValid = false;
+    if (!servProName || !servProName.value.trim() || isNaN(proP) || proP <= 0)
+      isValid = false;
+
+    if (serviceSubmitBtn) {
+      serviceSubmitBtn.disabled = !isValid;
+    }
+  }
+
+  // Загрузка товаров
+  async function loadCatalog() {
+    if (!productsContainer) return;
+    const response = await fetch("http://localhost:3000/products");
+    const products = await response.json();
+
+    productsContainer.innerHTML = "";
+    if (filterByProduct) {
+      filterByProduct.innerHTML = `<option value="">Все товары</option>`;
+    }
+
+    products.forEach((p) => {
+      const card = document.createElement("div");
+      card.className = "prod-card";
+      card.innerHTML = `
+        <img src="${p.photo}" alt="">
+        <h4>${p.name}</h4>
+        <p class="card-price">${p.price} ₽</p>
+        <div class="card-actions">
+          <button class="edit-btn-style edit-btn" style="position: relative; z-index: 10; pointer-events: auto;">Ред.</button>
+          <button class="delete-btn-style delete-btn" style="position: relative; z-index: 10; pointer-events: auto;">Удалить</button>
+        </div>
+      `;
+
+      card.querySelector(".edit-btn").addEventListener("click", () => {
+        if (formModeTitle)
+          formModeTitle.textContent = `Редактирование: ${p.name}`;
+        if (prodIdInput) prodIdInput.value = p.id;
+        if (prodNameInput) prodNameInput.value = p.name;
+        if (prodCostInput) prodCostInput.value = p.price;
+        if (prodDescInput) prodDescInput.value = p.description;
+        if (prodCategorySelect) prodCategorySelect.value = p.category;
+        if (prodPhotoInput) prodPhotoInput.value = p.photo;
+        validateProductForm();
+        if (tabProducts) tabProducts.click();
+      });
+
+      card.querySelector(".delete-btn").addEventListener("click", async () => {
+        if (confirm(`Удалить товар "${p.name}"?`)) {
+          await fetch(`http://localhost:3000/products/${p.id}`, {
+            method: "DELETE",
+          });
+          loadCatalog();
+        }
+      });
+
+      productsContainer.appendChild(card);
+
+      if (filterByProduct) {
+        const opt = document.createElement("option");
+        opt.value = p.id;
+        opt.textContent = p.name;
+        filterByProduct.appendChild(opt);
+      }
+    });
+  }
+
+  // Загрузка услуг
+  async function loadServices() {
+    if (!servicesContainer) return;
+    const response = await fetch("http://localhost:3000/services");
+    const services = await response.json();
+
+    servicesContainer.innerHTML = "";
+
+    services.forEach((s) => {
+      // Генерация HTML для подкатегорий
+      let subcategoriesHTML = "";
+      if (s.subcategories && s.subcategories.length > 0) {
+        subcategoriesHTML = `
+          <div class="admin-service-subcategories">
+            ${s.subcategories
+              .map(
+                (sub, index) => `
+              <div class="admin-subcat-block">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 4px; margin-bottom: 6px;">
+                  <p class="admin-subcat-title" style="margin: 0; border: none; padding: 0;">${sub.title}</p>
+                  <div style="display: flex; gap: 5px;">
+                    <button class="edit-sub-inline-btn my-custom-button" data-service-id="${s.id}" data-sub-idx="${index}" style="position: relative; z-index: 10; pointer-events: auto; padding: 2px 8px; font-size: 11px; background: #fff; color: #000; border: 1px solid #fff; cursor: pointer; border-radius: 12px;">Ред.</button>
+                    <button class="delete-sub-inline-btn my-custom-button" data-service-id="${s.id}" data-sub-idx="${index}" style="position: relative; z-index: 10; pointer-events: auto; padding: 2px 8px; font-size: 11px; background-color: palevioletred; color: #fff; border: none; cursor: pointer; border-radius: 12px;">Уд.</button>
+                  </div>
+                </div>
+                <ul class="admin-subcat-items">
+                  ${sub.items
+                    .map(
+                      (item) => `
+                    <li>
+                      <span>${item.name}</span>
+                      <span class="admin-price-badge">${item.price} ₽</span>
+                    </li>
+                  `,
+                    )
+                    .join("")}
+                </ul>
+              </div>
+            `,
+              )
+              .join("")}
+              <!-- Кнопка добавления новой подкатегории -->
+              <div style="text-align: right; margin-top: 10px;">
+                <button class="add-sub-inline-btn my-custom-button" data-service-id="${s.id}" style="position: relative; z-index: 10; pointer-events: auto; padding: 4px 12px; font-size: 11px; background-color: #2ecc71; color: #fff; border: none; cursor: pointer; border-radius: 12px; font-weight: bold;">+ Добавить подкатегорию</button>
+              </div>
+          </div>
+        `;
+      } else {
+        subcategoriesHTML = `
+          <div class="admin-service-subcategories">
+            <div class="admin-subcat-block">
+              <p class="admin-subcat-title">Базовые тарифы</p>
+              <ul class="admin-subcat-items">
+                <li>
+                  <span>${s.fromstash || "Услуга у стажёра"}</span>
+                  <span class="admin-price-badge">${s.startingPricestach || s.price || 0} ₽</span>
+                </li>
+                <li>
+                  <span>${s.frommast || "Услуга у мастера"}</span>
+                  <span class="admin-price-badge">${s.startingPricemast || s.price || 0} ₽</span>
+                </li>
+                <li>
+                  <span>${s.frompro || "Услуга у профи"}</span>
+                  <span class="admin-price-badge">${s.startingPricepro || s.price || 0} ₽</span>
+                </li>
+              </ul>
+            </div>
+            <!-- Кнопка добавления новой подкатегории -->
+            <div style="text-align: right; margin-top: 10px;">
+              <button class="add-sub-inline-btn my-custom-button" data-service-id="${s.id}" style="position: relative; z-index: 10; pointer-events: auto; padding: 4px 12px; font-size: 11px; background-color: #7d12af; color: #fff; border: none; cursor: pointer; border-radius: 12px; font-weight: bold;">+ Добавить подкатегорию</button>
+            </div>
+          </div>
+        `;
+      }
+
+      const card = document.createElement("div");
+      card.className = "prod-card";
+      card.innerHTML = `
+        <img src="${s.photo}" alt="">
+        <h4>${s.title}</h4>
+        <p class="card-price">от ${s.startingPricestach} ₽</p>
+        ${subcategoriesHTML}
+        <div class="card-actions">
+          <button class="edit-btn-style edit-serv-btn" style="position: relative; z-index: 10; pointer-events: auto;">Ред. Категорию</button>
+          <button class="delete-btn-style delete-serv-btn" style="position: relative; z-index: 10; pointer-events: auto;">Удалить</button>
+        </div>
+      `;
+
+      // Редактирование основной категории
+      card.querySelector(".edit-serv-btn").addEventListener("click", () => {
+        if (serviceFormModeTitle)
+          serviceFormModeTitle.textContent = `Редактирование категории: ${s.title}`;
+        if (servIdInput) servIdInput.value = s.id;
+        if (servTitleInput) servTitleInput.value = s.title;
+        if (servPhotoInput) servPhotoInput.value = s.photo;
+        if (servDescInput) servDescInput.value = s.description;
+        if (servStashName) servStashName.value = s.fromstash;
+        if (servStashPrice) servStashPrice.value = s.startingPricestach;
+        if (servMastName) servMastName.value = s.frommast;
+        if (servMastPrice) servMastPrice.value = s.startingPricemast;
+        if (servProName) servProName.value = s.frompro;
+        if (servProPrice) servProPrice.value = s.startingPricepro;
+        validateServiceForm();
+
+        // Плавная прокрутка к форме редактирования категории
+        if (serviceForm) {
+          serviceForm.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+
+      card
+        .querySelector(".delete-serv-btn")
+        .addEventListener("click", async () => {
+          if (
+            confirm(
+              `Удалить основную услугу "${s.title}" и все её подкатегории?`,
+            )
+          ) {
+            await fetch(`http://localhost:3000/services/${s.id}`, {
+              method: "DELETE",
+            });
+            loadServices();
+          }
+        });
+
+      // Быстрое добавление подкатегории (+) из карточки (через модальное окно)
+      card.querySelectorAll(".add-sub-inline-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const serviceId = btn.getAttribute("data-service-id");
+          showSubcategoryModal(serviceId, null);
+        });
+      });
+
+      // Инлайн-редактирование подкатегории из карточки (через модальное окно)
+      card.querySelectorAll(".edit-sub-inline-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const serviceId = btn.getAttribute("data-service-id");
+          const subIdx = parseInt(btn.getAttribute("data-sub-idx"));
+          showSubcategoryModal(serviceId, subIdx);
+        });
+      });
+
+      // Инлайн-удаление подкатегории из карточки
+      card.querySelectorAll(".delete-sub-inline-btn").forEach((btn) => {
+        btn.addEventListener("click", async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const serviceId = btn.getAttribute("data-service-id");
+          const subIdx = parseInt(btn.getAttribute("data-sub-idx"));
+
+          if (confirm("Вы действительно хотите удалить эту подкатегорию?")) {
+            try {
+              const res = await fetch(
+                `http://localhost:3000/services/${serviceId}`,
+              );
+              const service = await res.json();
+
+              service.subcategories.splice(subIdx, 1);
+
+              await fetch(`http://localhost:3000/services/${serviceId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(service),
+              });
+
+              alert("Подкатегория успешно удалена!");
+              await loadServices();
+            } catch (err) {
+              console.error(err);
+            }
+          }
+        });
+      });
+
+      servicesContainer.appendChild(card);
+    });
+  }
+
+  // Динамически создаваемое модальное окно для добавления/редактирования подкатегорий
+  async function showSubcategoryModal(serviceId, subIdx = null) {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/services/${serviceId}`,
+      );
+      const service = await response.json();
+
+      let subcatData = {
+        title: "",
+        items: [
+          { name: "Служба у стажёра", price: "", photo: "" },
+          { name: "Служба у мастера", price: "", photo: "" },
+          { name: "Служба у профи", price: "", photo: "" },
+        ],
+      };
+
+      if (
+        subIdx !== null &&
+        service.subcategories &&
+        service.subcategories[subIdx]
+      ) {
+        subcatData = JSON.parse(JSON.stringify(service.subcategories[subIdx]));
+      }
+
+      // Создаем фон модального окна
+      const modalOverlay = document.createElement("div");
+      modalOverlay.style.position = "fixed";
+      modalOverlay.style.top = "0";
+      modalOverlay.style.left = "0";
+      modalOverlay.style.width = "100%";
+      modalOverlay.style.height = "100%";
+      modalOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.85)";
+      modalOverlay.style.zIndex = "10000";
+      modalOverlay.style.display = "flex";
+      modalOverlay.style.justifyContent = "center";
+      modalOverlay.style.alignItems = "center";
+      modalOverlay.style.padding = "20px";
+      modalOverlay.style.boxSizing = "border-box";
+
+      // Контейнер окна с прокруткой
+      const modalContent = document.createElement("div");
+      modalContent.style.backgroundColor = "#111";
+      modalContent.style.border = "1px solid #333";
+      modalContent.style.borderRadius = "12px";
+      modalContent.style.width = "100%";
+      modalContent.style.maxWidth = "550px";
+      modalContent.style.maxHeight = "90vh";
+      modalContent.style.overflowY = "auto";
+      modalContent.style.padding = "25px";
+      modalContent.style.boxSizing = "border-box";
+      modalContent.style.color = "#fff";
+      modalContent.style.fontFamily = "sans-serif";
+
+      const headerText =
+        subIdx === null
+          ? "Создать подкатегорию"
+          : `Редактирование: ${subcatData.title}`;
+
+      modalContent.innerHTML = `
+        <h2 style="margin-top:0; border-bottom:1px solid #333; padding-bottom:10px; color:#fff; font-size:1.4rem;">${headerText}</h2>
+        <form id="dyn-subcat-form" style="display:flex; flex-direction:column; gap:12px; margin-top:15px;">
+          
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <label style="font-size:13px; color:#aaa;">Название подкатегории *</label>
+            <input type="text" id="dyn-subcat-title" value="${subcatData.title}" required style="padding:8px; border-radius:6px; border:1px solid #333; background:#222; color:#fff;" />
+          </div>
+
+          <!-- СТАЖЕР -->
+          <div style="border-bottom:1px solid #222; margin-top:10px; padding-bottom:3px;">
+            <h4 style="margin:0; color:#fff;">Тариф: Стажёр</h4>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <label style="font-size:11px; color:#aaa;">Название *</label>
+              <input type="text" id="dyn-stash-name" value="${subcatData.items[0]?.name || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+            </div>
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <label style="font-size:11px; color:#aaa;">Цена (₽) *</label>
+              <input type="number" id="dyn-stash-price" value="${subcatData.items[0]?.price || ""}" min="1" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:3px;">
+            <label style="font-size:11px; color:#aaa;">Ссылка на фото *</label>
+            <input type="text" id="dyn-stash-photo" value="${subcatData.items[0]?.photo || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+          </div>
+
+          <!-- МАСТЕР -->
+          <div style="border-bottom:1px solid #222; margin-top:10px; padding-bottom:3px;">
+            <h4 style="margin:0; color:#fff;">Тариф: Мастер</h4>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <label style="font-size:11px; color:#aaa;">Название *</label>
+              <input type="text" id="dyn-mast-name" value="${subcatData.items[1]?.name || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+            </div>
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <label style="font-size:11px; color:#aaa;">Цена (₽) *</label>
+              <input type="number" id="dyn-mast-price" value="${subcatData.items[1]?.price || ""}" min="1" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:3px;">
+            <label style="font-size:11px; color:#aaa;">Ссылка на фото *</label>
+            <input type="text" id="dyn-mast-photo" value="${subcatData.items[1]?.photo || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+          </div>
+
+          <!-- ПРОФИ -->
+          <div style="border-bottom:1px solid #222; margin-top:10px; padding-bottom:3px;">
+            <h4 style="margin:0; color:#fff;">Тариф: Профи</h4>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <label style="font-size:11px; color:#aaa;">Название *</label>
+              <input type="text" id="dyn-pro-name" value="${subcatData.items[2]?.name || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+            </div>
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <label style="font-size:11px; color:#aaa;">Цена (₽) *</label>
+              <input type="number" id="dyn-pro-price" value="${subcatData.items[2]?.price || ""}" min="1" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:3px;">
+            <label style="font-size:11px; color:#aaa;">Ссылка на фото *</label>
+            <input type="text" id="dyn-pro-photo" value="${subcatData.items[2]?.photo || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+          </div>
+
+          <div style="display:flex; gap:10px; margin-top:15px;">
+            <button type="submit" style="flex:1; padding:10px; border:none; border-radius:6px; background:#2ecc71; color:#fff; font-weight:bold; cursor:pointer;">Сохранить</button>
+            <button type="button" id="dyn-cancel-btn" style="padding:10px 20px; border:1px solid #444; border-radius:6px; background:#222; color:#fff; cursor:pointer;">Отмена</button>
+          </div>
+        </form>
+      `;
+
+      modalOverlay.appendChild(modalContent);
+      document.body.appendChild(modalOverlay);
+
+      // Запрещаем прокрутку фона страницы
+      document.body.style.overflow = "hidden";
+
+      const closeModal = () => {
+        document.body.removeChild(modalOverlay);
+        document.body.style.overflow = "auto";
+      };
+
+      modalContent
+        .querySelector("#dyn-cancel-btn")
+        .addEventListener("click", closeModal);
+
+      modalContent
+        .querySelector("#dyn-subcat-form")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const newSubcat = {
+            title: document.getElementById("dyn-subcat-title").value.trim(),
+            items: [
+              {
+                name: document.getElementById("dyn-stash-name").value.trim(),
+                price: parseFloat(
+                  document.getElementById("dyn-stash-price").value,
+                ),
+                photo: document.getElementById("dyn-stash-photo").value.trim(),
+              },
+              {
+                name: document.getElementById("dyn-mast-name").value.trim(),
+                price: parseFloat(
+                  document.getElementById("dyn-mast-price").value,
+                ),
+                photo: document.getElementById("dyn-mast-photo").value.trim(),
+              },
+              {
+                name: document.getElementById("dyn-pro-name").value.trim(),
+                price: parseFloat(
+                  document.getElementById("dyn-pro-price").value,
+                ),
+                photo: document.getElementById("dyn-pro-photo").value.trim(),
+              },
+            ],
+          };
+
+          if (!service.subcategories) {
+            service.subcategories = [];
+          }
+
+          if (subIdx === null) {
+            service.subcategories.push(newSubcat);
+          } else {
+            service.subcategories[subIdx] = newSubcat;
+          }
+
+          try {
+            await fetch(`http://localhost:3000/services/${serviceId}`, {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(service),
+            });
+
+            alert(
+              subIdx === null
+                ? "Подкатегория добавлена!"
+                : "Подкатегория обновлена!",
+            );
+            closeModal();
+            await loadServices();
+          } catch (err) {
+            console.error(err);
+            alert("Ошибка сохранения!");
+          }
+        });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // Добавление / Редактирование товаров
+  if (productForm) {
+    productForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const costValue = parseFloat(prodCostInput.value);
+
+      const productData = {
+        name: prodNameInput.value.trim(),
+        price: costValue,
+        description: prodDescInput.value.trim(),
+        category: prodCategorySelect.value,
+        photo: prodPhotoInput.value.trim(),
+        rating: 5.0,
+      };
+
+      const editId = prodIdInput.value;
+
+      try {
+        if (editId) {
+          await fetch(`http://localhost:3000/products/${editId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(productData),
+          });
+          alert("Товар обновлен!");
+        } else {
+          await fetch(`http://localhost:3000/products`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(productData),
+          });
+          alert("Товар успешно добавлен в систему!");
+        }
+
+        productForm.reset();
+        prodIdInput.value = "";
+        formModeTitle.textContent = "Создать новый товар";
+        productSubmitBtn.disabled = true;
+        loadCatalog();
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  }
+
+  // Добавление / Редактирование базовых услуг
+  if (serviceForm) {
+    serviceForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const editId = servIdInput.value;
+      let existingSubcategories = [];
+
+      if (editId) {
+        try {
+          const getRes = await fetch(
+            `http://localhost:3000/services/${editId}`,
+          );
+          const currentServ = await getRes.json();
+          existingSubcategories = currentServ.subcategories || [];
+        } catch (err) {
+          console.error("Ошибка получения подкатегорий:", err);
+        }
+      }
+
+      const serviceData = {
+        title: servTitleInput.value.trim(),
+        photo: servPhotoInput.value.trim(),
+        description: servDescInput.value.trim(),
+        fromstash: servStashName.value.trim(),
+        startingPricestach: parseFloat(servStashPrice.value),
+        frommast: servMastName.value.trim(),
+        startingPricemast: parseFloat(servMastPrice.value),
+        frompro: servProName.value.trim(),
+        startingPricepro: parseFloat(servProPrice.value),
+        subcategories: existingSubcategories,
+      };
+
+      try {
+        if (editId) {
+          await fetch(`http://localhost:3000/services/${editId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(serviceData),
+          });
+          alert("Услуга обновлена!");
+        } else {
+          serviceData.id = servTitleInput.value
+            .toLowerCase()
+            .replace(/[^a-z0-9]/gi, "_");
+          await fetch(`http://localhost:3000/services`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(serviceData),
+          });
+          alert("Услуга успешно добавлена в систему!");
+        }
+
+        serviceForm.reset();
+        servIdInput.value = "";
+        serviceFormModeTitle.textContent = "Создать новую услугу";
+        serviceSubmitBtn.disabled = true;
+        loadServices();
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  }
+
+  async function loadUsers() {
+    if (!filterByUser) return;
+    const response = await fetch("http://localhost:3000/users?role=client");
+    const clients = await response.json();
+    filterByUser.innerHTML = `<option value="">Все клиенты</option>`;
+    clients.forEach((c) => {
+      const opt = document.createElement("option");
+      opt.value = c.id;
+      opt.textContent = `@${c.username} (${c.firstName} ${c.lastName})`;
+      filterByUser.appendChild(opt);
+    });
+  }
+
+  async function loadReviews() {
+    if (!reviewsContainer) return;
+    const url = new URL("http://localhost:3000/feedback");
+    const prodVal = filterByProduct ? filterByProduct.value : "";
+    const userVal = filterByUser ? filterByUser.value : "";
+
+    if (prodVal) url.searchParams.set("productId", prodVal);
+    if (userVal) url.searchParams.set("userId", userVal);
+
+    const response = await fetch(url);
+    const reviews = await response.json();
+
+    reviewsContainer.innerHTML = "";
+    if (reviews.length === 0) {
+      reviewsContainer.innerHTML =
+        "<p style='color:#fff;'>Отзывов не найдено.</p>";
+      return;
+    }
+
+    reviews.forEach((r) => {
+      const item = document.createElement("div");
+      item.className = "feedback-item";
+      item.style.background = "#222";
+      item.style.padding = "15px";
+      item.style.borderRadius = "12px";
+      item.style.display = "flex";
+      item.style.justifyContent = "space-between";
+      item.style.alignItems = "center";
+      item.innerHTML = `
+        <div style="color:#fff;">
+          <p><strong>Товар:</strong> ${r.productName}</p>
+          <p><strong>Автор:</strong> @${r.username}</p>
+          <p style="margin: 6px 0; font-style: italic;">"${r.text}"</p>
+          <small style="color: #888;">Дата: ${r.date}</small>
+        </div>
+        <button class="my-custom-button delete-feed-btn" style="background-color: palevioletred; color: white; border:none; cursor:pointer; padding:5px 10px;">Удалить</button>
+      `;
+
+      item
+        .querySelector(".delete-feed-btn")
+        .addEventListener("click", async () => {
+          if (confirm("Вы действительно хотите удалить этот отзыв?")) {
+            await fetch(`http://localhost:3000/feedback/${r.id}`, {
+              method: "DELETE",
+            });
+            loadReviews();
+          }
+        });
+
+      reviewsContainer.appendChild(item);
+    });
+  }
+
+  if (filterByProduct) {
+    filterByProduct.addEventListener("change", loadReviews);
+  }
+  if (filterByUser) {
+    filterByUser.addEventListener("change", loadReviews);
+  }
+
+  // Безопасный запуск независимых процессов инициализации данных
+  try {
+    await loadCatalog();
+  } catch (err) {
+    console.error("Ошибка инициализации каталога товаров:", err);
+  }
+
+  try {
+    await loadServices();
+  } catch (err) {
+    console.error("Ошибка инициализации каталога услуг:", err);
+  }
+
+  try {
+    await loadUsers();
+  } catch (err) {
+    console.error("Ошибка инициализации пользователей:", err);
+  }
+
+  try {
+    await loadReviews();
+  } catch (err) {
+    console.error("Ошибка инициализации отзывов:", err);
+  }
+});

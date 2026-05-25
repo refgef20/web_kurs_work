@@ -1,0 +1,236 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("D:/2 курс/web/web_kurs_work/frontend/set/fonts/circe_light.woff");
+@font-face {
+  font-family: "Vera Humana";
+  src: url("../set/fonts/verahumana95.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@import url("D:/2 курс/web/web_kurs_work/frontend/set/fonts/ofont.ru_Circe.ttf");
+@font-face {
+  font-family: "Circe";
+  src: url(../set/fonts/circerounded-regular.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+.admin-layout {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #111;
+  padding: clamp(15px, 2.5vw + 10px, 35px);
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+.admin-layout h1 {
+  color: #fff;
+  margin-bottom: clamp(15px, 2vw + 10px, 30px);
+  text-align: center;
+  font-family: "Vera Humana", sans-serif;
+  font-size: clamp(24px, 2vw + 14px, 36px);
+}
+
+.admin-tabs {
+  display: flex;
+  gap: clamp(10px, 1.5vw + 5px, 20px);
+  margin-bottom: clamp(20px, 2.5vw + 10px, 35px);
+}
+
+.tab-btn {
+  flex: 1;
+  border-radius: 120px;
+  background-color: #222;
+  padding: clamp(8px, 1vw + 5px, 15px) clamp(16px, 1.5vw + 10px, 30px);
+  border: 1px solid #333;
+  font-size: clamp(14px, 1vw + 12px, 18px);
+  color: #999;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.tab-btn.active {
+  background-color: palevioletred;
+  color: white;
+  border-color: palevioletred;
+}
+
+.admin-tab-content h2,
+.admin-section h2 {
+  color: #71165b;
+  margin-top: clamp(25px, 3vw + 10px, 45px);
+  margin-bottom: clamp(12px, 1.5vw + 8px, 22px);
+  font-family: "Vera Humana", sans-serif;
+  font-size: clamp(18px, 1.5vw + 12px, 26px);
+}
+
+.admin-tab-content h2:first-of-type {
+  margin-top: 0;
+}
+
+.admin-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(10px, 1.5vw + 5px, 20px);
+}
+
+.admin-form .span-2 {
+  grid-column: span 2;
+}
+
+.admin-form textarea {
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+  font-family: "Circe", sans-serif;
+  min-height: clamp(70px, 10vh, 120px);
+  resize: vertical;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.admin-form select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+  font-family: "Circe", sans-serif;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.prod-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(240px, 25vw, 290px), 1fr)
+  );
+  gap: clamp(15px, 2vw + 10px, 30px);
+}
+
+.prod-card {
+  background: #222;
+  padding: clamp(12px, 1.5vw + 10px, 24px);
+  border-radius: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border: 1px solid #333;
+}
+
+.prod-card img {
+  width: clamp(80px, 10vw + 40px, 120px);
+  height: clamp(80px, 10vw + 40px, 120px);
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 0 auto 10px auto;
+}
+
+.prod-card h4 {
+  margin: 8px 0 4px 0;
+  color: #fff;
+  font-family: "Circe", sans-serif;
+  font-size: clamp(15px, 1vw + 12px, 19px);
+}
+
+.prod-card .card-price {
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #71165b;
+  font-size: clamp(14px, 1vw + 11px, 17px);
+}
+
+.admin-service-subcategories {
+  text-align: left;
+  margin: 10px 0;
+  padding-top: 10px;
+  border-top: 1px dashed #444;
+}
+
+.admin-subcat-block {
+  margin-bottom: 8px;
+}
+
+.admin-subcat-block:last-child {
+  margin-bottom: 0;
+}
+
+.admin-subcat-title {
+  color: #71165b;
+  font-size: clamp(12px, 0.8vw + 10px, 14px);
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-family: "Circe", sans-serif;
+}
+
+.admin-subcat-items {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.admin-subcat-items li {
+  font-size: clamp(11px, 0.7vw + 9px, 13px);
+  color: #bbb;
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin-price-badge {
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Стили кнопок управления внутри карточек */
+.card-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.card-actions .edit-btn-style,
+.card-actions .delete-btn-style {
+  flex: 1;
+  padding: 6px 12px;
+  font-size: clamp(12px, 0.8vw + 10px, 14px);
+  cursor: pointer;
+  border-radius: 32px;
+  transition: 0.2s ease-in-out;
+}
+
+.card-actions .edit-btn-style {
+  background: #fff;
+  color: #111;
+  border: 1px solid #fff;
+}
+
+.card-actions .delete-btn-style {
+  background-color: #71165b;
+  color: white;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .admin-form {
+    grid-template-columns: 1fr;
+  }
+  .admin-form .span-2 {
+    grid-column: span 1;
+  }
+  .admin-tabs {
+    flex-direction: column;
+  }
+}
+@media (max-width: 350px) {
+  .admin-layout {
+    background: none;
+  }
+}

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Панель управления - Annetka.Hair</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/auth.css" />
+    <link rel="stylesheet" href="../css/media_catalog.css" />
+    <link rel="stylesheet" href="../css/catalog.css" />
+    <link rel="stylesheet" href="../css/admin.css" />
+    <script type="module" src="../js/pages/components.js"></script>
+    <script type="module" src="../js/pages/admin.js"></script>
+  </head>
+  <body>
+    <site-header></site-header>
+    <main>
+      <section class="container-for-catalog">
+        <div class="admin-layout">
+          <h1>Панель управления</h1>
+
+          <div class="admin-tabs">
+            <button id="tab-products-btn" class="tab-btn active">Товары</button>
+            <button id="tab-services-btn" class="tab-btn">Услуги</button>
+          </div>
+
+          <!-- СЕКЦИЯ УПРАВЛЕНИЯ ТОВАРАМИ -->
+          <div id="products-admin-section" class="admin-tab-content">
+            <h2 id="form-mode-title">Создать новый товар</h2>
+            <form id="product-form" class="admin-form" novalidate>
+              <input type="hidden" id="prod-id" />
+              <div class="input-group">
+                <label for="prod-name" style="color: #fff"
+                  >Название товара *</label
+                >
+                <input type="text" id="prod-name" required />
+              </div>
+              <div class="input-group">
+                <label for="prod-cost" style="color: #fff">Цена (₽) *</label>
+                <input type="number" id="prod-cost" min="1" required />
+              </div>
+              <div class="input-group span-2">
+                <label for="prod-desc" style="color: #fff"
+                  >Описание товара *</label
+                >
+                <textarea id="prod-desc" required></textarea>
+              </div>
+              <div class="input-group">
+                <label for="prod-category" style="color: #fff"
+                  >Категория *</label
+                >
+                <select id="prod-category" required>
+                  <option value="Professional care">Professional care</option>
+                  <option value="Hair treatment">Hair treatment</option>
+                  <option value="Styling tools">Styling tools</option>
+                  <option value="Daily care">Daily care</option>
+                  <option value="Styling products">Styling products</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="prod-photo" style="color: #fff"
+                  >Ссылка на фото *</label
+                >
+                <input type="text" id="prod-photo" required />
+              </div>
+              <div class="input-group span-2">
+                <button
+                  type="submit"
+                  id="product-submit-btn"
+                  class="submit-btn"
+                  disabled
+                >
+                  Сохранить товар
+                </button>
+              </div>
+            </form>
+
+            <h2>Текущий каталог товаров</h2>
+            <div id="admin-products-container" class="prod-grid"></div>
+          </div>
+
+          <!-- СЕКЦИЯ УПРАВЛЕНИЯ УСЛУГАМИ -->
+          <div id="services-admin-section" class="admin-tab-content hidden">
+            <h2 id="service-form-mode-title">Создать новую услугу</h2>
+            <form id="service-form" class="admin-form" novalidate>
+              <input type="hidden" id="serv-id" />
+              <div class="input-group">
+                <label for="serv-title" style="color: #fff"
+                  >Название услуги *</label
+                >
+                <input type="text" id="serv-title" required />
+              </div>
+              <div class="input-group">
+                <label for="serv-photo" style="color: #fff"
+                  >Ссылка на фото *</label
+                >
+                <input type="text" id="serv-photo" required />
+              </div>
+              <div class="input-group span-2">
+                <label for="serv-desc" style="color: #fff"
+                  >Описание услуги *</label
+                >
+                <textarea id="serv-desc" required></textarea>
+              </div>
+
+              <div class="input-group">
+                <label for="serv-stash-name" style="color: #fff"
+                  >Тариф (Стажер) - Название *</label
+                >
+                <input type="text" id="serv-stash-name" required />
+              </div>
+              <div class="input-group">
+                <label for="serv-stash-price" style="color: #fff"
+                  >Тариф (Стажер) - Цена *</label
+                >
+                <input type="number" id="serv-stash-price" min="1" required />
+              </div>
+
+              <div class="input-group">
+                <label for="serv-mast-name" style="color: #fff"
+                  >Тариф (Мастер) - Название *</label
+                >
+                <input type="text" id="serv-mast-name" required />
+              </div>
+              <div class="input-group">
+                <label for="serv-mast-price" style="color: #fff"
+                  >Тариф (Мастер) - Цена *</label
+                >
+                <input type="number" id="serv-mast-price" min="1" required />
+              </div>
+
+              <div class="input-group">
+                <label for="serv-pro-name" style="color: #fff"
+                  >Тариф (Профи) - Название *</label
+                >
+                <input type="text" id="serv-pro-name" required />
+              </div>
+              <div class="input-group">
+                <label for="serv-pro-price" style="color: #fff"
+                  >Тариф (Профи) - Цена *</label
+                >
+                <input type="number" id="serv-pro-price" min="1" required />
+              </div>
+
+              <div class="input-group span-2">
+                <button
+                  type="submit"
+                  id="service-submit-btn"
+                  class="submit-btn"
+                  disabled
+                >
+                  Сохранить услугу
+                </button>
+              </div>
+            </form>
+
+            <h2>Текущий каталог услуг</h2>
+            <div id="admin-services-container" class="prod-grid"></div>
+          </div>
+
+          <!-- СЕКЦИЯ УПРАВЛЕНИЯ ОТЗЫВАМИ -->
+          <div class="admin-section" style="margin-top: 40px">
+            <h2>Управление отзывами</h2>
+            <div
+              style="
+                display: flex;
+                gap: 20px;
+                margin-bottom: 20px;
+                flex-wrap: wrap;
+              "
+            >
+              <div class="input-group2 input-group">
+                <label for="filter-by-product" style="color: #fff"
+                  >Фильтр по товару</label
+                >
+                <select
+                  id="filter-by-product"
+                  style="
+                    padding: 10px;
+                    border-radius: 8px;
+                    border: 1px solid #333;
+                    background: #1a1a1a;
+                    color: #fff;
+                    width: 100%;
+                  "
+                >
+                  <option value="">Все товары</option>
+                </select>
+              </div>
+              <div class="input-group2 input-group">
+                <label for="filter-by-user" style="color: #fff"
+                  >Фильтр по клиенту</label
+                >
+                <select
+                  id="filter-by-user"
+                  style="
+                    padding: 10px;
+                    border-radius: 8px;
+                    border: 1px solid #333;
+                    background: #1a1a1a;
+                    color: #fff;
+                    width: 100%;
+                  "
+                >
+                  <option value="">Все клиенты</option>
+                </select>
+              </div>
+            </div>
+            <div
+              id="admin-reviews-container"
+              class="feedback-list"
+              style="display: flex; flex-direction: column; gap: 15px"
+            ></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <site-footer></site-footer>
+  </body>
+</html>
