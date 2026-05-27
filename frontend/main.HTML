@@ -6,41 +6,14 @@
 
     <title>Document</title>
     <link rel="stylesheet" href="css/main.css" />
+    <script type="module" src="js/pages/components(for main).js"></script>
     <script type="module" src="js/pages/main(masters).js"></script>
     <script type="module" src="js/pages/main.js"></script>
   </head>
   <body>
     <header>
-      <div class="head">
-        <p class="item-icon">Annetka.Hair</p>
-        <ul class="navigation">
-          <li><a class="navigation-item" href="#favor">Услуги</a></li>
-          <li><a class="navigation-item" href="#master">Мастера</a></li>
-          <li><a class="navigation-item" href="">Отзывы</a></li>
-          <li><a class="navigation-item" href="">Работы</a></li>
-          <li>
-            <a class="navigation-item" href="pages/catalog.html">Каталог</a>
-          </li>
-          <li>
-            <a class="navigation-item" href="../frontend/pages/favorites.html"
-              >Избранное</a
-            >
-          </li>
-          <li>
-            <a class="navigation-item" href="../frontend/pages/cart.html"
-              >Корзина</a
-            >
-          </li>
-          <li>
-            <a class="navigation-item" href="/frontend/pages/feedback.html"
-              >Отзывы</a
-            >
-          </li>
-        </ul>
-        <div class="burger">
-          <span></span>
-        </div>
-      </div>
+      <site-header></site-header>
+
       <div class="description-annet">
         <div class="social-media">
           <p class="item-social">in</p>
@@ -124,36 +97,9 @@
             </div>
             <hr class="line-style" />
             <div class="description-hairstyle">
-              <div class="sign-desription">
-                <!-- <p class="tittle">Cтрижка</p>
-                <p class="description-hairCut">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non,
-                  lorem arcu quam platea adipiscing sed lacus. Cursus mattis
-                  aenean viverra accumsan. Amet velit ac faucibus vitae.
-                </p> -->
-              </div>
+              <div class="sign-desription"></div>
               <div class="cost-with-button">
-                <div class="costs-master">
-                  <!-- <div class="with-line">
-                    <div class="haircut-masterCost">
-                     
-                    </div>
-                    <hr class="line-haircut" />
-                  </div> -->
-
-                  <!-- <div class="with-line">
-                    <div class="haircut-masterCost haircut-masterCost1">
-                    
-                    </div>
-                    <hr class="line-haircut" />
-                  </div> -->
-                  <!-- <div class="with-line">
-                    <div class="haircut-masterCost haircut-masterCost2">
-                     
-                    </div>
-                    <hr class="line-haircut" />
-                  </div> -->
-                </div>
+                <div class="costs-master"></div>
                 <div class="buttons-written-master">
                   <button class="write-button-style">Записаться</button>
                   <button class="write-button-style master-button">
@@ -180,41 +126,7 @@
           />
           <div class="master">
             <p class="tittle-master">мастера</p>
-            <div class="cards-masters" id="masters-container">
-              <!-- <div class="card">
-             
-                <div class="container-review-master">
-                  <div class="review-master">
-                    <div class="name-and-who">
-                   
-                    </div>
-              
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-           
-                <div class="container-review-master">
-                  <div class="review-master">
-                    <div class="name-and-who">
-                      
-                    </div>
-               
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-
-                <div class="container-review-master">
-                  <div class="review-master">
-                    <div class="name-and-who">
-                    
-                    </div>
-                  
-                  </div>
-                </div>
-              </div> -->
-            </div>
+            <div class="cards-masters" id="masters-container"></div>
             <img
               style="align-self: center"
               src="/frontend/set/icon/табы.svg"
@@ -238,11 +150,6 @@
               <img src="/frontend/set/image/review2.jpg" alt="" />
               <img src="/frontend/set/image/review3.jpg" alt="" />
             </div>
-            <!-- <img
-              style="align-self: center"
-              src="/frontend/set/icon/табы.svg"
-              alt=""
-            /> -->
           </div>
         </div>
       </section>
@@ -291,60 +198,6 @@
         </div>
       </section>
     </main>
-    <footer>
-      <div class="container-for-footer">
-        <div class="cards-allInfo">
-          <div class="menu-with-bitton">
-            <div class="menu">
-              <div class="punkt">
-                <p class="item-punkt1">Адрес</p>
-                <p class="item-punkt2">
-                  Москва, м. Парк Победы, Улица 1812 года, дом 1
-                </p>
-              </div>
-              <div class="punkt">
-                <p class="item-punkt1">Телефон</p>
-                <p class="item-punkt2">+7 (995) 099-27-57</p>
-              </div>
-              <div class="punkt punkt1">
-                <p class="item-punkt1">Время работы</p>
-                <p class="item-punkt2">пн-пт 7:00 - 23:00</p>
-                <p class="item-punkt2">сб-вс: 11:00 - 22:00</p>
-              </div>
-              <div class="punkt">
-                <p class="item-punkt1">соц. сети</p>
-                <div class="social-media2">
-                  <p class="item-social2">in</p>
-                  <p class="item-social2">vk</p>
-                  <p class="item-social2">fc</p>
-                </div>
-              </div>
-            </div>
-            <button class="button-under-menu">Записаться</button>
-          </div>
-          <div class="cards-navigation">
-            <p class="tittle-card">Карта</p>
-            <img src="/frontend/set/image/card.jpg" alt="" />
-          </div>
-        </div>
-        <div class="footer-with-line">
-          <hr class="line-footer" />
-          <div class="footer-with-nav">
-            <p class="logo">annetka.hair</p>
-            <ul class="navigation2">
-              <li><a class="navigation-item" href="!#">Услуги</a></li>
-              <li><a class="navigation-item" href="">Мастера</a></li>
-              <li><a class="navigation-item" href="">Отзывы</a></li>
-              <li><a class="navigation-item" href="">Работы</a></li>
-              <li><a class="navigation-item" href="">Контакты</a></li>
-            </ul>
-            <div class="copyright">
-              <p class="year">2014-2022</p>
-              <p class="year">Политика конфидициальности</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <site-footer></site-footer>
   </body>
 </html>

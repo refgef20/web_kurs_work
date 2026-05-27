@@ -79,6 +79,11 @@
   padding: 10px 20px 11px 17px;
   border: 1px solid white;
 }
+.button-for-nav-second:hover {
+  background-color: #71165b !important;
+  border-color: #71165b !important;
+  color: #ffffff !important;
+}
 .item-for-nav-mets-last3 {
   text-decoration: none;
   color: #ffffff;
@@ -156,23 +161,23 @@
 
 ::selection {
   background-color: #10a5ea;
-  color: palevioletred;
+  color: #71165b;
 }
 
 a {
   transition: color 0.6s ease-in-out;
 }
 a:hover {
-  color: palevioletred;
+  color: #71165b;
 }
 button {
   transition: 0.4s ease-out;
 }
 button:hover {
-  transform: scale(1.2);
+  transform: scale(1.1); /* Умеренное масштабирование для плавности */
 }
 button:active {
-  transform: scale(0.43);
+  transform: scale(0.95);
 }
 
 .container-for-every-card-mets {
@@ -180,6 +185,6 @@ button:active {
 }
 .container-for-every-card-mets:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(255, 0, 247, 0.572);
+  box-shadow: 0 15px 30px rgba(113, 22, 91, 0.5); /* Подгонка под цвет #71165B */
   transform: scale(1.06);
 }

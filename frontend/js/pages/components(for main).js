@@ -12,11 +12,10 @@ class SiteHeader extends HTMLElement {
         </div>
       `;
       if (currentUser.role === "admin") {
-        adminLink = `<li><a class="navigation-item admin-nav-link" href="admin.html">Админ</a></li>`;
+        adminLink = `<li><a class="navigation-item admin-nav-link" href="pages/admin.html">Админ</a></li>`;
       }
     }
     this.innerHTML = `
-     <header>
       <div class="head">
         <p class="item-icon">Annetka.Hair</p>
         <div class="burger" id="burger-btn">
@@ -25,15 +24,15 @@ class SiteHeader extends HTMLElement {
           <span></span>
         </div>
         <ul class="navigation" id="nav-menu">
-          <li><a class="navigation-item" href="../main.HTML#favor">Услуги</a></li>
-          <li><a class="navigation-item" href="../main.HTML#master">Мастера</a></li>
-          <li><a class="navigation-item" href="feedback.html">Отзывы</a></li>
-          <li><a class="navigation-item" href="../main.HTML">Главная</a></li>
-          <li><a class="navigation-item" href="cart.html">Корзина</a></li>
-          <li><a class="navigation-item" href="catalog.html">Каталог</a></li>
-          <li><a class="navigation-item" href="favorites.html">Избранное</a></li>
-          <li><a class="navigation-item" href="history.html">История заказов</a></li>
-          <li><a class="navigation-item" href="profile.html">Личный кабинет</a></li>
+          <li><a class="navigation-item" href="#favor">Услуги</a></li>
+          <li><a class="navigation-item" href="#master">Мастера</a></li>
+          <li><a class="navigation-item" href="pages/feedback.html">Отзывы</a></li>
+          <li><a class="navigation-item" href="main.HTML">Главная</a></li>
+          <li><a class="navigation-item" href="pages/cart.html">Корзина</a></li>
+          <li><a class="navigation-item" href="pages/catalog.html">Каталог</a></li>
+          <li><a class="navigation-item" href="pages/favorites.html">Избранное</a></li>
+          <li><a class="navigation-item" href="pages/history.html">История заказов</a></li>
+          <li><a class="navigation-item" href="pages/profile.html">Личный кабинет</a></li>
           ${adminLink}
           <li class="container-for-button">
              ${authSection}
@@ -49,7 +48,6 @@ class SiteHeader extends HTMLElement {
         </ul>
         <div class="drawer-overlay" id="menu-overlay"></div>
       </div>
-    </header>
     `;
 
     const burgerBtn = this.querySelector("#burger-btn");
@@ -71,14 +69,14 @@ class SiteHeader extends HTMLElement {
     if (logoutBtn) {
       logoutBtn.addEventListener("click", () => {
         localStorage.removeItem("currentUser");
-        location.href = "../main.HTML";
+        location.href = "main.HTML";
       });
     }
 
     const loginNavBtn = this.querySelector("#login-nav-btn");
     if (loginNavBtn) {
       loginNavBtn.addEventListener("click", () => {
-        location.href = "auth.html";
+        location.href = "pages/auth.html";
       });
     }
   }
@@ -119,10 +117,18 @@ class SiteFooter extends HTMLElement {
             </div>
             <button class="button-under-menu">Записаться</button>
           </div>
-          <div class="cards-navigation">
-            <p class="tittle-card">Карта</p>
-            <img src="/frontend/set/image/card.jpg" alt="" />
-          </div>
+      <div class="cards-navigation">
+  <p class="tittle-card">Карта</p>
+  <div class="map-wrapper">
+    <iframe 
+      src="https://yandex.ru/map-widget/v1/?ll=37.523528%2C55.734658&mode=search&oid=1107572718&ol=biz&z=16" 
+      width="100%" 
+      height="100%" 
+      frameborder="0" 
+      allowfullscreen="true">
+    </iframe>
+  </div>
+</div>
         </div>
         <div class="footer-with-line">
           <hr class="line-footer" />

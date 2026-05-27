@@ -13,55 +13,67 @@
   font-weight: normal;
   font-style: normal;
 }
+
 .admin-layout {
   width: 100%;
-  max-width: 1000px;
+  max-width: clamp(320px, 95vw, 1000px);
   margin: 0 auto;
-  background: #111;
-  padding: clamp(15px, 2.5vw + 10px, 35px);
-  border-radius: 16px;
+  background: #111111;
+  padding: clamp(15px, 3.5vw + 5px, 35px);
+  border-radius: clamp(8px, 2vw, 16px);
   box-sizing: border-box;
 }
 
 .admin-layout h1 {
-  color: #fff;
-  margin-bottom: clamp(15px, 2vw + 10px, 30px);
+  color: #ffffff;
+  margin-bottom: clamp(15px, 2.5vw + 5px, 30px);
   text-align: center;
   font-family: "Vera Humana", sans-serif;
-  font-size: clamp(24px, 2vw + 14px, 36px);
+  font-size: clamp(
+    2rem,
+    5vw + 1rem,
+    6.875rem
+  ); /* Динамически масштабируется до 110px */
 }
 
 .admin-tabs {
   display: flex;
-  gap: clamp(10px, 1.5vw + 5px, 20px);
-  margin-bottom: clamp(20px, 2.5vw + 10px, 35px);
+  gap: clamp(8px, 1.8vw + 2px, 20px);
+  margin-bottom: clamp(15px, 3vw + 5px, 35px);
 }
 
 .tab-btn {
   flex: 1;
-  border-radius: 120px;
+  border-radius: clamp(20px, 8vw, 120px);
   background-color: #222;
-  padding: clamp(8px, 1vw + 5px, 15px) clamp(16px, 1.5vw + 10px, 30px);
+  padding: clamp(6px, 1vw + 4px, 15px) clamp(12px, 2vw + 8px, 30px);
   border: 1px solid #333;
-  font-size: clamp(14px, 1vw + 12px, 18px);
+  font-size: clamp(13px, 1.2vw + 10px, 18px);
   color: #999;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .tab-btn.active {
-  background-color: palevioletred;
-  color: white;
-  border-color: palevioletred;
+  background-color: #71165b;
+  color: #ffffff;
+  border-color: #71165b;
 }
 
 .admin-tab-content h2,
 .admin-section h2 {
   color: #71165b;
-  margin-top: clamp(25px, 3vw + 10px, 45px);
-  margin-bottom: clamp(12px, 1.5vw + 8px, 22px);
+  margin-top: clamp(20px, 4vw + 5px, 45px);
+  margin-bottom: clamp(10px, 1.8vw + 4px, 22px);
   font-family: "Vera Humana", sans-serif;
-  font-size: clamp(18px, 1.5vw + 12px, 26px);
+  font-size: clamp(
+    1.5rem,
+    3.5vw + 0.5rem,
+    3.25rem
+  ); /* Динамически масштабируется до 52px */
 }
 
 .admin-tab-content h2:first-of-type {
@@ -71,7 +83,7 @@
 .admin-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(10px, 1.5vw + 5px, 20px);
+  gap: clamp(10px, 2vw + 4px, 20px);
 }
 
 .admin-form .span-2 {
@@ -79,42 +91,44 @@
 }
 
 .admin-form textarea {
-  border-radius: 8px;
-  padding: 10px;
+  border-radius: clamp(4px, 1vw, 8px);
+  padding: clamp(8px, 1.2vw + 4px, 12px);
   border: 1px solid #333;
   background: #1a1a1a;
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe", sans-serif;
-  min-height: clamp(70px, 10vh, 120px);
+  min-height: clamp(80px, 15vh, 150px);
   resize: vertical;
   width: 100%;
   box-sizing: border-box;
+  font-size: clamp(14px, 0.8vw + 11px, 16px);
 }
 
 .admin-form select {
-  padding: 10px;
-  border-radius: 8px;
+  padding: clamp(8px, 1.2vw + 4px, 12px);
+  border-radius: clamp(4px, 1vw, 8px);
   border: 1px solid #333;
   background: #1a1a1a;
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe", sans-serif;
   height: 100%;
   box-sizing: border-box;
+  font-size: clamp(14px, 0.8vw + 11px, 16px);
 }
 
 .prod-grid {
   display: grid;
   grid-template-columns: repeat(
     auto-fill,
-    minmax(clamp(240px, 25vw, 290px), 1fr)
+    minmax(clamp(200px, 28vw, 290px), 1fr)
   );
-  gap: clamp(15px, 2vw + 10px, 30px);
+  gap: clamp(12px, 2.5vw + 4px, 30px);
 }
 
 .prod-card {
-  background: #222;
-  padding: clamp(12px, 1.5vw + 10px, 24px);
-  border-radius: 12px;
+  background: #111111;
+  padding: clamp(10px, 2vw + 6px, 24px);
+  border-radius: clamp(6px, 1.5vw, 12px);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -124,36 +138,36 @@
 }
 
 .prod-card img {
-  width: clamp(80px, 10vw + 40px, 120px);
-  height: clamp(80px, 10vw + 40px, 120px);
+  width: clamp(80px, 12vw + 20px, 120px);
+  height: clamp(80px, 12vw + 20px, 120px);
   object-fit: cover;
-  border-radius: 8px;
-  margin: 0 auto 10px auto;
+  border-radius: clamp(4px, 1vw, 8px);
+  margin: 0 auto clamp(8px, 1.2vw, 12px) auto;
 }
 
 .prod-card h4 {
-  margin: 8px 0 4px 0;
-  color: #fff;
+  margin: clamp(4px, 1vw, 8px) 0 clamp(2px, 0.5vw, 4px) 0;
+  color: #ffffff;
   font-family: "Circe", sans-serif;
-  font-size: clamp(15px, 1vw + 12px, 19px);
+  font-size: clamp(14px, 1.2vw + 10px, 19px);
 }
 
 .prod-card .card-price {
   font-weight: bold;
-  margin-bottom: 12px;
+  margin-bottom: clamp(8px, 1.5vw, 16px);
   color: #71165b;
-  font-size: clamp(14px, 1vw + 11px, 17px);
+  font-size: clamp(13px, 1vw + 10px, 17px);
 }
 
 .admin-service-subcategories {
   text-align: left;
-  margin: 10px 0;
-  padding-top: 10px;
+  margin: clamp(8px, 1.5vw, 12px) 0;
+  padding-top: clamp(8px, 1.5vw, 12px);
   border-top: 1px dashed #444;
 }
 
 .admin-subcat-block {
-  margin-bottom: 8px;
+  margin-bottom: clamp(4px, 1vw, 8px);
 }
 
 .admin-subcat-block:last-child {
@@ -162,9 +176,9 @@
 
 .admin-subcat-title {
   color: #71165b;
-  font-size: clamp(12px, 0.8vw + 10px, 14px);
+  font-size: clamp(11px, 0.8vw + 9px, 14px);
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-bottom: clamp(2px, 0.5vw, 4px);
   font-family: "Circe", sans-serif;
 }
 
@@ -175,46 +189,48 @@
 }
 
 .admin-subcat-items li {
-  font-size: clamp(11px, 0.7vw + 9px, 13px);
+  font-size: clamp(10px, 0.8vw + 8px, 13px);
   color: #bbb;
-  margin-bottom: 2px;
+  margin-bottom: clamp(1px, 0.3vw, 3px);
   display: flex;
   justify-content: space-between;
 }
 
 .admin-price-badge {
-  color: #fff;
+  color: #ffffff;
   font-weight: bold;
 }
 
-/* Стили кнопок управления внутри карточек */
 .card-actions {
   display: flex;
-  gap: 10px;
+  gap: clamp(6px, 1.2vw, 12px);
   justify-content: center;
   margin-top: auto;
-  padding-top: 10px;
+  padding-top: clamp(8px, 1.5vw, 12px);
 }
 
 .card-actions .edit-btn-style,
 .card-actions .delete-btn-style {
   flex: 1;
-  padding: 6px 12px;
-  font-size: clamp(12px, 0.8vw + 10px, 14px);
+  padding: clamp(4px, 0.8vw + 2px, 8px) clamp(8px, 1.5vw + 4px, 16px);
+  font-size: clamp(11px, 0.8vw + 9px, 14px);
   cursor: pointer;
-  border-radius: 32px;
-  transition: 0.2s ease-in-out;
+  border-radius: clamp(16px, 5vw, 32px);
+  transition:
+    background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
 }
 
 .card-actions .edit-btn-style {
-  background: #fff;
-  color: #111;
-  border: 1px solid #fff;
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid #ffffff;
 }
 
 .card-actions .delete-btn-style {
   background-color: #71165b;
-  color: white;
+  color: #ffffff;
   border: none;
 }
 

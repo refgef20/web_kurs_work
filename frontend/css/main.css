@@ -42,18 +42,22 @@ button {
   --contact: var(--gap-contact);
   --revmast: var(--gap-revmast);
 }
+
+/* Определение кастомного тега в качестве блочной обертки */
+site-header {
+  display: block;
+  width: 100%;
+}
+
 .container-for-button {
   display: inline-flex;
   padding: 16px 2px;
   justify-content: flex-end;
   align-items: center;
-  grid-row: 1;
-  grid-column: 3;
-  justify-self: end;
 }
 .button-login {
   border-radius: 120px;
-  background-color: #fff;
+  background-color: #ffffff;
   width: 5.8125rem;
   height: 3.1875rem;
   border: 1px solid #000000;
@@ -70,36 +74,41 @@ header {
   flex-direction: column;
   align-items: flex-start;
   gap: 10.96rem;
-  background-color: black;
+  background-color: #010101;
 }
 .head {
   display: flex;
-  padding: 10px 0 14px 90px;
+  padding: clamp(15px, 2vh, 25px) clamp(15px, 5vw, 90px);
   align-items: center;
-  gap: clamp(3rem, 29.39vw, 6.25rem);
+  justify-content: space-between;
   align-self: stretch;
+  position: relative;
+  z-index: 1002;
 }
 .item-icon {
-  color: #fff;
-  font-family: "Vera Humana";
+  color: #ffffff;
+  font-family: "Vera Humana", sans-serif;
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;
   line-height: 180%;
   text-transform: uppercase;
+  z-index: 1002;
+  flex-shrink: 0; /* Запрет на сжатие логотипа */
+  margin-right: clamp(15px, 2.5vw, 40px); /* Безопасный интервал до ссылок */
 }
 .navigation {
   list-style: none;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
-  gap: 4.18rem;
-  align-self: stretch;
-  flex-wrap: wrap;
+  gap: clamp(0.8rem, 1.2vw, 2.2rem);
+  margin-left: auto;
+  flex-wrap: nowrap;
 }
 .navigation-item {
   text-decoration: none;
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
@@ -123,7 +132,7 @@ header {
 .item-social {
   align-self: stretch;
   align-content: center;
-  color: #fff;
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 1.25rem;
   font-style: normal;
@@ -149,7 +158,7 @@ header {
   height: 0.0625rem;
 }
 .item-sign {
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
@@ -157,12 +166,99 @@ header {
   line-height: 160%;
   opacity: 0.6;
 }
+
+/* Анимированная кнопка бургера */
 .burger {
   display: none;
+  cursor: pointer;
+  width: 30px;
+  height: 20px;
+  position: relative;
+  z-index: 1002;
 }
+.burger span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+}
+.burger span:nth-child(1) {
+  top: 0px;
+}
+.burger span:nth-child(2) {
+  top: 9px;
+}
+.burger span:nth-child(3) {
+  top: 18px;
+}
+
+.burger.active span:nth-child(1) {
+  top: 9px;
+  transform: rotate(135deg);
+}
+.burger.active span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
+}
+.burger.active span:nth-child(3) {
+  top: 9px;
+  transform: rotate(-135deg);
+}
+
+/* Затемняющая размытая подложка */
+.drawer-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 998;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+.drawer-overlay.active {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Элементы шторки, скрытые на десктопе */
+.mobile-drawer-footer {
+  display: none;
+}
+
+.user-profile-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1vw, 15px);
+}
+.user-profile-username {
+  font-size: clamp(0.85rem, 0.95vw, 1rem);
+  font-family: "Circe", sans-serif;
+  font-weight: 500;
+  color: #ffffff;
+}
+.admin-nav-link {
+  color: #71165b !important;
+  font-weight: bold;
+}
+.admin-nav-link:hover {
+  color: #ffffff !important;
+}
+
 .annetka-texts-buttons {
   display: flex;
-
   flex-direction: column;
   align-items: flex-start;
   gap: 2.8875rem;
@@ -175,23 +271,22 @@ header {
   gap: 1.9rem;
 }
 .annet-item {
-  color: #fff;
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 6.875rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 100%; /* 6.875rem */
+  line-height: 100%;
   text-transform: uppercase;
 }
 .annet-inem2 {
   align-self: stretch;
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe";
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;
   line-height: 160%;
-
   width: 100%;
   max-width: 490px;
 }
@@ -203,7 +298,6 @@ header {
 }
 .write-button {
   display: flex;
-
   padding: 1.1875rem 4.125rem 1.125rem 4.125rem;
   justify-content: center;
   align-items: center;
@@ -213,16 +307,20 @@ header {
 }
 .favor-button {
   display: flex;
-
   padding: 1.1875rem 3.625rem 1.125rem 3.6875rem;
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
   background: none;
-  border: 1px solid #fff;
+  border: 1px solid #ffffff;
+}
+.favor-button:hover {
+  background-color: #71165b !important;
+  border-color: #71165b !important;
+  color: #ffffff !important;
 }
 .items-button-annet {
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe";
   font-size: 1.125rem;
   font-style: normal;
@@ -233,7 +331,6 @@ header {
 
 .phone-address {
   display: flex;
-
   padding-left: 6.25rem;
   align-items: flex-start;
   gap: 9.7375rem;
@@ -242,21 +339,21 @@ header {
   padding-bottom: 46px;
 }
 .address {
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 160%; /* 1.6rem */
+  line-height: 160%;
   opacity: 0.6;
 }
 .phone-number {
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe";
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 180%; /* 2.25rem */
+  line-height: 180%;
   text-transform: uppercase;
 }
 .favors-costs {
@@ -279,12 +376,12 @@ header {
 }
 .item-favorsCosts {
   align-self: stretch;
-  color: #fff;
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 3.25rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%; /* 4.225rem */
+  line-height: 130%;
   text-transform: uppercase;
 }
 .hair-style {
@@ -323,26 +420,22 @@ header {
 }
 .items-kinds-hair {
   text-decoration: none;
-  color: #fff;
-
-  /* h3 */
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%; /* 1.4625rem */
+  line-height: 130%;
   text-transform: uppercase;
 }
 .view-favor {
-  color: #fff;
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%; /* 1.4625rem */
+  line-height: 130%;
   text-transform: uppercase;
-}
-.view-favor {
   display: none;
 }
 .hair > img {
@@ -350,7 +443,7 @@ header {
 }
 .line-style {
   opacity: 0.2;
-  background: #fff;
+  background: #ffffff;
   width: 0.005rem;
   height: 26.68781rem;
 }
@@ -367,29 +460,27 @@ header {
   gap: 1.55rem;
 }
 .tittle {
-  color: #fff;
+  color: #ffffff;
   opacity: 0.7;
-  /* h3 */
   font-family: "Vera Humana";
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 90%; /* 1.4625rem */
+  line-height: 90%;
   text-transform: uppercase;
   align-self: stretch;
 }
 .description-hairCut {
   align-self: stretch;
-  color: #fff;
+  color: #ffffff;
   opacity: 0.6;
   width: 100%;
   max-width: 29rem;
-  /* основной текст */
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 165%; /* 1.6rem */
+  line-height: 165%;
 }
 .costs-master {
   display: flex;
@@ -411,20 +502,20 @@ header {
   gap: var(--profi);
 }
 .master-hair {
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe";
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%; /* 1.4625rem */
+  line-height: 130%;
 }
 .cost-hair {
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%; /* 1.3rem */
+  line-height: 130%;
 }
 .line-haircut {
   width: 100%;
@@ -447,12 +538,12 @@ header {
   align-items: center;
   filter: drop-shadow(0 22px 44px rgba(113, 22, 92, 0.3));
   background-color: #71165b;
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 180%; /* 1.8rem */
+  line-height: 180%;
   text-transform: uppercase;
 }
 .cost-with-button {
@@ -464,7 +555,7 @@ header {
   padding: 16px 45px 15px 45px;
   filter: none;
   background: none;
-  border: 1px solid #fff;
+  border: 1px solid #ffffff;
 }
 .buttons-written-master {
   display: flex;
@@ -474,7 +565,6 @@ header {
 
 .container-ourMaster {
   margin: 0 auto;
-
   width: 100%;
   max-width: 100rem;
   display: flex;
@@ -500,7 +590,7 @@ header {
   display: none;
 }
 .tittle-master {
-  color: #fff;
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 3.25rem;
   font-style: normal;
@@ -521,7 +611,6 @@ header {
 }
 .container-review-master {
   display: flex;
-
   padding: 1.875rem 1.875rem 2rem 1.875rem;
   align-items: flex-start;
   gap: 0.625rem;
@@ -541,14 +630,12 @@ header {
   gap: 1rem;
 }
 .name {
-  color: #fff;
-
-  /* h3 */
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%; /* 1.4625rem */
+  line-height: 130%;
   text-transform: uppercase;
 }
 .who {
@@ -559,7 +646,7 @@ header {
   align-self: stretch;
 }
 .item-who {
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
@@ -569,12 +656,12 @@ header {
   opacity: 0.6;
 }
 .qualification {
-  color: #930270;
+  color: #71165b;
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 160%; /* 1.6rem */
+  line-height: 160%;
   text-transform: uppercase;
 }
 .container-for-review {
@@ -601,14 +688,12 @@ header {
   gap: 3.6375rem;
 }
 .tittle-review {
-  color: #fff;
-
-  /* h2 */
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 3.25rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%; /* 4.225rem */
+  line-height: 130%;
   text-transform: uppercase;
   align-self: stretch;
 }
@@ -629,7 +714,6 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-
   background-color: #111111;
 }
 .our-works {
@@ -639,23 +723,21 @@ header {
   gap: 2.6rem;
 }
 .tittle-works {
-  color: #fff;
-
-  /* h2 */
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 3.25rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 138%; /* 4.225rem */
+  line-height: 138%;
   text-transform: uppercase;
 }
 .inst {
-  color: #fff;
+  color: #ffffff;
   font-family: Circe;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 150%; /* 1.6875rem */
+  line-height: 150%;
 }
 .our-works-ex {
   display: flex;
@@ -663,11 +745,10 @@ header {
   align-items: center;
   align-content: center;
   gap: 1.875rem;
-
   flex-wrap: wrap;
 }
 .highlight {
-  color: #930270;
+  color: #71165b;
   font-family: Circe;
   font-size: 1.125rem;
   font-style: normal;
@@ -710,26 +791,23 @@ header {
   align-self: stretch;
 }
 .tittle-product {
-  color: #fff;
-
-  /* h2 */
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 3.25rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%; /* 4.225rem */
+  line-height: 130%;
   text-transform: uppercase;
 }
 .description-product {
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe";
   font-size: 1rem;
   width: 100%;
   max-width: 26.9375rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 160%; /* 1.6rem */
-  color: #ffffff;
+  line-height: 160%;
 }
 .buttons-buy {
   display: flex;
@@ -755,12 +833,12 @@ header {
   background: linear-gradient(91deg, #cb11ab 2.31%, #5f2a87 95.78%);
 }
 .item-buy {
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe";
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 180%; /* 2.025rem */
+  line-height: 180%;
   text-transform: uppercase;
 }
 .card-tin {
@@ -820,25 +898,21 @@ footer {
   gap: var(--time-work);
 }
 .item-punkt1 {
-  color: #fff;
-
-  /* h3 */
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%; /* 1.4625rem */
+  line-height: 130%;
   text-transform: uppercase;
 }
 .item-punkt2 {
-  color: #fff;
-
-  /* основной текст */
+  color: #ffffff;
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 152%; /* 1.6rem */
+  line-height: 152%;
   opacity: 0.6;
   align-self: stretch;
 }
@@ -846,12 +920,12 @@ footer {
   display: flex;
   flex-direction: row;
   gap: 2.75rem;
-  color: #fff;
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 180%; /* 2.25rem */
+  line-height: 180%;
   text-transform: uppercase;
   opacity: 0.6;
 }
@@ -863,11 +937,11 @@ footer {
   gap: 0.625rem;
   background: #71165b;
   box-shadow: 0 22px 44px 0 rgba(113, 22, 92, 0.3);
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe";
   font-size: 1.125rem;
   font-style: normal;
-  line-height: 180%; /* 2.025rem */
+  line-height: 180%;
   text-transform: uppercase;
 }
 .cards-navigation {
@@ -877,20 +951,18 @@ footer {
   gap: 0.9375rem;
 }
 .tittle-card {
-  color: #fff;
-
-  /* h3 */
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%; /* 1.4625rem */
+  line-height: 130%;
   text-transform: uppercase;
 }
 .item-social2 {
   align-self: stretch;
   align-content: center;
-  color: #fff;
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 1.25rem;
   font-style: normal;
@@ -903,7 +975,7 @@ footer {
   max-width: 87.5rem;
   height: 0;
   stroke-width: 1px;
-  stroke: #fff;
+  stroke: #ffffff;
   opacity: 0.2;
 }
 .footer-with-line {
@@ -921,12 +993,12 @@ footer {
   grid-template-columns: 1fr 2fr 1fr;
 }
 .logo {
-  color: #fff;
+  color: #ffffff;
   font-family: "Vera Humana";
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 180%; /* 2.25rem */
+  line-height: 180%;
   text-transform: uppercase;
 }
 .copyright {
@@ -939,37 +1011,29 @@ footer {
 }
 .year {
   direction: ltr;
-  color: #fff;
+  color: #ffffff;
   font-family: "Circe";
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 350;
   line-height: 180%;
   opacity: 0.5;
-  /* 1.35rem */
 }
 .navigation2 {
   list-style: none;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
   gap: 3.38rem;
-
   align-self: stretch;
   flex-wrap: wrap;
   padding-bottom: 10px;
-}
-.image-wom {
-}
-.head > img {
-  display: none;
 }
 .cards-masters .card > img {
   width: 27.5rem;
   height: 23.88rem;
   object-fit: cover;
-  border-radius: 8px; /* Опционально: скругление углов, если требуется */
+  border-radius: 8px;
 }
 @media (max-width: 1570px) {
   .image-wom {
@@ -995,8 +1059,7 @@ footer {
   }
 
   .head {
-    padding-left: var(--side-padding);
-    padding-right: var(--side-padding);
+    padding: clamp(15px, 2vh, 25px) var(--side-padding);
   }
 
   .description-annet,
@@ -1015,6 +1078,106 @@ footer {
     font-size: clamp(3.5rem, 8vw, 6.875rem);
   }
 }
+
+/* --- ВЫДВИЖНОЙ СЛАЙДЕР DRAWER (ПОРOГ УВЕЛИЧЕН ДО 1366PX ДЛЯ ИДЕАЛЬНОЙ РАБОТЫ НА НОУТБУКАХ) --- */
+@media (max-width: 1366px) {
+  .head {
+    padding: clamp(15px, 2vh, 25px) clamp(15px, 5vw, 90px);
+  }
+
+  .burger {
+    display: block !important;
+  }
+
+  .navigation {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    max-width: 400px;
+    height: 100vh;
+    background: #010101; /* UI KIT Темно-черный */
+    padding: clamp(80px, 12vh, 120px) clamp(20px, 5vw, 45px)
+      clamp(20px, 4vh, 40px) clamp(20px, 5vw, 45px);
+    z-index: 999;
+    box-sizing: border-box;
+    gap: clamp(15px, 2.5vh, 25px);
+
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .navigation.active {
+    transform: translateX(0);
+  }
+
+  .navigation-item {
+    font-size: clamp(1.1rem, 1.5vw + 0.5rem, 1.35rem);
+    font-family: "Circe", sans-serif;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .navigation-item:hover {
+    color: #71165b;
+  }
+
+  .container-for-button {
+    width: 100%;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .user-profile-nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  .mobile-drawer-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: auto; /* Контакты прижаты вниз шторки */
+    width: 100%;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .drawer-address {
+    font-family: "Circe", sans-serif;
+    font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.5;
+  }
+
+  .drawer-socials {
+    display: flex;
+    gap: clamp(15px, 3vw, 25px);
+    font-family: "Vera Humana", sans-serif;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+  }
+
+  .drawer-socials span {
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .drawer-socials span:hover {
+    color: #71165b;
+  }
+}
+
 img,
 svg {
   max-width: 100%;
@@ -1132,10 +1295,6 @@ svg {
   .container-cards-review img {
     width: clamp(280px, 90vw, 450px);
   }
-
-  .navigation {
-    display: none;
-  }
   .our-works-ex {
     justify-content: center;
   }
@@ -1152,40 +1311,10 @@ svg {
   .haircut-masterCost2 {
     gap: clamp(14.8rem, 20vw, 24.69rem);
   }
-  .burger {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    width: 25px;
-    transition: background-color 0.3s ease;
-    min-height: 1px;
-    background-color: #fff;
-  }
+
   .burger::before,
   .burger::after {
-    position: absolute;
-    content: "";
-    transition: all 0.3s ease;
-    width: 30px;
-    height: 1px;
-    background-color: #fff;
-  }
-  .burger::before {
-    top: -8px;
-  }
-  .burger::after {
-    bottom: -8px;
-  }
-  .burger.active {
-    background-color: transparent;
-  }
-  .burger.active::before {
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg);
-  }
-  .burger.active::after {
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg);
+    display: none !important;
   }
 }
 
@@ -1222,7 +1351,7 @@ svg {
     display: none;
   }
   .hair {
-    border: 1px solid #fff;
+    border: 1px solid #ffffff;
     padding: 1rem 1.25rem 0.9375rem 1.25rem;
     align-items: center;
     gap: 9.6875rem;
@@ -1338,7 +1467,7 @@ svg {
 }
 
 .items-kinds-hair.active {
-  color: #930270;
+  color: #71165b;
   opacity: 1;
 }
 
@@ -1354,7 +1483,7 @@ svg {
   max-height: 300px;
 }
 .subcategories-list li {
-  color: #fff;
+  color: #ffffff;
   opacity: 0.7;
   font-family: "Circe", sans-serif;
   font-size: 0.95rem;
@@ -1365,7 +1494,7 @@ svg {
     padding-left 0.2s;
 }
 .subcategories-list li:hover {
-  color: #930270;
+  color: #71165b;
   padding-left: 5px;
 }
 
@@ -1376,4 +1505,16 @@ svg {
   display: flex;
   flex-direction: column;
   column-gap: 20px;
+}
+.map-wrapper {
+  width: 100%;
+  max-width: clamp(
+    300px,
+    100%,
+    600px
+  ); /* Полная совместимость со стилями изображений */
+  height: clamp(200px, 30vh, 350px);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }

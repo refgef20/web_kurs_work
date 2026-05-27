@@ -28,12 +28,12 @@
   transition: 0.3s;
 }
 .tab-btn.active {
-  background-color: palevioletred;
-  color: white;
-  border-color: palevioletred;
+  background-color: #71165b;
+  color: #ffffff;
+  border-color: #71165b;
 }
 .form-wrapper {
-  background: white;
+  background: #ffffff;
   border: 1px solid #ddd;
   border-radius: 16px;
   padding: 30px;
@@ -89,7 +89,7 @@
 }
 .nickname-control button {
   background-color: #000;
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: 8px;
   padding: 0 15px;
@@ -105,8 +105,8 @@
   gap: 10px;
 }
 .submit-btn {
-  background-color: rgb(141, 26, 112);
-  color: white;
+  background-color: #71165b;
+  color: #ffffff;
   border: none;
   border-radius: 30px;
   padding: 12px;
@@ -121,7 +121,7 @@
   cursor: not-allowed;
 }
 .error-message {
-  color: palevioletred;
+  color: #71165b;
   font-size: 0.8rem;
   margin-top: 5px;
   display: none;
@@ -142,7 +142,7 @@
   z-index: 1000;
 }
 .modal-content {
-  background: white;
+  background: #ffffff;
   padding: 30px;
   border-radius: 16px;
   max-width: 400px;

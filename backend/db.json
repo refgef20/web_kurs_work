@@ -358,17 +358,7 @@
       "id": "enowM2f37lE"
     }
   ],
-  "favorites": [
-    {
-      "userId": "u1",
-      "productId": "service__________________",
-      "name": "Стрижка у стажёра",
-      "price": 999,
-      "description": "Услуга салона красоты Annetka.Hair",
-      "photo": "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80",
-      "id": "1ThA21s0F6U"
-    }
-  ],
+  "favorites": [],
   "masters": [
     {
       "id": "m1",
@@ -471,12 +461,12 @@
     {
       "id": "u2",
       "firstName": "Петр",
-      "lastName": "Клиентов",
+      "lastName": "Суворов",
       "patronymic": "Игоревич",
-      "phone": "+375292222222",
+      "phone": "+375292222223",
       "email": "client@design.by",
-      "birthDate": "2000-05-15",
-      "username": "client1",
+      "birthDate": "2010-05-05",
+      "username": "client",
       "password": "Client@1234",
       "role": "client"
     }

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Профиль — Annetka.Hair</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/media_catalog.css" />
+
+    <link rel="stylesheet" href="../css/profile.css" />
+    <script type="module" src="../js/pages/components.js"></script>
+    <script type="module" src="../js/pages/profile.js"></script>
+  </head>
+  <body>
+    <site-header></site-header>
+
+    <main class="profile-container">
+      <h1 class="profile-main-title">Личный кабинет</h1>
+
+      <div class="profile-layout">
+        <aside class="profile-card">
+          <div class="profile-avatar" id="user-avatar">..</div>
+          <h2 class="profile-fullname" id="display-fullname">Загрузка...</h2>
+          <p class="profile-username" id="display-username">@loading</p>
+          <span class="role-badge" id="display-role">Роль</span>
+        </aside>
+
+        <section class="profile-fields-section">
+          <h2 class="section-title">Персональные данные</h2>
+          <form id="profile-form" class="profile-form">
+            <div class="profile-form-grid">
+              <div class="input-group">
+                <label for="p-lastname">Фамилия</label>
+                <input
+                  type="text"
+                  id="p-lastname"
+                  placeholder="Введите фамилию"
+                  required
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="p-firstname">Имя</label>
+                <input
+                  type="text"
+                  id="p-firstname"
+                  placeholder="Введите имя"
+                  required
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="p-patronymic">Отчество</label>
+                <input
+                  type="text"
+                  id="p-patronymic"
+                  placeholder="Введите отчество"
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="p-phone">Телефон</label>
+                <input
+                  type="tel"
+                  id="p-phone"
+                  placeholder="+375 (__) ___-__-__"
+                  required
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="p-email">Электронная почта</label>
+                <input
+                  type="email"
+                  id="p-email"
+                  placeholder="email@example.com"
+                  required
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="p-birthdate">Дата рождения</label>
+                <input type="date" id="p-birthdate" required />
+              </div>
+
+              <div class="input-group">
+                <label for="p-username">Имя пользователя (Никнейм)</label>
+                <input
+                  type="text"
+                  id="p-username"
+                  placeholder="Nickname"
+                  required
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="p-role">Статус доступа (Роль)</label>
+                <input
+                  type="text"
+                  id="p-role"
+                  readonly
+                  style="opacity: 0.5; cursor: not-allowed"
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="profile-submit-btn">
+              Сохранить изменения
+            </button>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <!-- Кастомный подвал из components.js -->
+    <site-footer></site-footer>
+  </body>
+</html>
