@@ -6,7 +6,7 @@
 
     <title>Document</title>
     <link rel="stylesheet" href="css/main.css" />
-
+    <script type="module" src="js/pages/main(masters).js"></script>
     <script type="module" src="js/pages/main.js"></script>
   </head>
   <body>
@@ -15,15 +15,25 @@
         <p class="item-icon">Annetka.Hair</p>
         <ul class="navigation">
           <li><a class="navigation-item" href="#favor">Услуги</a></li>
-          <li><a class="navigation-item" href="">Мастера</a></li>
+          <li><a class="navigation-item" href="#master">Мастера</a></li>
           <li><a class="navigation-item" href="">Отзывы</a></li>
           <li><a class="navigation-item" href="">Работы</a></li>
           <li>
             <a class="navigation-item" href="pages/catalog.html">Каталог</a>
           </li>
           <li>
+            <a class="navigation-item" href="../frontend/pages/favorites.html"
+              >Избранное</a
+            >
+          </li>
+          <li>
             <a class="navigation-item" href="../frontend/pages/cart.html"
               >Корзина</a
+            >
+          </li>
+          <li>
+            <a class="navigation-item" href="/frontend/pages/feedback.html"
+              >Отзывы</a
             >
           </li>
         </ul>
@@ -66,6 +76,7 @@
         <p class="phone-number">+7 (995) 099-27-57</p>
       </div>
     </header>
+
     <main>
       <section class="favors-costs" id="favor">
         <div class="container-hairStyle-favors">
@@ -159,57 +170,50 @@
           </div>
         </div>
       </section>
-      <section class="container-ourMaster">
+      <section id="master" class="container-ourMaster">
         <div class="our-master">
-          <img src="/frontend/set/icon/left.svg" alt="" />
+          <img
+            src="/frontend/set/icon/left.svg"
+            alt="Назад"
+            class="arrow-left"
+            style="cursor: pointer"
+          />
           <div class="master">
             <p class="tittle-master">мастера</p>
-            <div class="cards-masters">
-              <div class="card">
-                <img src="/frontend/set/image/master.png" alt="" />
+            <div class="cards-masters" id="masters-container">
+              <!-- <div class="card">
+             
                 <div class="container-review-master">
                   <div class="review-master">
                     <div class="name-and-who">
-                      <p class="name">Анна астахова</p>
-                      <div class="who">
-                        <p class="item-who">- Парикмахер-стилист</p>
-                        <p class="item-who">- Опыт более 5 лет</p>
-                      </div>
+                   
                     </div>
-                    <p class="qualification">мастер</p>
+              
                   </div>
                 </div>
               </div>
               <div class="card">
-                <img src="/frontend/set/image/master.png" alt="" />
+           
                 <div class="container-review-master">
                   <div class="review-master">
                     <div class="name-and-who">
-                      <p class="name">Анна астахова</p>
-                      <div class="who">
-                        <p class="item-who">- Парикмахер-стилист</p>
-                        <p class="item-who">- Опыт более 5 лет</p>
-                      </div>
+                      
                     </div>
-                    <p class="qualification">стажер</p>
+               
                   </div>
                 </div>
               </div>
               <div class="card">
-                <img src="/frontend/set/image/master.png" alt="" />
+
                 <div class="container-review-master">
                   <div class="review-master">
                     <div class="name-and-who">
-                      <p class="name">Анна астахова</p>
-                      <div class="who">
-                        <p class="item-who">- Парикмахер-стилист</p>
-                        <p class="item-who">- Опыт более 5 лет</p>
-                      </div>
+                    
                     </div>
-                    <p class="qualification">профи</p>
+                  
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
             <img
               style="align-self: center"
@@ -217,12 +221,16 @@
               alt=""
             />
           </div>
-          <img src="/frontend/set/icon/right.svg" alt="" />
+          <img
+            src="/frontend/set/icon/right.svg"
+            alt="Вперед"
+            class="arrow-right"
+            style="cursor: pointer"
+          />
         </div>
       </section>
       <section class="container-for-review">
         <div class="review-clients">
-          <img src="/frontend/set/icon/left.svg" alt="" />
           <div class="container-for-review-with-title">
             <p class="tittle-review">Отзывы клиентов</p>
             <div class="container-cards-review">
@@ -230,13 +238,12 @@
               <img src="/frontend/set/image/review2.jpg" alt="" />
               <img src="/frontend/set/image/review3.jpg" alt="" />
             </div>
-            <img
+            <!-- <img
               style="align-self: center"
               src="/frontend/set/icon/табы.svg"
               alt=""
-            />
+            /> -->
           </div>
-          <img src="/frontend/set/icon/right.svg" alt="" />
         </div>
       </section>
       <section class="container-our-works">
