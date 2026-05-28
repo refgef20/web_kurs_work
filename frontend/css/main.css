@@ -33,15 +33,12 @@
   --color-brand-wb-end: #5f2a87;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-
 @font-face {
   font-family: "Vera Humana";
   src: url("../set/fonts/verahumana95.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
-@import url("D:/2 курс/web/web_kurs_work/frontend/set/fonts/ofont.ru_Circe.ttf");
 @font-face {
   font-family: "Circe";
   src: url(../set/fonts/circerounded-regular.ttf) format("truetype");
@@ -99,6 +96,7 @@ header {
   align-self: stretch;
   position: relative;
   z-index: 1002;
+  background-color: var(--color-bg-black);
 }
 .item-icon {
   color: var(--color-white);
@@ -1455,6 +1453,17 @@ svg {
     height: 18.12rem;
     max-width: 100%;
   }
+  .buttons-annet {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .error-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
 }
 @media (max-width: 375px) {
   .haircut-masterCost {
@@ -1480,6 +1489,7 @@ svg {
 .toggle-icon {
   transition: transform 0.3s ease;
   cursor: pointer;
+  background-color: solid var(--color-white);
 }
 .toggle-icon.rotate {
   transform: rotate(45deg);
@@ -1533,17 +1543,6 @@ svg {
   overflow: hidden;
   border: 1px solid var(--color-border-map);
 }
-body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--color-bg-deep, #010101);
-  color: var(--color-white, #ffffff);
-  font-family: var(--font-family-body, "Circe"), sans-serif;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  box-sizing: border-box;
-}
 
 .error-wrapper {
   flex: 1;
@@ -1554,6 +1553,9 @@ body {
   text-align: center;
   padding: var(--pad-container, clamp(1rem, 5vw, 6.25rem));
   box-sizing: border-box;
+  max-width: 100rem;
+  background-color: var(--color-bg-black);
+  margin: 0 auto;
 }
 
 .error-container {
@@ -1584,6 +1586,7 @@ body {
   margin: 10px 0 0 0;
   line-height: 1.2;
   letter-spacing: 1px;
+  color: var(--color-white);
 }
 
 .error-description {
@@ -1599,7 +1602,6 @@ body {
 
 .error-btn {
   text-decoration: none;
-  border-radius: 30px; /* Скругление углов по UI Kit */
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease,
@@ -1625,17 +1627,68 @@ body {
     transform: translateY(-10px) scale(1.02);
   }
 }
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg-deep, #010101);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+  transition:
+    opacity 0.5s ease,
+    visibility 0.5s ease;
+  opacity: 1;
+  visibility: visible;
+}
+.preloader.preloader-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 
-@media (max-width: 480px) {
-  .buttons-annet {
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.preloader-logo {
+  font-family: var(--font-family-title, "Vera Humana"), sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  color: var(--color-white, #ffffff);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  animation: pulseLogo 2s infinite ease-in-out;
+}
+.preloader-spinner {
+  width: 45px;
+  height: 45px;
+  border: 3px solid rgba(255, 255, 255, 0.08);
+  border-top: 3px solid var(--color-accent, #71165b);
+  border-radius: 50%;
+  animation: spinLoader 1s linear infinite;
+}
+@keyframes spinLoader {
+  0% {
+    transform: rotate(0deg);
   }
-
-  .error-btn {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulseLogo {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.97);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
   }
 }

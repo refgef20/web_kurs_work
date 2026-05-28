@@ -22,15 +22,12 @@
   --color-bg-tab: #222222;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("D:/2 курс/web/web_kurs_work/frontend/set/fonts/circe_light.woff");
 @font-face {
   font-family: "Vera Humana";
   src: url("../set/fonts/verahumana95.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
-@import url("D:/2 курс/web/web_kurs_work/frontend/set/fonts/ofont.ru_Circe.ttf");
 @font-face {
   font-family: "Circe";
   src: url(../set/fonts/circerounded-regular.ttf) format("truetype");
@@ -135,7 +132,7 @@
   border: 1px solid var(--color-white);
   font-size: 0.9375rem;
   font-family: Circe;
-  color: #ffffff;
+  color: var(--color-white);
 }
 
 .find-card {

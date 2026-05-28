@@ -289,6 +289,7 @@ section.appendChild(buttons);
 
 const find = document.createElement("input");
 find.className = "find-card";
+find.setAttribute("id", "findit");
 find.setAttribute("data-i18n-placeholder", "catalog.search_placeholder");
 find.addEventListener("input", function () {
   findCard(find.value);
@@ -297,6 +298,7 @@ buttons.appendChild(find);
 
 const list_filter = document.createElement("select");
 list_filter.className = "category-filter";
+list_filter.setAttribute("id", "filt");
 const sort = document.createElement("option");
 sort.setAttribute("data-i18n", "catalog.sort_lbl");
 buttons.appendChild(list_filter);
@@ -328,12 +330,14 @@ const inputMin = document.createElement("input");
 inputMin.type = "number";
 inputMin.setAttribute("data-i18n-placeholder", "catalog.min_price_placeholder");
 inputMin.className = "find-card";
+inputMin.setAttribute("id", "min");
 inputMin.style.maxWidth = "120px";
 
 const inputMax = document.createElement("input");
 inputMax.type = "number";
 inputMax.setAttribute("data-i18n-placeholder", "catalog.max_price_placeholder");
 inputMax.className = "find-card";
+inputMax.setAttribute("id", "max");
 inputMax.style.maxWidth = "120px";
 
 inputMin.addEventListener("input", applyPriceFilter);

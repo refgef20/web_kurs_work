@@ -15,7 +15,7 @@ html[data-theme="white"] {
   --color-bg-tab: #e5e5ea; /* Серые неактивные вкладки */
   --color-bg-tab-light: #ffffff; /* Светлые вкладки в формах авторизации */
   --color-bg-white: #ffffff; /* Сохраняем белый для контентных оберток */
-  --color-bg-black: #111111; /* Инвертируем черный в темно-серый для кнопок типа никнейма */
+  --color-bg-black: #ffffff; /* Инвертируем черный в темно-серый для кнопок типа никнейма */
 
   /* Цвета текста */
   --color-text-main: #1c1c1e; /* Основной темный цвет текста */
@@ -37,10 +37,10 @@ html[data-theme="white"] {
   --color-accent-shadow-alt: rgba(113, 22, 91, 0.08);
 
   /* Границы (Borders) */
-  --color-border-dark: #e5e5ea; /* Тонкие серые рамки вокруг блоков */
-  --color-border-light: #d1d1d6; /* Границы инпутов */
+  --color-border-dark: #e5e5ea;
+  --color-border-light: #d1d1d6;
   --color-border-wrapper: #e5e5ea;
-  --color-border-haircut: #c7c7cc; /* Линии-разделители услуг */
+  --color-border-haircut: #c7c7cc;
   --color-border-dashed: #d1d1d6; /* Пунктирные линии */
   --color-border-translucent: rgba(
     0,
@@ -65,4 +65,7 @@ html[data-theme="light"] header {
 }
 html[data-theme="light"] .some-white-icon-class {
   filter: invert(1); /* Превратит белую иконку в темную */
+}
+html[data-theme="light"] .head {
+  background-color: var(--color-bg-card); /* Превратит белую иконку в темную */
 }

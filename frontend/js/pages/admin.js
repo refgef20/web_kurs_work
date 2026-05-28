@@ -895,7 +895,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     reviewsContainer.innerHTML = "";
     if (reviews.length === 0) {
       reviewsContainer.innerHTML =
-        "<p style='color:#fff;' data-i18n='admin.reviews_not_found'>Отзывов не найдено.</p>";
+        "<p style='color:var( --color-text-main: #1c1c1e);' data-i18n='admin.reviews_not_found'>Отзывов не найдено.</p>";
       window.translatePage();
       return;
     }

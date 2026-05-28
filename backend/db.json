@@ -55,7 +55,7 @@
               "name_ru": "Стрижка у мастера",
               "name_en": "Haircut by a master",
               "price": 1899,
-              "photo": "https://images.unsplash.com/photo-1503951914875-452162b7f744?auto=format&fit=crop&w=400&q=80"
+              "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=400&q=80"
             },
             {
               "name_ru": "Стрижка у профи",
@@ -387,7 +387,7 @@
       "description_en": "Concentrated sulfate-free shampoo for dry, color-treated hair. Provides deep, luxurious hydration.",
       "category": "Professional care",
       "rating": 4.8,
-      "photo": "https://images.unsplash.com/photo-1535585209827-a1143ab7be?auto=format&fit=crop&w=600&q=80"
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMGGt7h8ddWOhpB6jT50AE3E4YOEPyyHRAUA&s"
     },
     {
       "id": "14",
@@ -424,7 +424,7 @@
       "description_ru": "Услуга салона красоты Annetka.Hair",
       "description_en": "Beauty salon service Annetka.Hair",
       "photo": "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=400&q=80",
-      "amount": 1,
+      "amount": 2,
       "id": "UAdssqxutj4"
     },
     {
@@ -482,6 +482,19 @@
       "description_en": "Beauty salon service Annetka.Hair",
       "photo": "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=400&q=80",
       "id": "Yew7WrQwUcs"
+    },
+    {
+      "userId": "u1",
+      "productId": "service_styling_sub_1",
+      "name_ru": "Укладка у мастера",
+      "name_en": "Styling by a master",
+      "subcategory_ru": "Вечерняя укладка",
+      "subcategory_en": "Evening Styling",
+      "price": 2499,
+      "description_ru": "Услуга салона красоты Annetka.Hair",
+      "description_en": "Beauty salon service Annetka.Hair",
+      "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=400&q=80",
+      "id": "dmPzy4ivGJg"
     }
   ],
   "masters": [
@@ -497,14 +510,8 @@
       "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
       "qualification_ru": "мастер",
       "qualification_en": "master",
-      "experience_ru": [
-        "Парикмахер-стилист",
-        "Опыт более 5 лет"
-      ],
-      "experience_en": [
-        "Hair stylist",
-        "Experience over 5 years"
-      ]
+      "experience_ru": ["Парикмахер-стилист", "Опыт более 5 лет"],
+      "experience_en": ["Hair stylist", "Experience over 5 years"]
     },
     {
       "id": "m2",
@@ -518,14 +525,8 @@
       "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
       "qualification_ru": "стажер",
       "qualification_en": "intern",
-      "experience_ru": [
-        "Младший стилист",
-        "Опыт 1 год"
-      ],
-      "experience_en": [
-        "Junior stylist",
-        "1 year of experience"
-      ]
+      "experience_ru": ["Младший стилист", "Опыт 1 год"],
+      "experience_en": ["Junior stylist", "1 year of experience"]
     },
     {
       "id": "m3",
@@ -539,14 +540,8 @@
       "photo": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80",
       "qualification_ru": "профи",
       "qualification_en": "pro",
-      "experience_ru": [
-        "Колорист-эксперт",
-        "Опыт более 8 лет"
-      ],
-      "experience_en": [
-        "Colorist expert",
-        "Experience over 8 years"
-      ]
+      "experience_ru": ["Колорист-эксперт", "Опыт более 8 лет"],
+      "experience_en": ["Colorist expert", "Experience over 8 years"]
     },
     {
       "id": "m4",
@@ -560,14 +555,8 @@
       "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
       "qualification_ru": "мастер",
       "qualification_en": "master",
-      "experience_ru": [
-        "Мужской стилист",
-        "Опыт более 4 лет"
-      ],
-      "experience_en": [
-        "Men's stylist",
-        "Experience over 4 years"
-      ]
+      "experience_ru": ["Мужской стилист", "Опыт более 4 лет"],
+      "experience_en": ["Men's stylist", "Experience over 4 years"]
     },
     {
       "id": "m5",
@@ -581,14 +570,8 @@
       "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
       "qualification_ru": "стажер",
       "qualification_en": "intern",
-      "experience_ru": [
-        "Мастер по уходу",
-        "Опыт 2 года"
-      ],
-      "experience_en": [
-        "Hair care specialist",
-        "2 years of experience"
-      ]
+      "experience_ru": ["Мастер по уходу", "Опыт 2 года"],
+      "experience_en": ["Hair care specialist", "2 years of experience"]
     },
     {
       "id": "m6",
@@ -602,14 +585,8 @@
       "photo": "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=600&q=80",
       "qualification_ru": "профи",
       "qualification_en": "pro",
-      "experience_ru": [
-        "Топ-стилист",
-        "Опыт более 7 лет"
-      ],
-      "experience_en": [
-        "Top stylist",
-        "Experience over 7 years"
-      ]
+      "experience_ru": ["Топ-стилист", "Опыт более 7 лет"],
+      "experience_en": ["Top stylist", "Experience over 7 years"]
     }
   ],
   "users": [

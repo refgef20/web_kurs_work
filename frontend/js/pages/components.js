@@ -16,6 +16,14 @@ class SiteHeader extends HTMLElement {
       }
     }
     this.innerHTML = `
+    <div id="preloader" class="preloader">
+    <div class="preloader-content">
+        <!-- Текст бренда (можно заменить на <img src="/путь/к/лого.png" alt="logo">) -->
+        <div class="preloader-logo">ANNETKA</div>
+        <!-- Крутящийся элемент -->
+        <div class="preloader-spinner"></div>
+    </div>
+</div>
      <header>
       <div class="head">
         <p class="item-icon">Annetka.Hair</p>
@@ -109,7 +117,7 @@ class SiteHeader extends HTMLElement {
     const themeIconContainer = this.querySelector("#theme-icon-container");
 
     const sunIcon = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-svg" style="color: inherit;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-svg" style="color: inherit;">
         <circle cx="12" cy="12" r="5"></circle>
         <line x1="12" y1="1" x2="12" y2="3"></line>
         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -123,7 +131,7 @@ class SiteHeader extends HTMLElement {
     `;
 
     const moonIcon = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-svg" style="color: inherit;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-svg" style="color: inherit;">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
       </svg>
     `;
@@ -131,21 +139,21 @@ class SiteHeader extends HTMLElement {
     const applyTheme = (theme) => {
       document.documentElement.setAttribute("data-theme", theme);
       localStorage.setItem("theme", theme);
-      if (theme === "light") {
-        themeIconContainer.innerHTML = moonIcon; // Иконка луны для перехода в темный режим
+      if (theme === "white") {
+        themeIconContainer.innerHTML = moonIcon;
       } else {
-        themeIconContainer.innerHTML = sunIcon; // Иконка солнца для перехода в светлый режим
+        themeIconContainer.innerHTML = sunIcon;
       }
     };
 
-    const currentTheme = localStorage.getItem("theme") || "dark";
+    const currentTheme = localStorage.getItem("theme") || "black";
     applyTheme(currentTheme);
 
     if (themeToggleBtn) {
       themeToggleBtn.addEventListener("click", () => {
         const activeTheme =
-          document.documentElement.getAttribute("data-theme") || "dark";
-        const newTheme = activeTheme === "dark" ? "light" : "dark";
+          document.documentElement.getAttribute("data-theme") || "black";
+        const newTheme = activeTheme === "black" ? "white" : "black";
         applyTheme(newTheme);
       });
     }

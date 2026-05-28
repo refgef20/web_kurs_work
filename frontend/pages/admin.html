@@ -14,7 +14,21 @@
     <script type="module" src="../js/pages/language.js"></script>
     <script type="module" src="../js/pages/components.js"></script>
     <script type="module" src="../js/pages/admin.js"></script>
-    <script src="path/to/bvi.min.js"></script>
+    <script type="module" src="../js/pages/load.js"></script>
+    <style>
+      :root {
+        --color-bg-deep: #010101;
+        --color-bg-white: #ffffff;
+        --color-bg-black: #000000;
+        --color-bg-tab-light: #f2f2f2;
+        --color-text-main: #ffffff;
+        --color-text-input-label: #333333;
+        --color-accent: #71165b;
+        --color-border-light: #cccccc;
+        --color-border-wrapper: #dddddd;
+        --color-overlay: rgba(0, 0, 0, 0.5);
+      }
+    </style>
   </head>
   <body>
     <site-header></site-header>
@@ -50,7 +64,7 @@
               <div class="input-group">
                 <label
                   for="prod-name"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.prod_name"
                   >Название товара *</label
                 >
@@ -59,7 +73,7 @@
               <div class="input-group">
                 <label
                   for="prod-cost"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.prod_price"
                   >Цена (₽) *</label
                 >
@@ -68,7 +82,7 @@
               <div class="input-group span-2">
                 <label
                   for="prod-desc"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.prod_desc"
                   >Описание товара *</label
                 >
@@ -77,7 +91,7 @@
               <div class="input-group">
                 <label
                   for="prod-category"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.prod_category"
                   >Категория *</label
                 >
@@ -92,7 +106,7 @@
               <div class="input-group">
                 <label
                   for="prod-photo"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.prod_photo"
                   >Ссылка на фото *</label
                 >
@@ -125,7 +139,7 @@
               <div class="input-group">
                 <label
                   for="serv-title"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.serv_title"
                   >Название услуги *</label
                 >
@@ -134,7 +148,7 @@
               <div class="input-group">
                 <label
                   for="serv-photo"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.prod_photo"
                   >Ссылка на фото *</label
                 >
@@ -143,7 +157,7 @@
               <div class="input-group span-2">
                 <label
                   for="serv-desc"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.serv_desc"
                   >Описание услуги *</label
                 >
@@ -153,7 +167,7 @@
               <div class="input-group">
                 <label
                   for="serv-stash-name"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.stash_name"
                   >Тариф (Стажер) - Название *</label
                 >
@@ -162,7 +176,7 @@
               <div class="input-group">
                 <label
                   for="serv-stash-price"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.stash_price"
                   >Тариф (Стажер) - Цена *</label
                 >
@@ -172,7 +186,7 @@
               <div class="input-group">
                 <label
                   for="serv-mast-name"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.mast_name"
                   >Тариф (Мастер) - Название *</label
                 >
@@ -181,7 +195,7 @@
               <div class="input-group">
                 <label
                   for="serv-mast-price"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.mast_price"
                   >Тариф (Мастер) - Цена *</label
                 >
@@ -191,7 +205,7 @@
               <div class="input-group">
                 <label
                   for="serv-pro-name"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.pro_name"
                   >Тариф (Профи) - Название *</label
                 >
@@ -200,7 +214,7 @@
               <div class="input-group">
                 <label
                   for="serv-pro-price"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.pro_price"
                   >Тариф (Профи) - Цена *</label
                 >
@@ -238,7 +252,7 @@
               <div class="input-group2 input-group">
                 <label
                   for="filter-by-product"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.filter_product"
                   >Фильтр по товару</label
                 >
@@ -248,8 +262,8 @@
                     padding: 10px;
                     border-radius: 8px;
                     border: 1px solid #333;
-                    background: #1a1a1a;
-                    color: #fff;
+                    background: var(--color-text-dark);
+                    color: var(--color-text-main);
                     width: 100%;
                   "
                 >
@@ -261,7 +275,7 @@
               <div class="input-group2 input-group">
                 <label
                   for="filter-by-user"
-                  style="color: #fff"
+                  style="color: var(--color-text-main)"
                   data-i18n="admin.filter_user"
                   >Фильтр по клиенту</label
                 >
@@ -271,8 +285,8 @@
                     padding: 10px;
                     border-radius: 8px;
                     border: 1px solid #333;
-                    background: #1a1a1a;
-                    color: #fff;
+                    background: var(--color-text-dark);
+                    color: var(--color-text-main);
                     width: 100%;
                   "
                 >

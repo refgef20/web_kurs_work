@@ -16,6 +16,14 @@ class SiteHeader extends HTMLElement {
       }
     }
     this.innerHTML = `
+    <div id="preloader" class="preloader">
+    <div class="preloader-content">
+        <!-- Текст бренда (можно заменить на <img src="/путь/к/лого.png" alt="logo">) -->
+        <div class="preloader-logo">ANNETKA</div>
+        <!-- Крутящийся элемент -->
+        <div class="preloader-spinner"></div>
+    </div>
+</div>
      <header>
       <div class="head">
         <p class="item-icon">Annetka.Hair</p>
@@ -229,3 +237,4 @@ class SiteFooter extends HTMLElement {
     }
   }
 }
+customElements.define("site-footer", SiteFooter);
