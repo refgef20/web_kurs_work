@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // DOM Элементы боковой панели
   const avatarEl = document.getElementById("user-avatar");
   const displayFullName = document.getElementById("display-fullname");
   const displayUsername = document.getElementById("display-username");

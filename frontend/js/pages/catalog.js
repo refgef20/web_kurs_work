@@ -160,7 +160,7 @@ async function AddFavorite(product) {
 
   try {
     const checkRes = await fetch(
-      `http://localhost:3000/favorites?userId=${currentUser.id}&productId=${product.id}`,
+      `http://localhost:3000/favorites?userId=${currentUser.id}&productId=${encodeURIComponent(product.id)}`,
     );
     const existing = await checkRes.json();
 
@@ -351,14 +351,14 @@ section.appendChild(containernav);
 
 const hair = document.createElement("li");
 hair.classList.add("button-for-nav-second", "item-for-nav-mets-last3");
-hair.setAttribute("data-i18n", "admin.tab_services");
+hair.setAttribute("data-i18n", "catalog.cat_treatment");
 hair.style.cursor = "pointer";
 hair.addEventListener("click", () => sortCategory("Hair treatment"));
 containernav.appendChild(hair);
 
 const care = document.createElement("li");
 care.classList.add("button-for-nav-second", "item-for-nav-mets-last3");
-care.setAttribute("data-i18n", "main.care");
+care.setAttribute("data-i18n", "catalog.cat_prof");
 care.style.cursor = "pointer";
 care.addEventListener("click", () => sortCategory("Professional care"));
 containernav.appendChild(care);

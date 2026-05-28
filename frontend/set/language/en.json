@@ -91,6 +91,8 @@
     "avatar_loading": "U"
   },
   "catalog": {
+    "cat_treatment": "Hear Treatment",
+    "cat_prof": "Professional care",
     "prev_btn": "Back",
     "next_btn": "Next",
     "sort_lbl": "Sorting",

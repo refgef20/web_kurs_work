@@ -23,7 +23,7 @@ async function translatePage(lang = currentLang) {
 
   try {
     // 1. Асинхронно скачиваем JSON-файл перевода
-    const response = await fetch(`set/language/${lang}.json`);
+    const response = await fetch(`../set/language/${lang}.json`);
     if (!response.ok) {
       throw new Error(`Failed to load lang file: ${response.status}`);
     }
