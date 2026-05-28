@@ -1,4 +1,17 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  // Безопасное определение текущего языка системы
+  const getLang = () => localStorage.getItem("lang") || "ru";
+
+  const getLocalizedValue = (obj, key) => {
+    if (!obj) return "";
+    const lang = getLang();
+    const localizedKey = `${key}_${lang}`;
+    if (obj[localizedKey] !== undefined && obj[localizedKey] !== null) {
+      return obj[localizedKey];
+    }
+    return obj[key] || "";
+  };
+
   // Безопасное чтение пользователя из localStorage
   let currentUser = null;
   try {
@@ -77,7 +90,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       errorSpan.className = "error-message";
       input.parentNode.appendChild(errorSpan);
     }
-    errorSpan.textContent = text;
+    errorSpan.setAttribute("data-i18n", text);
+    window.translatePage();
     errorSpan.style.display = "block";
   }
 
@@ -86,6 +100,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const errorSpan = input.parentNode.querySelector(".error-message");
     if (errorSpan) {
       errorSpan.style.display = "none";
+      errorSpan.removeAttribute("data-i18n");
     }
   }
 
@@ -181,29 +196,31 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     productsContainer.innerHTML = "";
     if (filterByProduct) {
-      filterByProduct.innerHTML = `<option value="">Все товары</option>`;
+      filterByProduct.innerHTML = `<option value="" data-i18n="admin.all_products">Все товары</option>`;
     }
 
     products.forEach((p) => {
+      const localizedName = getLocalizedValue(p, "name");
       const card = document.createElement("div");
       card.className = "prod-card";
       card.innerHTML = `
         <img src="${p.photo}" alt="">
-        <h4>${p.name}</h4>
+        <h4>${localizedName}</h4>
         <p class="card-price">${p.price} ₽</p>
         <div class="card-actions">
-          <button class="edit-btn-style edit-btn" style="position: relative; z-index: 10; pointer-events: auto;">Ред.</button>
-          <button class="delete-btn-style delete-btn" style="position: relative; z-index: 10; pointer-events: auto;">Удалить</button>
+          <button class="edit-btn-style edit-btn" style="position: relative; z-index: 10; pointer-events: auto;" data-i18n="admin.edit_btn">Ред.</button>
+          <button class="delete-btn-style delete-btn" style="position: relative; z-index: 10; pointer-events: auto;" data-i18n="admin.delete_btn">Удалить</button>
         </div>
       `;
 
       card.querySelector(".edit-btn").addEventListener("click", () => {
         if (formModeTitle)
-          formModeTitle.textContent = `Редактирование: ${p.name}`;
+          formModeTitle.textContent = `Редактирование: ${localizedName}`;
         if (prodIdInput) prodIdInput.value = p.id;
-        if (prodNameInput) prodNameInput.value = p.name;
+        if (prodNameInput) prodNameInput.value = localizedName;
         if (prodCostInput) prodCostInput.value = p.price;
-        if (prodDescInput) prodDescInput.value = p.description;
+        if (prodDescInput)
+          prodDescInput.value = getLocalizedValue(p, "description");
         if (prodCategorySelect) prodCategorySelect.value = p.category;
         if (prodPhotoInput) prodPhotoInput.value = p.photo;
         validateProductForm();
@@ -211,7 +228,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
 
       card.querySelector(".delete-btn").addEventListener("click", async () => {
-        if (confirm(`Удалить товар "${p.name}"?`)) {
+        if (confirm(`Удалить товар "${localizedName}"?`)) {
           await fetch(`http://localhost:3000/products/${p.id}`, {
             method: "DELETE",
           });
@@ -224,10 +241,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (filterByProduct) {
         const opt = document.createElement("option");
         opt.value = p.id;
-        opt.textContent = p.name;
+        opt.textContent = localizedName;
         filterByProduct.appendChild(opt);
       }
     });
+
+    // Вызов перевода после того, как элементы каталога добавлены в DOM
+    window.translatePage();
   }
 
   // Загрузка услуг
@@ -239,8 +259,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     servicesContainer.innerHTML = "";
 
     services.forEach((s) => {
-      // Генерация HTML для подкатегорий
       let subcategoriesHTML = "";
+      const localizedTitle = getLocalizedValue(s, "title");
+
       if (s.subcategories && s.subcategories.length > 0) {
         subcategoriesHTML = `
           <div class="admin-service-subcategories">
@@ -249,10 +270,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 (sub, index) => `
               <div class="admin-subcat-block">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 4px; margin-bottom: 6px;">
-                  <p class="admin-subcat-title" style="margin: 0; border: none; padding: 0;">${sub.title}</p>
+                  <p class="admin-subcat-title" style="margin: 0; border: none; padding: 0;">${getLocalizedValue(sub, "title")}</p>
                   <div style="display: flex; gap: 5px;">
-                    <button class="edit-sub-inline-btn my-custom-button" data-service-id="${s.id}" data-sub-idx="${index}" style="position: relative; z-index: 10; pointer-events: auto; padding: 2px 8px; font-size: 11px; background: #fff; color: #000; border: 1px solid #fff; cursor: pointer; border-radius: 12px;">Ред.</button>
-                    <button class="delete-sub-inline-btn my-custom-button" data-service-id="${s.id}" data-sub-idx="${index}" style="position: relative; z-index: 10; pointer-events: auto; padding: 2px 8px; font-size: 11px; background-color: palevioletred; color: #fff; border: none; cursor: pointer; border-radius: 12px;">Уд.</button>
+                    <button class="edit-sub-inline-btn my-custom-button" data-service-id="${s.id}" data-sub-idx="${index}" style="position: relative; z-index: 10; pointer-events: auto; padding: 2px 8px; font-size: 11px; background: #fff; color: #000; border: 1px solid #fff; cursor: pointer; border-radius: 12px;" data-i18n="admin.edit_btn">Ред.</button>
+                    <button class="delete-sub-inline-btn my-custom-button" data-service-id="${s.id}" data-sub-idx="${index}" style="position: relative; z-index: 10; pointer-events: auto; padding: 2px 8px; font-size: 11px; background-color: palevioletred; color: #fff; border: none; cursor: pointer; border-radius: 12px;" data-i18n="admin.del_btn_short">Уд.</button>
                   </div>
                 </div>
                 <ul class="admin-subcat-items">
@@ -260,7 +281,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     .map(
                       (item) => `
                     <li>
-                      <span>${item.name}</span>
+                      <span>${getLocalizedValue(item, "name")}</span>
                       <span class="admin-price-badge">${item.price} ₽</span>
                     </li>
                   `,
@@ -271,35 +292,40 @@ document.addEventListener("DOMContentLoaded", async () => {
             `,
               )
               .join("")}
-              <!-- Кнопка добавления новой подкатегории -->
               <div style="text-align: right; margin-top: 10px;">
-                <button class="add-sub-inline-btn my-custom-button" data-service-id="${s.id}" style="position: relative; z-index: 10; pointer-events: auto; padding: 4px 12px; font-size: 11px; background-color: #2ecc71; color: #fff; border: none; cursor: pointer; border-radius: 12px; font-weight: bold;">+ Добавить подкатегорию</button>
+                <button class="add-sub-inline-btn my-custom-button" data-service-id="${s.id}" style="position: relative; z-index: 10; pointer-events: auto; padding: 4px 12px; font-size: 11px; background-color: #2ecc71; color: #fff; border: none; cursor: pointer; border-radius: 12px; font-weight: bold;" data-i18n="admin.add_subcat_btn">+ Добавить подкатегорию</button>
               </div>
           </div>
         `;
       } else {
+        const defaultStash =
+          getLang() === "ru" ? "Услуга у стажёра" : "Service by intern";
+        const defaultMast =
+          getLang() === "ru" ? "Услуга у мастера" : "Service by master";
+        const defaultPro =
+          getLang() === "ru" ? "Услуга у профи" : "Service by pro";
+
         subcategoriesHTML = `
           <div class="admin-service-subcategories">
             <div class="admin-subcat-block">
-              <p class="admin-subcat-title">Базовые тарифы</p>
+              <p class="admin-subcat-title" data-i18n="admin.base_tariffs">Базовые тарифы</p>
               <ul class="admin-subcat-items">
                 <li>
-                  <span>${s.fromstash || "Услуга у стажёра"}</span>
+                  <span>${getLocalizedValue(s, "fromstash") || defaultStash}</span>
                   <span class="admin-price-badge">${s.startingPricestach || s.price || 0} ₽</span>
                 </li>
                 <li>
-                  <span>${s.frommast || "Услуга у мастера"}</span>
+                  <span>${getLocalizedValue(s, "frommast") || defaultMast}</span>
                   <span class="admin-price-badge">${s.startingPricemast || s.price || 0} ₽</span>
                 </li>
                 <li>
-                  <span>${s.frompro || "Услуга у профи"}</span>
+                  <span>${getLocalizedValue(s, "frompro") || defaultPro}</span>
                   <span class="admin-price-badge">${s.startingPricepro || s.price || 0} ₽</span>
                 </li>
               </ul>
             </div>
-            <!-- Кнопка добавления новой подкатегории -->
             <div style="text-align: right; margin-top: 10px;">
-              <button class="add-sub-inline-btn my-custom-button" data-service-id="${s.id}" style="position: relative; z-index: 10; pointer-events: auto; padding: 4px 12px; font-size: 11px; background-color: #7d12af; color: #fff; border: none; cursor: pointer; border-radius: 12px; font-weight: bold;">+ Добавить подкатегорию</button>
+              <button class="add-sub-inline-btn my-custom-button" data-service-id="${s.id}" style="position: relative; z-index: 10; pointer-events: auto; padding: 4px 12px; font-size: 11px; background-color: #7d12af; color: #fff; border: none; cursor: pointer; border-radius: 12px; font-weight: bold;" data-i18n="admin.add_subcat_btn">+ Добавить подкатегорию</button>
             </div>
           </div>
         `;
@@ -308,29 +334,31 @@ document.addEventListener("DOMContentLoaded", async () => {
       const card = document.createElement("div");
       card.className = "prod-card";
       card.innerHTML = `
-        <img src="${s.photo}" alt="">
-        <h4>${s.title}</h4>
+       <img src="${s.photo}" alt="">
+        <h4>${localizedTitle}</h4>
         <p class="card-price">от ${s.startingPricestach} ₽</p>
         ${subcategoriesHTML}
         <div class="card-actions">
-          <button class="edit-btn-style edit-serv-btn" style="position: relative; z-index: 10; pointer-events: auto;">Ред. Категорию</button>
-          <button class="delete-btn-style delete-serv-btn" style="position: relative; z-index: 10; pointer-events: auto;">Удалить</button>
+          <button class="edit-btn-style edit-serv-btn" style="position: relative; z-index: 10; pointer-events: auto;" data-i18n="admin.edit_category_btn">Ред. Категорию</button>
+          <button class="delete-btn-style delete-serv-btn" style="position: relative; z-index: 10; pointer-events: auto;" data-i18n="admin.delete_btn">Удалить</button>
         </div>
       `;
 
       // Редактирование основной категории
       card.querySelector(".edit-serv-btn").addEventListener("click", () => {
         if (serviceFormModeTitle)
-          serviceFormModeTitle.textContent = `Редактирование категории: ${s.title}`;
+          serviceFormModeTitle.textContent = `Редактирование категории: ${localizedTitle}`;
         if (servIdInput) servIdInput.value = s.id;
-        if (servTitleInput) servTitleInput.value = s.title;
+        if (servTitleInput) servTitleInput.value = localizedTitle;
         if (servPhotoInput) servPhotoInput.value = s.photo;
-        if (servDescInput) servDescInput.value = s.description;
-        if (servStashName) servStashName.value = s.fromstash;
+        if (servDescInput)
+          servDescInput.value = getLocalizedValue(s, "description");
+        if (servStashName)
+          servStashName.value = getLocalizedValue(s, "fromstash");
         if (servStashPrice) servStashPrice.value = s.startingPricestach;
-        if (servMastName) servMastName.value = s.frommast;
+        if (servMastName) servMastName.value = getLocalizedValue(s, "frommast");
         if (servMastPrice) servMastPrice.value = s.startingPricemast;
-        if (servProName) servProName.value = s.frompro;
+        if (servProName) servProName.value = getLocalizedValue(s, "frompro");
         if (servProPrice) servProPrice.value = s.startingPricepro;
         validateServiceForm();
 
@@ -345,7 +373,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         .addEventListener("click", async () => {
           if (
             confirm(
-              `Удалить основную услугу "${s.title}" и все её подкатегории?`,
+              `Удалить основную услугу "${localizedTitle}" и все её подкатегории?`,
             )
           ) {
             await fetch(`http://localhost:3000/services/${s.id}`, {
@@ -410,6 +438,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       servicesContainer.appendChild(card);
     });
+    window.translatePage();
   }
 
   // Динамически создаваемое модальное окно для добавления/редактирования подкатегорий
@@ -421,11 +450,27 @@ document.addEventListener("DOMContentLoaded", async () => {
       const service = await response.json();
 
       let subcatData = {
-        title: "",
+        title_ru: "",
+        title_en: "",
         items: [
-          { name: "Служба у стажёра", price: "", photo: "" },
-          { name: "Служба у мастера", price: "", photo: "" },
-          { name: "Служба у профи", price: "", photo: "" },
+          {
+            name_ru: "Служба у стажёра",
+            name_en: "Service by intern",
+            price: "",
+            photo: "",
+          },
+          {
+            name_ru: "Служба у мастера",
+            name_en: "Service by master",
+            price: "",
+            photo: "",
+          },
+          {
+            name_ru: "Служба у профи",
+            name_en: "Service by pro",
+            price: "",
+            photo: "",
+          },
         ],
       };
 
@@ -466,80 +511,103 @@ document.addEventListener("DOMContentLoaded", async () => {
       modalContent.style.color = "#fff";
       modalContent.style.fontFamily = "sans-serif";
 
+      const localizedSubcatTitle = getLocalizedValue(subcatData, "title");
       const headerText =
         subIdx === null
           ? "Создать подкатегорию"
-          : `Редактирование: ${subcatData.title}`;
+          : `Редактирование: ${localizedSubcatTitle}`;
 
       modalContent.innerHTML = `
-        <h2 style="margin-top:0; border-bottom:1px solid #333; padding-bottom:10px; color:#fff; font-size:1.4rem;">${headerText}</h2>
+        <h2 style="margin-top:0; border-bottom:1px solid #333; padding-bottom:10px; color:#fff; font-size:1.4rem;" data-i18n="${subIdx === null ? "admin.create_product" : "admin.edit_btn"}">${headerText}</h2>
         <form id="dyn-subcat-form" style="display:flex; flex-direction:column; gap:12px; margin-top:15px;">
           
           <div style="display:flex; flex-direction:column; gap:5px;">
-            <label style="font-size:13px; color:#aaa;">Название подкатегории *</label>
-            <input type="text" id="dyn-subcat-title" value="${subcatData.title}" required style="padding:8px; border-radius:6px; border:1px solid #333; background:#222; color:#fff;" />
+            <label style="font-size:13px; color:#aaa;">Название подкатегории (RU) *</label>
+            <input type="text" id="dyn-subcat-title-ru" value="${subcatData.title_ru || subcatData.title || ""}" required style="padding:8px; border-radius:6px; border:1px solid #333; background:#222; color:#fff;" />
+          </div>
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <label style="font-size:13px; color:#aaa;">Название подкатегории (EN) *</label>
+            <input type="text" id="dyn-subcat-title-en" value="${subcatData.title_en || subcatData.title || ""}" required style="padding:8px; border-radius:6px; border:1px solid #333; background:#222; color:#fff;" />
           </div>
 
           <!-- СТАЖЕР -->
           <div style="border-bottom:1px solid #222; margin-top:10px; padding-bottom:3px;">
-            <h4 style="margin:0; color:#fff;">Тариф: Стажёр</h4>
+            <h4 style="margin:0; color:#fff;" data-i18n="admin.tarif_stash">Тариф: Стажёр</h4>
           </div>
           <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
             <div style="display:flex; flex-direction:column; gap:3px;">
-              <label style="font-size:11px; color:#aaa;">Название *</label>
-              <input type="text" id="dyn-stash-name" value="${subcatData.items[0]?.name || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+              <label style="font-size:11px; color:#aaa;">Название (RU) *</label>
+              <input type="text" id="dyn-stash-name-ru" value="${subcatData.items[0]?.name_ru || subcatData.items[0]?.name || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
             </div>
             <div style="display:flex; flex-direction:column; gap:3px;">
-              <label style="font-size:11px; color:#aaa;">Цена (₽) *</label>
-              <input type="number" id="dyn-stash-price" value="${subcatData.items[0]?.price || ""}" min="1" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+              <label style="font-size:11px; color:#aaa;">Название (EN) *</label>
+              <input type="text" id="dyn-stash-name-en" value="${subcatData.items[0]?.name_en || subcatData.items[0]?.name || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
             </div>
           </div>
-          <div style="display:flex; flex-direction:column; gap:3px;">
-            <label style="font-size:11px; color:#aaa;">Ссылка на фото *</label>
-            <input type="text" id="dyn-stash-photo" value="${subcatData.items[0]?.photo || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <label style="font-size:11px; color:#aaa;" data-i18n="admin.input_price">Цена (₽) *</label>
+              <input type="number" id="dyn-stash-price" value="${subcatData.items[0]?.price || ""}" min="1" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+            </div>
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <label style="font-size:11px; color:#aaa;" data-i18n="admin.input_photo">Ссылка на фото *</label>
+              <input type="text" id="dyn-stash-photo" value="${subcatData.items[0]?.photo || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+            </div>
           </div>
 
           <!-- МАСТЕР -->
           <div style="border-bottom:1px solid #222; margin-top:10px; padding-bottom:3px;">
-            <h4 style="margin:0; color:#fff;">Тариф: Мастер</h4>
+            <h4 style="margin:0; color:#fff;" data-i18n="admin.tarif_mast">Тариф: Мастер</h4>
           </div>
           <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
             <div style="display:flex; flex-direction:column; gap:3px;">
-              <label style="font-size:11px; color:#aaa;">Название *</label>
-              <input type="text" id="dyn-mast-name" value="${subcatData.items[1]?.name || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+              <label style="font-size:11px; color:#aaa;">Название (RU) *</label>
+              <input type="text" id="dyn-mast-name-ru" value="${subcatData.items[1]?.name_ru || subcatData.items[1]?.name || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
             </div>
             <div style="display:flex; flex-direction:column; gap:3px;">
-              <label style="font-size:11px; color:#aaa;">Цена (₽) *</label>
-              <input type="number" id="dyn-mast-price" value="${subcatData.items[1]?.price || ""}" min="1" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+              <label style="font-size:11px; color:#aaa;">Название (EN) *</label>
+              <input type="text" id="dyn-mast-name-en" value="${subcatData.items[1]?.name_en || subcatData.items[1]?.name || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
             </div>
           </div>
-          <div style="display:flex; flex-direction:column; gap:3px;">
-            <label style="font-size:11px; color:#aaa;">Ссылка на фото *</label>
-            <input type="text" id="dyn-mast-photo" value="${subcatData.items[1]?.photo || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <label style="font-size:11px; color:#aaa;" data-i18n="admin.input_price">Цена (₽) *</label>
+              <input type="number" id="dyn-mast-price" value="${subcatData.items[1]?.price || ""}" min="1" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+            </div>
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <label style="font-size:11px; color:#aaa;" data-i18n="admin.input_photo">Ссылка на фото *</label>
+              <input type="text" id="dyn-mast-photo" value="${subcatData.items[1]?.photo || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+            </div>
           </div>
 
           <!-- ПРОФИ -->
           <div style="border-bottom:1px solid #222; margin-top:10px; padding-bottom:3px;">
-            <h4 style="margin:0; color:#fff;">Тариф: Профи</h4>
+            <h4 style="margin:0; color:#fff;" data-i18n="admin.tarif_pro">Тариф: Профи</h4>
           </div>
           <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
             <div style="display:flex; flex-direction:column; gap:3px;">
-              <label style="font-size:11px; color:#aaa;">Название *</label>
-              <input type="text" id="dyn-pro-name" value="${subcatData.items[2]?.name || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+              <label style="font-size:11px; color:#aaa;">Название (RU) *</label>
+              <input type="text" id="dyn-pro-name-ru" value="${subcatData.items[2]?.name_ru || subcatData.items[2]?.name || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
             </div>
             <div style="display:flex; flex-direction:column; gap:3px;">
-              <label style="font-size:11px; color:#aaa;">Цена (₽) *</label>
-              <input type="number" id="dyn-pro-price" value="${subcatData.items[2]?.price || ""}" min="1" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+              <label style="font-size:11px; color:#aaa;">Название (EN) *</label>
+              <input type="text" id="dyn-pro-name-en" value="${subcatData.items[2]?.name_en || subcatData.items[2]?.name || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
             </div>
           </div>
-          <div style="display:flex; flex-direction:column; gap:3px;">
-            <label style="font-size:11px; color:#aaa;">Ссылка на фото *</label>
-            <input type="text" id="dyn-pro-photo" value="${subcatData.items[2]?.photo || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <label style="font-size:11px; color:#aaa;" data-i18n="admin.input_price">Цена (₽) *</label>
+              <input type="number" id="dyn-pro-price" value="${subcatData.items[2]?.price || ""}" min="1" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+            </div>
+            <div style="display:flex; flex-direction:column; gap:3px;">
+              <label style="font-size:11px; color:#aaa;" data-i18n="admin.input_photo">Ссылка на фото *</label>
+              <input type="text" id="dyn-pro-photo" value="${subcatData.items[2]?.photo || ""}" required style="padding:6px; border-radius:4px; border:1px solid #333; background:#222; color:#fff; font-size:12px;" />
+            </div>
           </div>
 
           <div style="display:flex; gap:10px; margin-top:15px;">
-            <button type="submit" style="flex:1; padding:10px; border:none; border-radius:6px; background:#2ecc71; color:#fff; font-weight:bold; cursor:pointer;">Сохранить</button>
-            <button type="button" id="dyn-cancel-btn" style="padding:10px 20px; border:1px solid #444; border-radius:6px; background:#222; color:#fff; cursor:pointer;">Отмена</button>
+            <button type="submit" style="flex:1; padding:10px; border:none; border-radius:6px; background:#2ecc71; color:#fff; font-weight:bold; cursor:pointer;" data-i18n="admin.save">Сохранить</button>
+            <button type="button" id="dyn-cancel-btn" style="padding:10px 20px; border:1px solid #444; border-radius:6px; background:#222; color:#fff; cursor:pointer;" data-i18n="admin.cancel">Отмена</button>
           </div>
         </form>
       `;
@@ -565,24 +633,44 @@ document.addEventListener("DOMContentLoaded", async () => {
           event.preventDefault();
 
           const newSubcat = {
-            title: document.getElementById("dyn-subcat-title").value.trim(),
+            title_ru: document
+              .getElementById("dyn-subcat-title-ru")
+              .value.trim(),
+            title_en: document
+              .getElementById("dyn-subcat-title-en")
+              .value.trim(),
             items: [
               {
-                name: document.getElementById("dyn-stash-name").value.trim(),
+                name_ru: document
+                  .getElementById("dyn-stash-name-ru")
+                  .value.trim(),
+                name_en: document
+                  .getElementById("dyn-stash-name-en")
+                  .value.trim(),
                 price: parseFloat(
                   document.getElementById("dyn-stash-price").value,
                 ),
                 photo: document.getElementById("dyn-stash-photo").value.trim(),
               },
               {
-                name: document.getElementById("dyn-mast-name").value.trim(),
+                name_ru: document
+                  .getElementById("dyn-mast-name-ru")
+                  .value.trim(),
+                name_en: document
+                  .getElementById("dyn-mast-name-en")
+                  .value.trim(),
                 price: parseFloat(
                   document.getElementById("dyn-mast-price").value,
                 ),
                 photo: document.getElementById("dyn-mast-photo").value.trim(),
               },
               {
-                name: document.getElementById("dyn-pro-name").value.trim(),
+                name_ru: document
+                  .getElementById("dyn-pro-name-ru")
+                  .value.trim(),
+                name_en: document
+                  .getElementById("dyn-pro-name-en")
+                  .value.trim(),
                 price: parseFloat(
                   document.getElementById("dyn-pro-price").value,
                 ),
@@ -623,6 +711,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (err) {
       console.error(err);
     }
+    window.translatePage();
   }
 
   // Добавление / Редактирование товаров
@@ -630,17 +719,37 @@ document.addEventListener("DOMContentLoaded", async () => {
     productForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const costValue = parseFloat(prodCostInput.value);
+      const editId = prodIdInput.value;
+      const currentLang = getLang();
 
-      const productData = {
-        name: prodNameInput.value.trim(),
+      let productData = {
         price: costValue,
-        description: prodDescInput.value.trim(),
         category: prodCategorySelect.value,
         photo: prodPhotoInput.value.trim(),
         rating: 5.0,
       };
 
-      const editId = prodIdInput.value;
+      if (editId) {
+        try {
+          const res = await fetch(`http://localhost:3000/products/${editId}`);
+          if (res.ok) {
+            const existingProduct = await res.json();
+            productData = { ...existingProduct, ...productData };
+          }
+        } catch (err) {
+          console.error("Ошибка при получении редактируемого товара:", err);
+        }
+      }
+
+      productData[`name_${currentLang}`] = prodNameInput.value.trim();
+      productData[`description_${currentLang}`] = prodDescInput.value.trim();
+
+      if (!editId) {
+        productData.name_ru = prodNameInput.value.trim();
+        productData.name_en = prodNameInput.value.trim();
+        productData.description_ru = prodDescInput.value.trim();
+        productData.description_en = prodDescInput.value.trim();
+      }
 
       try {
         if (editId) {
@@ -675,32 +784,51 @@ document.addEventListener("DOMContentLoaded", async () => {
     serviceForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const editId = servIdInput.value;
+      const currentLang = getLang();
       let existingSubcategories = [];
+      let serviceData = {};
 
       if (editId) {
         try {
           const getRes = await fetch(
             `http://localhost:3000/services/${editId}`,
           );
-          const currentServ = await getRes.json();
-          existingSubcategories = currentServ.subcategories || [];
+          if (getRes.ok) {
+            serviceData = await getRes.json();
+            existingSubcategories = serviceData.subcategories || [];
+          }
         } catch (err) {
           console.error("Ошибка получения подкатегорий:", err);
         }
       }
 
-      const serviceData = {
-        title: servTitleInput.value.trim(),
+      serviceData = {
+        ...serviceData,
         photo: servPhotoInput.value.trim(),
-        description: servDescInput.value.trim(),
-        fromstash: servStashName.value.trim(),
         startingPricestach: parseFloat(servStashPrice.value),
-        frommast: servMastName.value.trim(),
         startingPricemast: parseFloat(servMastPrice.value),
-        frompro: servProName.value.trim(),
         startingPricepro: parseFloat(servProPrice.value),
         subcategories: existingSubcategories,
       };
+
+      serviceData[`title_${currentLang}`] = servTitleInput.value.trim();
+      serviceData[`description_${currentLang}`] = servDescInput.value.trim();
+      serviceData[`fromstash_${currentLang}`] = servStashName.value.trim();
+      serviceData[`frommast_${currentLang}`] = servMastName.value.trim();
+      serviceData[`frompro_${currentLang}`] = servProName.value.trim();
+
+      if (!editId) {
+        serviceData.title_ru = servTitleInput.value.trim();
+        serviceData.title_en = servTitleInput.value.trim();
+        serviceData.description_ru = servDescInput.value.trim();
+        serviceData.description_en = servDescInput.value.trim();
+        serviceData.fromstash_ru = servStashName.value.trim();
+        serviceData.fromstash_en = servStashName.value.trim();
+        serviceData.frommast_ru = servMastName.value.trim();
+        serviceData.frommast_en = servMastName.value.trim();
+        serviceData.frompro_ru = servProName.value.trim();
+        serviceData.frompro_en = servProName.value.trim();
+      }
 
       try {
         if (editId) {
@@ -737,13 +865,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!filterByUser) return;
     const response = await fetch("http://localhost:3000/users?role=client");
     const clients = await response.json();
-    filterByUser.innerHTML = `<option value="">Все клиенты</option>`;
+
+    // Добавлен data-i18n="admin.all_users" для перевода "Все клиенты"
+    filterByUser.innerHTML = `<option value="" data-i18n="admin.all_users">Все клиенты</option>`;
+
     clients.forEach((c) => {
       const opt = document.createElement("option");
       opt.value = c.id;
       opt.textContent = `@${c.username} (${c.firstName} ${c.lastName})`;
       filterByUser.appendChild(opt);
     });
+
+    // Вызов перевода после того, как элементы добавлены в DOM
+    window.translatePage();
   }
 
   async function loadReviews() {
@@ -761,11 +895,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     reviewsContainer.innerHTML = "";
     if (reviews.length === 0) {
       reviewsContainer.innerHTML =
-        "<p style='color:#fff;'>Отзывов не найдено.</p>";
+        "<p style='color:#fff;' data-i18n='admin.reviews_not_found'>Отзывов не найдено.</p>";
+      window.translatePage();
       return;
     }
 
     reviews.forEach((r) => {
+      const localizedProductName = getLocalizedValue(r, "productName");
       const item = document.createElement("div");
       item.className = "feedback-item";
       item.style.background = "#222";
@@ -775,13 +911,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       item.style.justifyContent = "space-between";
       item.style.alignItems = "center";
       item.innerHTML = `
-        <div style="color:#fff;">
-          <p><strong>Товар:</strong> ${r.productName}</p>
-          <p><strong>Автор:</strong> @${r.username}</p>
+            <div style="color:#fff;">
+          <p><strong data-i18n="admin.filter_product">Товар:</strong> ${localizedProductName}</p>
+          <p><strong data-i18n="admin.filter_user">Автор:</strong> @${r.username}</p>
           <p style="margin: 6px 0; font-style: italic;">"${r.text}"</p>
           <small style="color: #888;">Дата: ${r.date}</small>
         </div>
-        <button class="my-custom-button delete-feed-btn" style="background-color: palevioletred; color: white; border:none; cursor:pointer; padding:5px 10px;">Удалить</button>
+        <button class="my-custom-button delete-feed-btn" style="background-color: palevioletred; color: white; border:none; cursor:pointer; padding:5px 10px;" data-i18n="admin.delete_btn">Удалить</button>
       `;
 
       item
@@ -797,6 +933,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       reviewsContainer.appendChild(item);
     });
+    window.translatePage();
   }
 
   if (filterByProduct) {
@@ -805,6 +942,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (filterByUser) {
     filterByUser.addEventListener("change", loadReviews);
   }
+
+  window.addEventListener("languageChanged", () => {
+    loadCatalog();
+    loadServices();
+    loadReviews();
+  });
 
   // Безопасный запуск независимых процессов инициализации данных
   try {

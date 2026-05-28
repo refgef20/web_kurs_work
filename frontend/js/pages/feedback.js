@@ -1,13 +1,21 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   if (!currentUser) {
-    alert("Пожалуйста, сначала авторизуйтесь!");
+    alert(
+      window.getLang() === "ru"
+        ? "Пожалуйста, сначала авторизуйтесь!"
+        : "Please log in first!",
+    );
     location.href = "auth.html";
     return;
   }
 
   if (currentUser.role === "admin") {
-    alert("Администраторы не могут оставлять отзывы!");
+    alert(
+      window.getLang() === "ru"
+        ? "Администраторы не могут оставлять отзывы!"
+        : "Administrators cannot leave reviews!",
+    );
     location.href = "../main.HTML";
     return;
   }
@@ -18,49 +26,62 @@ document.addEventListener("DOMContentLoaded", async () => {
   const feedbackSubmitBtn = document.getElementById("feedback-submit-btn");
   const feedbackForm = document.getElementById("feedback-form");
 
-  // Получаем все заказы текущего пользователя
   const ordersResponse = await fetch(
     `http://localhost:3000/orders?userId=${currentUser.id}`,
   );
   const orders = await ordersResponse.json();
 
-  // Собираем уникальные товары и услуги из истории заказов
-  const purchasedItems = new Map(); // ID позиции -> Название позиции
+  const purchasedItems = new Map();
   orders.forEach((order) => {
     if (order.items && Array.isArray(order.items)) {
       order.items.forEach((item) => {
-        if (item.productId && item.name) {
-          purchasedItems.set(item.productId, item.name);
+        if (item.productId) {
+          purchasedItems.set(item.productId, item);
         }
       });
-    } else if (order.productId && order.name) {
-      purchasedItems.set(order.productId, order.name);
     }
   });
 
-  // Заполняем выпадающий список полученными позициями
-  purchasedItems.forEach((name, id) => {
-    const opt = document.createElement("option");
-    opt.value = id;
-    opt.dataset.name = name;
+  const renderProductOptions = () => {
+    productSelect.innerHTML = `<option value="" disabled selected data-i18n="feedback.select_placeholder">Выберите купленный продукт</option>`;
 
-    // Визуальное разделение товаров и услуг в выпадающем списке
-    const isService = id.toString().startsWith("service");
-    opt.textContent = isService ? `Услуга ${name}` : `Товар ${name}`;
+    purchasedItems.forEach((item, id) => {
+      const opt = document.createElement("option");
+      opt.value = id;
 
-    productSelect.appendChild(opt);
-  });
+      const localizedName = window.getLocalizedValue(item, "name");
+      opt.dataset.name_ru = item.name_ru || item.name;
+      opt.dataset.name_en = item.name_en || item.name;
 
-  if (productSelect.options.length === 1) {
-    const opt = document.createElement("option");
-    opt.disabled = true;
-    opt.textContent = "Вы еще ничего не приобрели!";
-    productSelect.appendChild(opt);
-  }
+      const isService = id.toString().startsWith("service");
+      if (window.getLang() === "ru") {
+        opt.textContent = isService
+          ? `Услуга ${localizedName}`
+          : `Товар ${localizedName}`;
+      } else {
+        opt.textContent = isService
+          ? `Service ${localizedName}`
+          : `Product ${localizedName}`;
+      }
+
+      productSelect.appendChild(opt);
+    });
+
+    if (purchasedItems.size === 0) {
+      const opt = document.createElement("option");
+      opt.disabled = true;
+      opt.setAttribute("data-i18n", "feedback.not_purchased_yet");
+      productSelect.appendChild(opt);
+    }
+    window.translatePage();
+  };
+
+  renderProductOptions();
 
   reviewText.addEventListener("input", () => {
     const len = reviewText.value.length;
-    charCounter.textContent = `Символов: ${len}`;
+    charCounter.innerHTML = `<span data-i18n="feedback.symbols">Символов</span>: ${len}`;
+    window.translatePage();
 
     if (len >= 20 && productSelect.value !== "") {
       feedbackSubmitBtn.disabled = false;
@@ -85,7 +106,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       userId: currentUser.id,
       username: currentUser.username,
       productId: productSelect.value,
-      productName: selectedOption.dataset.name,
+      productName_ru: selectedOption.dataset.name_ru,
+      productName_en: selectedOption.dataset.name_en,
       text: reviewText.value.trim(),
       date: new Date().toLocaleDateString(),
     };
@@ -99,11 +121,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (!response.ok) throw new Error("Не удалось опубликовать отзыв");
 
-      alert("Отзыв успешно добавлен!");
+      alert(
+        window.getLang() === "ru"
+          ? "Отзыв успешно добавлен!"
+          : "Review successfully published!",
+      );
       location.href = "../main.HTML";
     } catch (err) {
       console.error(err);
-      alert("Ошибка при сохранении отзыва.");
     }
   });
+
+  window.addEventListener("languageChanged", renderProductOptions);
 });

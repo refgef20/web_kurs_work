@@ -2,71 +2,88 @@
   "services": [
     {
       "id": "haircut",
-      "title": "Стрижка",
-      "description": "Профессиональная стрижка волос любой сложности. Индивидуальный подбор формы.",
+      "title_ru": "Стрижка",
+      "title_en": "Haircut",
+      "description_ru": "Профессиональная стрижка волос любой сложности. Индивидуальный подбор формы.",
+      "description_en": "Professional haircut of any complexity. Individual shape selection.",
       "photo": "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80",
-      "fromstash": "Стрижка у стажёра",
-      "frommast": "Стрижка у мастера",
-      "frompro": "Стрижка у профи",
+      "fromstash_ru": "Стрижка у стажёра",
+      "fromstash_en": "Haircut by an intern",
+      "frommast_ru": "Стрижка у мастера",
+      "frommast_en": "Haircut by a master",
+      "frompro_ru": "Стрижка у профи",
+      "frompro_en": "Haircut by a pro",
       "startingPricestach": 999,
       "startingPricemast": 1899,
       "startingPricepro": 2799,
       "subcategories": [
         {
-          "title": "Женская стрижка",
+          "title_ru": "Женская стрижка",
+          "title_en": "Women's Haircut",
           "items": [
             {
-              "name": "Стрижка у стажёра",
+              "name_ru": "Стрижка у стажёра",
+              "name_en": "Haircut by an intern",
               "price": 1199,
               "photo": "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=400&q=80"
             },
             {
-              "name": "Стрижка у мастера",
+              "name_ru": "Стрижка у мастера",
+              "name_en": "Haircut by a master",
               "price": 2299,
               "photo": "https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=400&q=80"
             },
             {
-              "name": "Стрижка у профи",
+              "name_ru": "Стрижка у профи",
+              "name_en": "Haircut by a pro",
               "price": 3399,
               "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=400&q=80"
             }
           ]
         },
         {
-          "title": "Мужская стрижка",
+          "title_ru": "Мужская стрижка",
+          "title_en": "Men's Haircut",
           "items": [
             {
-              "name": "Стрижка у стажёра",
+              "name_ru": "Стрижка у стажёра",
+              "name_en": "Haircut by an intern",
               "price": 999,
               "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=400&q=80"
             },
             {
-              "name": "Стрижка у мастера",
+              "name_ru": "Стрижка у мастера",
+              "name_en": "Haircut by a master",
               "price": 1899,
               "photo": "https://images.unsplash.com/photo-1503951914875-452162b7f744?auto=format&fit=crop&w=400&q=80"
             },
             {
-              "name": "Стрижка у профи",
+              "name_ru": "Стрижка у профи",
+              "name_en": "Haircut by a pro",
               "price": 2799,
               "photo": "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=400&q=80"
             }
           ]
         },
         {
-          "title": "Детская стрижка",
+          "title_ru": "Детская стрижка",
+          "title_en": "Kids Haircut",
           "items": [
             {
-              "name": "Стрижка у стажёра",
+              "name_ru": "Стрижка у стажёра",
+              "name_en": "Haircut by an intern",
               "price": 800,
               "photo": "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=400&q=80"
             },
             {
-              "name": "Стрижка у мастера",
+              "name_ru": "Стрижка у мастера",
+              "name_en": "Haircut by a master",
               "price": 1200,
               "photo": "https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=400&q=80"
             },
             {
-              "name": "Стрижка у профи",
+              "name_ru": "Стрижка у профи",
+              "name_en": "Haircut by a pro",
               "price": 1500,
               "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=400&q=80"
             }
@@ -76,51 +93,64 @@
     },
     {
       "id": "styling",
-      "title": "Укладка",
-      "description": "Создание идеальной укладки для любого случая.",
+      "title_ru": "Укладка",
+      "title_en": "Styling",
+      "description_ru": "Создание идеальной укладки для любого случая.",
+      "description_en": "Creating the perfect styling for any occasion.",
       "photo": "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=600&q=80",
-      "fromstash": "Укладка у стажёра",
-      "frommast": "Укладка у мастера",
-      "frompro": "Укладка у профи",
+      "fromstash_ru": "Укладка у стажёра",
+      "fromstash_en": "Styling by an intern",
+      "frommast_ru": "Укладка у мастера",
+      "frommast_en": "Styling by a master",
+      "frompro_ru": "Укладка у профи",
+      "frompro_en": "Styling by a pro",
       "startingPricestach": 899,
       "startingPricemast": 1099,
       "startingPricepro": 1699,
       "subcategories": [
         {
-          "title": "Повседневная укладка",
+          "title_ru": "Повседневная укладка",
+          "title_en": "Everyday Styling",
           "items": [
             {
-              "name": "Укладка у стажёра",
+              "name_ru": "Укладка у стажёра",
+              "name_en": "Styling by an intern",
               "price": 899,
               "photo": "https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=400&q=80"
             },
             {
-              "name": "Укладка у мастера",
+              "name_ru": "Укладка у мастера",
+              "name_en": "Styling by a master",
               "price": 1099,
               "photo": "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=400&q=80"
             },
             {
-              "name": "Укладка у профи",
+              "name_ru": "Укладка у профи",
+              "name_en": "Styling by a pro",
               "price": 1699,
               "photo": "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=400&q=80"
             }
           ]
         },
         {
-          "title": "Вечерняя укладка",
+          "title_ru": "Вечерняя укладка",
+          "title_en": "Evening Styling",
           "items": [
             {
-              "name": "Укладка у стажёра",
+              "name_ru": "Укладка у стажёра",
+              "name_en": "Styling by an intern",
               "price": 1499,
               "photo": "https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=400&q=80"
             },
             {
-              "name": "Укладка у мастера",
+              "name_ru": "Укладка у мастера",
+              "name_en": "Styling by a master",
               "price": 2499,
               "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=400&q=80"
             },
             {
-              "name": "Укладка у профи",
+              "name_ru": "Укладка у профи",
+              "name_en": "Styling by a pro",
               "price": 3500,
               "photo": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=400&q=80"
             }
@@ -130,31 +160,40 @@
     },
     {
       "id": "coloring",
-      "title": "Окрашивание",
-      "description": "Профессиональное окрашивание премиальными красителями.",
+      "title_ru": "Окрашивание",
+      "title_en": "Coloring",
+      "description_ru": "Профессиональное окрашивание премиальными красителями.",
+      "description_en": "Professional coloring with premium dyes.",
       "photo": "https://images.unsplash.com/photo-1504198453312-84a5c4d15c89?auto=format&fit=crop&w=600&q=80",
-      "fromstash": "Окрашивание у стажёра",
-      "frommast": "Окрашивание у мастера",
-      "frompro": "Окрашивание у профи",
+      "fromstash_ru": "Окрашивание у стажёра",
+      "fromstash_en": "Coloring by an intern",
+      "frommast_ru": "Окрашивание у мастера",
+      "frommast_en": "Coloring by a master",
+      "frompro_ru": "Окрашивание у профи",
+      "frompro_en": "Coloring by a pro",
       "startingPricestach": 2199,
       "startingPricemast": 3299,
       "startingPricepro": 4399,
       "subcategories": [
         {
-          "title": "Однотонное окрашивание",
+          "title_ru": "Однотонное окрашивание",
+          "title_en": "One Tone Coloring",
           "items": [
             {
-              "name": "Окрашивание корней (стажёр)",
+              "name_ru": "Окрашивание корней (стажёр)",
+              "name_en": "Root coloring (intern)",
               "price": 2199,
               "photo": "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=400&q=80"
             },
             {
-              "name": "Окрашивание корней (мастер)",
+              "name_ru": "Окрашивание корней (мастер)",
+              "name_en": "Root coloring (master)",
               "price": 3299,
               "photo": "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=400&q=80"
             },
             {
-              "name": "Окрашивание корней (профи)",
+              "name_ru": "Окрашивание корней (профи)",
+              "name_en": "Root coloring (pro)",
               "price": 4399,
               "photo": "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=600&q=80"
             }
@@ -163,172 +202,211 @@
       ]
     },
     {
-      "title": "Уход",
+      "id": "care",
+      "title_ru": "Уход",
+      "title_en": "Care",
       "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80",
-      "description": "Восстанавливающие процедуры для здоровья и красоты волос.",
-      "fromstash": "Уход у стажёра",
+      "description_ru": "Восстанавливающие процедуры для здоровья и красоты волос.",
+      "description_en": "Restorative procedures for hair health and beauty.",
+      "fromstash_ru": "Уход у стажёра",
+      "fromstash_en": "Care by an intern",
       "startingPricestach": 1499,
-      "frommast": "Уход у мастера",
+      "frommast_ru": "Уход у мастера",
+      "frommast_en": "Care by a master",
       "startingPricemast": 2499,
-      "frompro": "Уход у профи",
+      "frompro_ru": "Уход у профи",
+      "frompro_en": "Care by a pro",
       "startingPricepro": 4399,
       "subcategories": [
         {
-          "title": "Базовый уход",
+          "title_ru": "Базовый уход",
+          "title_en": "Basic Care",
           "items": [
             {
-              "name": "Уход у стажёра",
+              "name_ru": "Уход у стажёра",
+              "name_en": "Care by an intern",
               "price": 1499,
               "photo": "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=400&q=80"
             },
             {
-              "name": "Уход у мастера",
+              "name_ru": "Уход у мастера",
+              "name_en": "Care by a master",
               "price": 2499,
               "photo": "https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=400&q=80"
             },
             {
-              "name": "Уход у профи",
+              "name_ru": "Уход у профи",
+              "name_en": "Care by a pro",
               "price": 4399,
               "photo": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=400&q=80"
             }
           ]
         }
-      ],
-      "id": "care"
+      ]
     }
   ],
   "products": [
     {
       "id": "1",
-      "name": "Kerastase Elixir Ultime",
+      "name_ru": "Kerastase Elixir Ultime",
+      "name_en": "Kerastase Elixir Ultime",
       "price": 4500,
-      "description": "Роскошное многофункциональное масло для волос с арганой, камелией и маслом зародышей кукурузы. Мгновенно придаёт блеск, гладкость и защиту до 230°C.Делает волос мягким",
+      "description_ru": "Роскошное многофункциональное масло для волос с арганой, камелией и маслом зародышей кукурузы. Мгновенно придаёт блеск, гладкость и защиту до 230°C. Делает волос мягким",
+      "description_en": "Luxurious multi-functional hair oil with argan, camellia, and corn germ oil. Instantly adds shine, smoothness, and protection up to 230°C. Softens the hair.",
       "category": "Professional care",
       "rating": 4.9,
       "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEhB9zUb7dy_nBzqLq6D1SPLIHGkd8KrTMsQ&s"
     },
     {
       "id": "2",
-      "name": "Olaplex No.3 Hair Perfector",
+      "name_ru": "Olaplex No.3 Hair Perfector",
+      "name_en": "Olaplex No.3 Hair Perfector",
       "price": 2800,
-      "description": "Домашняя восстанавливающая терапия для волос, которая уменьшает ломкость и визуально укрепляет волосы, восстанавливая повреждения изнутри.Защищает волос от внешних факторов",
+      "description_ru": "Домашняя восстанавливающая терапия для волос, которая уменьшает ломкость и визуально укрепляет волосы, восстанавливая повреждения изнутри. Защищает волос от внешних факторов",
+      "description_en": "At-home restorative treatment that reduces breakage and visibly strengthens hair, repairing damage from within. Protects hair from external factors.",
       "category": "Hair treatment",
       "rating": 4.8,
       "photo": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "3",
-      "name": "Dyson Airwrap Multi-styler",
+      "name_ru": "Dyson Airwrap Multi-styler",
+      "name_en": "Dyson Airwrap Multi-styler",
       "price": 59900,
-      "description": "Революционный стайлер, который завивает, создаёт волны, разглаживает и сушит без экстремально высоких температур. Использует эффект Коанда для универсальной укладки.",
+      "description_ru": "Революционный стайлер, который завивает, создаёт волны, разглаживает и сушит без экстремально высоких температур. Использует эффект Коанда для универсальной укладки.",
+      "description_en": "Revolutionary styler that curls, waves, smooths, and dries without extreme heat. Uses the Coanda effect for versatile styling.",
       "category": "Styling tools",
       "rating": 4.9,
       "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "4",
-      "name": "Oribe Lust Repair Shampoo",
+      "name_ru": "Oribe Lust Repair Shampoo",
+      "name_en": "Oribe Lust Repair Shampoo",
       "price": 5200,
-      "description": "Ультрапитательный шампунь с био-восстанавливающим комплексом, который восстанавливает повреждённые волосы, бережно очищая и добавляя невероятный блеск.",
+      "description_ru": "Ультрапитательный шампунь с био-восстанавливающим комплексом, который восстанавливает повреждённые волосы, бережно очищая и добавляя невероятный блеск.",
+      "description_en": "Ultra-nourishing shampoo with a bio-restorative complex that repairs damaged hair, gently cleansing and adding incredible shine.",
       "category": "Professional care",
       "rating": 4.7,
       "photo": "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "5",
-      "name": "Moroccanoil Treatment ",
+      "name_ru": "Moroccanoil Treatment",
+      "name_en": "Moroccanoil Treatment",
       "price": 3800,
-      "description": "Оригинальное масло для волос с арганой, которое питает, кондиционирует и добавляет блеск. Обогащено аргановым маслом и витаминами для всех типов волос.Создаёт эффект не утяжеляя волос",
+      "description_ru": "Оригинальное масло для волос с арганой, которое питает, кондиционирует и добавляет блеск. Обогащено аргановым маслом и витаминами для всех типов волос. Создаёт эффект не утяжеляя волос",
+      "description_en": "Original argan hair treatment that nourishes, conditions, and adds shine. Infused with argan oil and vitamins for all hair types. Softens hair without weighing it down.",
       "category": "Hair treatment",
       "rating": 4.8,
       "photo": "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "6",
-      "name": "GHD Platinum+ Styler",
+      "name_ru": "GHD Platinum+ Styler",
+      "name_en": "GHD Platinum+ Styler",
       "price": 27900,
-      "description": "Умный выпрямитель с прогнозирующей технологией, которая распознаёт толщину волос и скорость укладки. Создаёт здоровую укладку.",
+      "description_ru": "Умный выпрямитель с прогнозирующей технологией, которая распознаёт толщину волос и скорость укладки. Создаёт здоровую укладку.",
+      "description_en": "Smart straightener with predictive technology that recognizes hair thickness and styling speed. Creates healthy, gorgeous styles.",
       "category": "Styling tools",
       "rating": 4.9,
       "photo": "https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "7",
-      "name": "Living Proof Perfect Hair",
+      "name_ru": "Living Proof Perfect Hair",
+      "name_en": "Living Proof Perfect Hair",
       "price": 2900,
-      "description": "Продвинутый сухой шампунь, который впитывает жир и пот, добавляя объём и текстуру. Оставляет волосы чистыми и свежими между мытьём.",
+      "description_ru": "Продвинутый сухой шампунь, который впитывает жир и пот, добавляя объём и текстуру. Оставляет волосы чистыми и свежими между мытьём.",
+      "description_en": "Advanced dry shampoo that absorbs oil and sweat, adding volume and texture. Leaves hair clean and fresh between washes.",
       "category": "Daily care",
       "rating": 4.6,
       "photo": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "8",
-      "name": "Redken Acidic Concentrate",
+      "name_ru": "Redken Acidic Concentrate",
+      "name_en": "Redken Acidic Concentrate",
       "price": 3400,
-      "description": "Интенсивная восстанавливающая система, которая укрепляет связи волос, восстанавливает повреждения и убирает повреждения.",
+      "description_ru": "Интенсивная восстанавливающая система, которая укрепляет связи волос, восстанавливает повреждения и убирает повреждения.",
+      "description_en": "Intensive restorative system that strengthens hair bonds, repairs damage, and eliminates structural imperfections.",
       "category": "Hair treatment",
       "rating": 4.7,
       "photo": "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "9",
-      "name": "Hairdresser's Invisible Oil",
+      "name_ru": "Hairdresser's Invisible Oil",
+      "name_en": "Hairdresser's Invisible Oil",
       "price": 4200,
-      "description": "Многофункциональное масло для волос с 6 невесомыми маслами, которые разглаживают, распутывают и контролируют пушистость.",
+      "description_ru": "Многофункциональное масло для волос с 6 невесомыми маслами, которые разглаживают, распутывают и контролируют пушистость.",
+      "description_en": "Multi-purpose hair oil infused with 6 featherlight oils that soften, detangle, and control frizz.",
       "category": "Professional care",
       "rating": 4.8,
       "photo": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "10",
-      "name": "T3 Micro Cura Luxe Dryer",
+      "name_ru": "T3 Micro Cura Luxe Dryer",
+      "name_en": "T3 Micro Cura Luxe Dryer",
       "price": 28500,
-      "description": "Профессиональный ионный фен с датчиком Auto Pause и 5 настройками тепла/скорости. Обеспечивает быструю сушку с салонным качеством.",
+      "description_ru": "Профессиональный ионный фен с датчиком Auto Pause и 5 настройками тепла/скорости. Обеспечивает быструю сушку с салонным качеством.",
+      "description_en": "Professional ionic hair dryer featuring Auto Pause sensor and 5 heat/speed settings. Delivers fast salon-quality blowouts.",
       "category": "Styling tools",
       "rating": 4.7,
       "photo": "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "11",
-      "name": "K18 Molecular Repair Mask",
+      "name_ru": "K18 Molecular Repair Mask",
+      "name_en": "K18 Molecular Repair Mask",
       "price": 7500,
-      "description": "Революционная пептидная терапия, которая восстанавливает повреждения от обесцвечивания, окрашивания.",
+      "description_ru": "Революционная пептидная терапия, которая восстанавливает повреждения от обесцвечивания, окрашивания.",
+      "description_en": "Revolutionary peptide therapy that reverses damage from bleaching and color processing.",
       "category": "Hair treatment",
       "rating": 4.9,
       "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "12",
-      "name": "Verb Ghost Oil",
+      "name_ru": "Verb Ghost Oil",
+      "name_en": "Verb Ghost Oil",
       "price": 1800,
-      "description": "Невесомое масло моринги, которое разглаживает пушистость, добавляет блеск и защищает волосы от термовоздействия до 230°C.",
+      "description_ru": "Невесомое масло моринги, которое разглаживает пушистость, добавляет блеск и защищает волосы от термовоздействия до 230°C.",
+      "description_en": "Featherlight moringa oil that smooths frizz, adds shine, and protects hair from heat styling up to 230°C.",
       "category": "Daily care",
       "rating": 4.6,
       "photo": "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "13",
-      "name": "Pureology Shampoo",
+      "name_ru": "Pureology Shampoo",
+      "name_en": "Pureology Shampoo",
       "price": 3200,
-      "description": "Концентрированный бессульфатный шампунь для сухих окрашенных волос. Обеспечивает интенсивное увлажнение",
+      "description_ru": "Концентрированный бессульфатный шампунь для сухих окрашенных волос. Обеспечивает интенсивное увлажнение",
+      "description_en": "Concentrated sulfate-free shampoo for dry, color-treated hair. Provides deep, luxurious hydration.",
       "category": "Professional care",
       "rating": 4.8,
       "photo": "https://images.unsplash.com/photo-1535585209827-a1143ab7be?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "14",
-      "name": "Color Wow Dream Seal",
+      "name_ru": "Color Wow Dream Seal",
+      "name_en": "Color Wow Dream Seal",
       "price": 2800,
-      "description": "Анти-пуш спрей, который создаёт водонепроницаемую защиту вокруг волос для гладких, блестящих и устойчивых.",
+      "description_ru": "Анти-пуш спрей, который создаёт водонепроницаемую защиту вокруг волос для гладких, блестящих и устойчивых.",
+      "description_en": "Anti-frizz spray that coats hair with a waterproof shield for sleek, glossy, and resilient locks.",
       "category": "Styling products",
       "rating": 4.7,
       "photo": "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80"
     },
     {
       "id": "15",
-      "name": "Briogeo Charcoal Shampoo",
+      "name_ru": "Briogeo Charcoal Shampoo",
+      "name_en": "Briogeo Charcoal Shampoo",
       "price": 4200,
-      "description": "Детокс и отшелушивающий уход за кожей головы с бинчотан углём и маслом мяты. Удаляет загрязнения и успокаивает.",
+      "description_ru": "Детокс и отшелушивающий уход за кожей головы с бинчотан углём и маслом мяты. Удаляет загрязнения и успокаивает.",
+      "description_en": "Scalp detox and exfoliating shampoo formulated with binchotan charcoal and peppermint oil. Purifies and soothes.",
       "category": "Professional care",
       "rating": 4.8,
       "photo": "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=600&q=80"
@@ -337,111 +415,200 @@
   "cart": [
     {
       "userId": "u1",
-      "productId": "service__________________",
-      "name": "Стрижка у стажёра",
-      "subcategory": "Женская стрижка",
+      "productId": "service_haircut_sub_0",
+      "name_ru": "Стрижка у стажёра",
+      "name_en": "Haircut by an intern",
+      "subcategory_ru": "Женская стрижка",
+      "subcategory_en": "Women's Haircut",
       "price": 1199,
-      "description": "Услуга салона красоты Annetka.Hair",
+      "description_ru": "Услуга салона красоты Annetka.Hair",
+      "description_en": "Beauty salon service Annetka.Hair",
       "photo": "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=400&q=80",
       "amount": 1,
       "id": "UAdssqxutj4"
     },
     {
       "userId": "u1",
-      "productId": "service__________________",
-      "name": "Укладка у мастера",
-      "subcategory": "Вечерняя укладка",
+      "productId": "service_styling_sub_1",
+      "name_ru": "Укладка у мастера",
+      "name_en": "Styling by a master",
+      "subcategory_ru": "Вечерняя укладка",
+      "subcategory_en": "Evening Styling",
       "price": 2499,
-      "description": "Услуга салона красоты Annetka.Hair",
+      "description_ru": "Услуга салона красоты Annetka.Hair",
+      "description_en": "Beauty salon service Annetka.Hair",
       "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=400&q=80",
       "amount": 1,
       "id": "enowM2f37lE"
+    },
+    {
+      "userId": "u2",
+      "productId": "service_haircut_sub_1",
+      "name_ru": "Стрижка у мастера",
+      "name_en": "Haircut by a master",
+      "subcategory_ru": "Мужская стрижка",
+      "subcategory_en": "Men's Haircut",
+      "price": 1899,
+      "description_ru": "Услуга салона красоты Annetka.Hair",
+      "description_en": "Beauty salon service Annetka.Hair",
+      "photo": "https://images.unsplash.com/photo-1503951914875-452162b7f744?auto=format&fit=crop&w=400&q=80",
+      "amount": 1,
+      "id": "vz-_VZBamjk"
     }
   ],
-  "favorites": [],
+  "favorites": [
+    {
+      "userId": "u2",
+      "productId": "service_styling_sub_1",
+      "name_ru": "Укладка у мастера",
+      "name_en": "Styling by a master",
+      "subcategory_ru": "Повседневная укладка",
+      "subcategory_en": "Everyday Styling",
+      "price": 1099,
+      "description_ru": "Услуга салона красоты Annetka.Hair",
+      "description_en": "Beauty salon service Annetka.Hair",
+      "photo": "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=400&q=80",
+      "id": "u1cm1zTM1Ng"
+    },
+    {
+      "userId": "u2",
+      "productId": "service_coloring_sub_1",
+      "name_ru": "Окрашивание корней (мастер)",
+      "name_en": "Root coloring (master)",
+      "subcategory_ru": "Однотонное окрашивание",
+      "subcategory_en": "One Tone Coloring",
+      "price": 3299,
+      "description_ru": "Услуга салона красоты Annetka.Hair",
+      "description_en": "Beauty salon service Annetka.Hair",
+      "photo": "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=400&q=80",
+      "id": "Yew7WrQwUcs"
+    }
+  ],
   "masters": [
     {
       "id": "m1",
-      "name": "Анна Астахова",
+      "name_ru": "Анна Астахова",
+      "name_en": "Anna Astakhova",
       "price": 1899,
-      "description": "Специалист по точным геометрическим стрижкам и созданию индивидуального стиля.",
+      "description_ru": "Специалист по точным геометрическим стрижкам и созданию индивидуального стиля.",
+      "description_en": "Specialist in precise geometric haircuts and creating personal styles.",
       "category": "haircut",
       "rating": 4.9,
       "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
-      "qualification": "мастер",
-      "experience": [
+      "qualification_ru": "мастер",
+      "qualification_en": "master",
+      "experience_ru": [
         "Парикмахер-стилист",
         "Опыт более 5 лет"
+      ],
+      "experience_en": [
+        "Hair stylist",
+        "Experience over 5 years"
       ]
     },
     {
       "id": "m2",
-      "name": "Ира Соколова",
+      "name_ru": "Ира Соколова",
+      "name_en": "Ira Sokolova",
       "price": 899,
-      "description": "Молодой специалист, создающий современные повседневные укладки.",
+      "description_ru": "Молодой специалист, создающий современные повседневные укладки.",
+      "description_en": "Young specialist creating modern everyday styles.",
       "category": "styling",
       "rating": 4.5,
       "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
-      "qualification": "стажер",
-      "experience": [
+      "qualification_ru": "стажер",
+      "qualification_en": "intern",
+      "experience_ru": [
         "Младший стилист",
         "Опыт 1 год"
+      ],
+      "experience_en": [
+        "Junior stylist",
+        "1 year of experience"
       ]
     },
     {
       "id": "m3",
-      "name": "Катя Климова",
+      "name_ru": "Катя Климова",
+      "name_en": "Katya Klimova",
       "price": 4399,
-      "description": "Эксперт по сложным техникам окрашивания: балаяж, шатуш, аиртач.",
+      "description_ru": "Эксперт по сложным техникам окрашивания: балаяж, шатуш, аиртач.",
+      "description_en": "Expert in complex coloring techniques: balayage, shatush, airtouch.",
       "category": "coloring",
       "rating": 5,
       "photo": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80",
-      "qualification": "профи",
-      "experience": [
+      "qualification_ru": "профи",
+      "qualification_en": "pro",
+      "experience_ru": [
         "Колорист-эксперт",
         "Опыт более 8 лет"
+      ],
+      "experience_en": [
+        "Colorist expert",
+        "Experience over 8 years"
       ]
     },
     {
       "id": "m4",
-      "name": "Дима Волков",
+      "name_ru": "Дима Волков",
+      "name_en": "Dima Volkov",
       "price": 1899,
-      "description": "Профессионал мужских стрижек, оформлений бороды и классического бритья.",
+      "description_ru": "Профессионал мужских стрижек, оформлений бороды и классического бритья.",
+      "description_en": "Professional in men's haircuts, beard grooming, and classic shaving.",
       "category": "haircut",
       "rating": 4.8,
       "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
-      "qualification": "мастер",
-      "experience": [
+      "qualification_ru": "мастер",
+      "qualification_en": "master",
+      "experience_ru": [
         "Мужской стилист",
         "Опыт более 4 лет"
+      ],
+      "experience_en": [
+        "Men's stylist",
+        "Experience over 4 years"
       ]
     },
     {
       "id": "m5",
-      "name": "Ольга Лебедева",
+      "name_ru": "Ольга Лебедева",
+      "name_en": "Olga Lebedeva",
       "price": 1499,
-      "description": "Занимается уходовыми процедурами, восстановлением волос и базовым массажем головы.",
+      "description_ru": "Занимается уходовыми процедурами, восстановлением волос и базовым массажем головы.",
+      "description_en": "Specializes in hair care procedures, restoration, and basic scalp massage.",
       "category": "care",
       "rating": 4.6,
       "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
-      "qualification": "стажер",
-      "experience": [
+      "qualification_ru": "стажер",
+      "qualification_en": "intern",
+      "experience_ru": [
         "Мастер по уходу",
         "Опыт 2 года"
+      ],
+      "experience_en": [
+        "Hair care specialist",
+        "2 years of experience"
       ]
     },
     {
       "id": "m6",
-      "name": "Мария Алексеева",
+      "name_ru": "Мария Алексеева",
+      "name_en": "Maria Alekseeva",
       "price": 1699,
-      "description": "Создает свадебные и вечерние образы премиум-класса.",
+      "description_ru": "Создает свадебные и вечерние образы премиум-класса.",
+      "description_en": "Creates premium-class bridal and evening looks.",
       "category": "styling",
       "rating": 4.9,
       "photo": "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=600&q=80",
-      "qualification": "профи",
-      "experience": [
+      "qualification_ru": "профи",
+      "qualification_en": "pro",
+      "experience_ru": [
         "Топ-стилист",
         "Опыт более 7 лет"
+      ],
+      "experience_en": [
+        "Top stylist",
+        "Experience over 7 years"
       ]
     }
   ],
@@ -476,8 +643,9 @@
       "userId": "u2",
       "items": [
         {
-          "productId": "service__________________",
-          "name": "Стрижка у стажёра",
+          "productId": "service_haircut_sub_0",
+          "name_ru": "Стрижка у стажёра",
+          "name_en": "Haircut by an intern",
           "price": 999,
           "amount": 1
         }
@@ -489,8 +657,9 @@
       "userId": "u1",
       "items": [
         {
-          "productId": "service________________",
-          "name": "Стрижка у профи",
+          "productId": "service_haircut_pro",
+          "name_ru": "Стрижка у профи",
+          "name_en": "Haircut by a pro",
           "price": 2799,
           "amount": 1,
           "masterId": "m2",
@@ -505,8 +674,9 @@
       "userId": "u1",
       "items": [
         {
-          "productId": "service__________________",
-          "name": "Стрижка у стажёра",
+          "productId": "service_haircut_sub_0",
+          "name_ru": "Стрижка у стажёра",
+          "name_en": "Haircut by an intern",
           "price": 999,
           "amount": 1,
           "masterId": "m4",
@@ -522,7 +692,8 @@
       "items": [
         {
           "productId": "2",
-          "name": "Olaplex No.3 Hair Perfector",
+          "name_ru": "Olaplex No.3 Hair Perfector",
+          "name_en": "Olaplex No.3 Hair Perfector",
           "price": 2800,
           "amount": 1
         }
@@ -534,9 +705,11 @@
       "userId": "u1",
       "items": [
         {
-          "productId": "service__________________",
-          "name": "Стрижка у мастера",
-          "subcategory": "Детская стрижка",
+          "productId": "service_haircut_sub_1",
+          "name_ru": "Стрижка у мастера",
+          "name_en": "Haircut by a master",
+          "subcategory_ru": "Детская стрижка",
+          "subcategory_en": "Kids Haircut",
           "price": 1200,
           "amount": 1,
           "masterId": "m1",
@@ -551,9 +724,11 @@
       "userId": "u2",
       "items": [
         {
-          "productId": "service__________________",
-          "name": "Стрижка у мастера",
-          "subcategory": "Детская стрижка",
+          "productId": "service_haircut_sub_1",
+          "name_ru": "Стрижка у мастера",
+          "name_en": "Haircut by a master",
+          "subcategory_ru": "Детская стрижка",
+          "subcategory_en": "Kids Haircut",
           "price": 1200,
           "amount": 1,
           "masterId": "m1",
@@ -568,9 +743,11 @@
       "userId": "u2",
       "items": [
         {
-          "productId": "service__________________",
-          "name": "Стрижка у мастера",
-          "subcategory": "Мужская стрижка",
+          "productId": "service_haircut_sub_1",
+          "name_ru": "Стрижка у мастера",
+          "name_en": "Haircut by a master",
+          "subcategory_ru": "Мужская стрижка",
+          "subcategory_en": "Men's Haircut",
           "price": 1899,
           "amount": 1,
           "masterId": "m4",
@@ -587,7 +764,8 @@
       "userId": "u2",
       "username": "client1",
       "productId": "2",
-      "productName": "Olaplex No.3 Hair Perfector",
+      "productName_ru": "Olaplex No.3 Hair Perfector",
+      "productName_en": "Olaplex No.3 Hair Perfector",
       "text": "вьыьвлыдвытвыфтвтвылвтылвтт",
       "date": "25.05.2026",
       "id": "oD7ryGcqCtI"
@@ -595,8 +773,9 @@
     {
       "userId": "u2",
       "username": "client1",
-      "productId": "service__________________",
-      "productName": "Стрижка у стажёра",
+      "productId": "service_haircut_sub_0",
+      "productName_ru": "Стрижка у стажёра",
+      "productName_en": "Haircut by an intern",
       "text": "атоаттутауатцатуцатуцжта",
       "date": "25.05.2026",
       "id": "Aw_8-ono_eE"

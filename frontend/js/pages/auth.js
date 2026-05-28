@@ -200,44 +200,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function validateField(input, show = true) {
     let isValid = true;
-    let errorMsg = "";
+    let errorKey = "";
 
     if (input === lastNameInput) {
       if (!lastNameInput.value.trim()) {
         isValid = false;
-        errorMsg = "Фамилия обязательна к заполнению";
+        errorKey = "auth_errors.lastname_req";
       }
     } else if (input === firstNameInput) {
       if (!firstNameInput.value.trim()) {
         isValid = false;
-        errorMsg = "Имя обязательно к заполнению";
+        errorKey = "auth_errors.firstname_req";
       }
     } else if (input === phoneInput) {
       const val = phoneInput.value.trim();
       const phoneRegex = /^\+375(25|29|33|44|17)\d{7}$/;
       if (!val) {
         isValid = false;
-        errorMsg = "Номер телефона обязателен";
+        errorKey = "auth_errors.phone_req";
       } else if (!phoneRegex.test(val)) {
         isValid = false;
-        errorMsg =
-          "Некорректный номер РБ. Пример: +375XXXXXXXXX (25, 29, 33, 44, 17)";
+        errorKey = "auth_errors.phone_invalid";
       }
     } else if (input === emailInput) {
       const val = emailInput.value.trim();
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!val) {
         isValid = false;
-        errorMsg = "Email обязателен";
+        errorKey = "auth_errors.email_req";
       } else if (!emailRegex.test(val)) {
         isValid = false;
-        errorMsg = "Неверный формат email адреса";
+        errorKey = "auth_errors.email_invalid";
       }
     } else if (input === birthdateInput) {
       const val = birthdateInput.value;
       if (!val) {
         isValid = false;
-        errorMsg = "Укажите дату рождения";
+        errorKey = "auth_errors.birthdate_req";
       } else {
         const bDate = new Date(val);
         const today = new Date();
@@ -248,13 +247,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (age < 16) {
           isValid = false;
-          errorMsg = "Регистрация разрешена только с 16 лет";
+          errorKey = "auth_errors.birthdate_invalid";
         }
       }
     } else if (input === usernameInput) {
       if (!usernameInput.value.trim()) {
         isValid = false;
-        errorMsg = "Никнейм обязателен к генерации";
+        errorKey = "auth_errors.username_req";
       }
     } else if (input === passwordInput) {
       const isManual =
@@ -271,17 +270,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!pass) {
           isValid = false;
-          errorMsg = "Пароль обязателен к заполнению";
+          errorKey = "auth_errors.password_req";
         } else if (isTooShortOrLong) {
           isValid = false;
-          errorMsg = "Пароль должен содержать от 8 до 20 символов";
+          errorKey = "auth_errors.password_invalid";
         } else if (!hasUpper || !hasLower || !hasDigit || !hasSpecial) {
           isValid = false;
-          errorMsg =
-            "Пароль должен содержать заглавную и строчную буквы, цифру и спецсимвол";
+          errorKey = "auth_errors.password_format";
         } else if (isCommon) {
           isValid = false;
-          errorMsg = "Этот пароль слишком простой и распространенный";
+          errorKey = "auth_errors.password_common";
         }
       }
     } else if (input === confirmPasswordInput) {
@@ -293,21 +291,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const confirm = confirmPasswordInput.value;
         if (!confirm) {
           isValid = false;
-          errorMsg = "Подтвердите ваш пароль";
+          errorKey = "auth_errors.confirm_req";
         } else if (pass !== confirm) {
           isValid = false;
-          errorMsg = "Пароли не совпадают";
+          errorKey = "auth_errors.confirm_invalid";
         }
       }
     } else if (input === agreementCheckbox) {
       if (!agreementCheckbox.checked) {
         isValid = false;
-        errorMsg = "Необходимо подтвердить согласие";
+        errorKey = "auth_errors.agreement_req";
       }
     }
 
     if (!isValid && show) {
-      showError(input, errorMsg);
+      showError(input, errorKey);
     } else if (isValid) {
       hideError(input);
     }

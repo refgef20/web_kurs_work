@@ -23,14 +23,17 @@ async function loadProduct() {
   } catch (error) {
     console.error("Ошибка при получении данных:", error);
     container.innerHTML =
-      "<p>Упс! Что-то пошло не так с загрузкой товаров.</p>";
+      "<p data-i18n='catalog.error_loading'>Упс! Что-то пошло не так с загрузкой товаров.</p>";
+    window.translatePage();
   }
 }
 
 function renderCards(input) {
   container.innerHTML = "";
   if (!input || input.length === 0) {
-    container.innerHTML = "<p>Товары не найдены</p>";
+    container.innerHTML =
+      "<p data-i18n='catalog.not_found'>Товары не найдены</p>";
+    window.translatePage();
     return;
   }
   input.forEach((element) => {
@@ -46,12 +49,12 @@ function renderCards(input) {
     const text1 = document.createElement("p");
     text1.className = "item-first-card-mets";
     card.appendChild(text1);
-    text1.textContent = element.name;
+    text1.textContent = window.getLocalizedValue(element, "name");
 
     const text2 = document.createElement("p");
     text2.className = "item-first-card-mets1";
     card.appendChild(text2);
-    text2.textContent = element.description;
+    text2.textContent = window.getLocalizedValue(element, "description");
 
     const button = document.createElement("div");
     button.className = "container-for-button-catalog";
@@ -82,12 +85,17 @@ function renderCards(input) {
     button.appendChild(cost);
     cost.textContent = element.price + " ₽";
   });
+  window.translatePage();
 }
 
 async function AddCart(product) {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   if (!currentUser) {
-    alert("Пожалуйста, сначала войдите в систему!");
+    alert(
+      window.getLang() === "ru"
+        ? "Пожалуйста, сначала войдите в систему!"
+        : "Please log in first!",
+    );
     location.href = "auth.html";
     return;
   }
@@ -105,14 +113,20 @@ async function AddCart(product) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: updatedAmount }),
       });
-      alert(`Количество товара "${product.name}" в корзине обновлено!`);
+      alert(
+        window.getLang() === "ru"
+          ? `Количество товара в корзине обновлено!`
+          : `Product quantity in cart updated!`,
+      );
     } else {
       const cartItem = {
         userId: currentUser.id,
         productId: product.id,
-        name: product.name,
+        name_ru: product.name_ru || product.name,
+        name_en: product.name_en || product.name,
         price: product.price,
-        description: product.description,
+        description_ru: product.description_ru || product.description,
+        description_en: product.description_en || product.description,
         photo: product.photo,
         amount: 1,
       };
@@ -121,7 +135,11 @@ async function AddCart(product) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(cartItem),
       });
-      alert(`Товар "${product.name}" добавлен в корзину!`);
+      alert(
+        window.getLang() === "ru"
+          ? `Товар добавлен в корзину!`
+          : `Product added to cart!`,
+      );
     }
   } catch (error) {
     console.error("Ошибка при добавлении в корзину:", error);
@@ -131,7 +149,11 @@ async function AddCart(product) {
 async function AddFavorite(product) {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   if (!currentUser) {
-    alert("Пожалуйста, сначала войдите в систему!");
+    alert(
+      window.getLang() === "ru"
+        ? "Пожалуйста, сначала войдите в систему!"
+        : "Please log in first!",
+    );
     location.href = "auth.html";
     return;
   }
@@ -143,15 +165,21 @@ async function AddFavorite(product) {
     const existing = await checkRes.json();
 
     if (existing.length > 0) {
-      alert(`Товар "${product.name}" уже добавлен в избранное!`);
+      alert(
+        window.getLang() === "ru"
+          ? `Товар уже добавлен в избранное!`
+          : `Product is already in favorites!`,
+      );
       return;
     } else {
       const favItem = {
         userId: currentUser.id,
         productId: product.id,
-        name: product.name,
+        name_ru: product.name_ru || product.name,
+        name_en: product.name_en || product.name,
         price: product.price,
-        description: product.description,
+        description_ru: product.description_ru || product.description,
+        description_en: product.description_en || product.description,
         photo: product.photo,
       };
       await fetch(`http://localhost:3000/favorites`, {
@@ -159,7 +187,11 @@ async function AddFavorite(product) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(favItem),
       });
-      alert(`Товар "${product.name}" добавлен в избранное!`);
+      alert(
+        window.getLang() === "ru"
+          ? `Товар добавлен в избранное!`
+          : `Product added to favorites!`,
+      );
     }
   } catch (error) {
     console.error("Ошибка при добавлении в избранное:", error);
@@ -170,10 +202,7 @@ async function sort_cards() {
   try {
     currentPage = 1;
     url.searchParams.set("_sort", "price");
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Ошибка загрузки");
-    const result = await response.json();
-    renderCards(result.data);
+    loadProduct();
   } catch (error) {
     console.error(error);
   }
@@ -181,11 +210,9 @@ async function sort_cards() {
 
 async function nameCards() {
   try {
-    url.searchParams.set("_sort", "name");
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Ошибка загрузки");
-    const result = await response.json();
-    renderCards(result.data);
+    const sortField = window.getLang() === "ru" ? "name_ru" : "name_en";
+    url.searchParams.set("_sort", sortField);
+    loadProduct();
   } catch (error) {
     console.error(error);
   }
@@ -194,10 +221,7 @@ async function nameCards() {
 async function ratingCards() {
   try {
     url.searchParams.set("_sort", "rating");
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Ошибка загрузки");
-    const result = await response.json();
-    renderCards(result.data);
+    loadProduct();
   } catch (error) {
     console.error(error);
   }
@@ -206,10 +230,7 @@ async function ratingCards() {
 async function sortCategory(category) {
   try {
     url.searchParams.set("category", category);
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Ошибка загрузки");
-    const result = await response.json();
-    renderCards(result.data);
+    loadProduct();
   } catch (error) {
     console.error(error);
   }
@@ -231,10 +252,13 @@ async function findCard(input) {
   try {
     currentPage = 1;
     url.searchParams.set("_page", currentPage);
+    url.searchParams.delete("name_ru:contains");
+    url.searchParams.delete("name_en:contains");
+
     if (input) {
-      url.searchParams.set("name:contains", input);
-    } else {
-      url.searchParams.delete("name:contains");
+      const searchField =
+        window.getLang() === "ru" ? "name_ru:contains" : "name_en:contains";
+      url.searchParams.set(searchField, input);
     }
     const findResult = await fetch(url);
     if (!findResult.ok) throw new Error("Ошибка поиска");
@@ -265,7 +289,7 @@ section.appendChild(buttons);
 
 const find = document.createElement("input");
 find.className = "find-card";
-find.placeholder = "🔍 Поиск по названию";
+find.setAttribute("data-i18n-placeholder", "catalog.search_placeholder");
 find.addEventListener("input", function () {
   findCard(find.value);
 });
@@ -274,18 +298,18 @@ buttons.appendChild(find);
 const list_filter = document.createElement("select");
 list_filter.className = "category-filter";
 const sort = document.createElement("option");
-sort.textContent = "Сортировка";
+sort.setAttribute("data-i18n", "catalog.sort_lbl");
 buttons.appendChild(list_filter);
 
 const button_sort = document.createElement("option");
 button_sort.value = "Price";
-button_sort.textContent = "По цене";
+button_sort.setAttribute("data-i18n", "catalog.sort_price");
 const button_resort = document.createElement("option");
 button_resort.value = "Name";
-button_resort.textContent = "По имени";
+button_resort.setAttribute("data-i18n", "catalog.sort_name");
 const button_category = document.createElement("option");
 button_category.value = "Rating";
-button_category.textContent = "По рейтингу";
+button_category.setAttribute("data-i18n", "catalog.sort_rating");
 
 list_filter.addEventListener("change", function () {
   const list_f = list_filter.value.toLowerCase();
@@ -302,13 +326,13 @@ buttons.appendChild(priceFilterContainer);
 
 const inputMin = document.createElement("input");
 inputMin.type = "number";
-inputMin.placeholder = "Мин ₽";
+inputMin.setAttribute("data-i18n-placeholder", "catalog.min_price_placeholder");
 inputMin.className = "find-card";
 inputMin.style.maxWidth = "120px";
 
 const inputMax = document.createElement("input");
 inputMax.type = "number";
-inputMax.placeholder = "Макс ₽";
+inputMax.setAttribute("data-i18n-placeholder", "catalog.max_price_placeholder");
 inputMax.className = "find-card";
 inputMax.style.maxWidth = "120px";
 
@@ -323,28 +347,28 @@ section.appendChild(containernav);
 
 const hair = document.createElement("li");
 hair.classList.add("button-for-nav-second", "item-for-nav-mets-last3");
-hair.textContent = "Hair treatment";
+hair.setAttribute("data-i18n", "admin.tab_services");
 hair.style.cursor = "pointer";
 hair.addEventListener("click", () => sortCategory("Hair treatment"));
 containernav.appendChild(hair);
 
 const care = document.createElement("li");
 care.classList.add("button-for-nav-second", "item-for-nav-mets-last3");
-care.textContent = "Professional care";
+care.setAttribute("data-i18n", "main.care");
 care.style.cursor = "pointer";
 care.addEventListener("click", () => sortCategory("Professional care"));
 containernav.appendChild(care);
 
 const tools = document.createElement("li");
 tools.classList.add("button-for-nav-second", "item-for-nav-mets-last3");
-tools.textContent = "Styling tools";
+tools.setAttribute("data-i18n", "catalog.cat_styling_tools");
 tools.style.cursor = "pointer";
 tools.addEventListener("click", () => sortCategory("Styling tools"));
 containernav.appendChild(tools);
 
 const daily = document.createElement("li");
 daily.classList.add("button-for-nav-second", "item-for-nav-mets-last3");
-daily.textContent = "Daily care";
+daily.setAttribute("data-i18n", "catalog.cat_daily_care");
 daily.style.cursor = "pointer";
 daily.addEventListener("click", () => sortCategory("Daily care"));
 containernav.appendChild(daily);
@@ -358,7 +382,7 @@ container_buttonPag.className = "container-buttons";
 section.appendChild(container_buttonPag);
 
 const btnPrev = document.createElement("button");
-btnPrev.textContent = "Назад";
+btnPrev.setAttribute("data-i18n", "catalog.prev_btn");
 btnPrev.className = "my-custom-button";
 btnPrev.addEventListener("click", () => {
   if (currentPage > 1) {
@@ -369,7 +393,7 @@ btnPrev.addEventListener("click", () => {
 });
 
 const btnNext = document.createElement("button");
-btnNext.textContent = "Вперед";
+btnNext.setAttribute("data-i18n", "catalog.next_btn");
 btnNext.className = "my-custom-button";
 btnNext.addEventListener("click", () => {
   if (currentPage < totalPages) {
@@ -380,5 +404,7 @@ btnNext.addEventListener("click", () => {
 });
 container_buttonPag.appendChild(btnPrev);
 container_buttonPag.appendChild(btnNext);
+
+window.addEventListener("languageChanged", loadProduct);
 
 loadProduct();

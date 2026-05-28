@@ -1,24 +1,20 @@
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 const section = document.querySelector(".container-for-catalog");
 
-// Хелпер для динамического подключения календаря Flatpickr в темной теме
 function loadFlatpickr() {
   return new Promise((resolve) => {
     if (window.flatpickr) {
       resolve();
       return;
     }
-    // Подключаем стили Flatpickr (темная тема под стиль UI KIT)
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = "https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css";
     document.head.appendChild(link);
 
-    // Подключаем основной скрипт библиотеки
     const script = document.createElement("script");
     script.src = "https://cdn.jsdelivr.net/npm/flatpickr";
     script.onload = () => {
-      // Подключаем русскую локализацию календаря
       const ruScript = document.createElement("script");
       ruScript.src = "https://npmcdn.com/flatpickr/dist/l10n/ru.js";
       ruScript.onload = () => resolve();
@@ -31,8 +27,8 @@ function loadFlatpickr() {
 if (!currentUser) {
   section.innerHTML = `
       <div style="text-align: center; margin-top: 50px; color: #fff;">
-        <h2>Пожалуйста, авторизуйтесь для просмотра корзины.</h2>
-        <button class="my-custom-button" onclick="location.href='auth.html'" style="margin-top: 15px; background: #fff;">Страница входа</button>
+        <h2 data-i18n="cart.please_auth">Пожалуйста, авторизуйтесь для просмотра корзины.</h2>
+        <button class="my-custom-button" onclick="location.href='auth.html'" style="margin-top: 15px; background: #fff;" data-i18n="cart.login_page">Страница входа</button>
       </div>
     `;
 } else {
@@ -53,14 +49,17 @@ if (!currentUser) {
     } catch (error) {
       console.error("Ошибка при получении данных:", error);
       container.innerHTML =
-        "<p style='color: #fff;'>Не удалось загрузить товары корзины.</p>";
+        "<p style='color: #fff;' data-i18n='catalog.error_loading'>Не удалось загрузить товары корзины.</p>";
+      window.translatePage();
     }
   }
 
   function renderCards(input) {
     container.innerHTML = "";
     if (!input || input.length === 0) {
-      container.innerHTML = "<p style='color: #fff;'>Ваша корзина пуста</p>";
+      container.innerHTML =
+        "<p style='color: #fff;' data-i18n='cart.empty'>Ваша корзина пуста</p>";
+      window.translatePage();
       return;
     }
 
@@ -72,7 +71,7 @@ if (!currentUser) {
 
       const buyBtn = document.createElement("button");
       buyBtn.className = "buy-button-on-img";
-      buyBtn.textContent = "Купить";
+      buyBtn.setAttribute("data-i18n", "cart.buy_btn");
       buyBtn.addEventListener("click", () => {
         processPurchase(element);
       });
@@ -83,19 +82,19 @@ if (!currentUser) {
       card.appendChild(image);
       image.src = element.photo;
 
+      const name = window.getLocalizedValue(element, "name");
+      const subcat = window.getLocalizedValue(element, "subcategory");
+      const desc = window.getLocalizedValue(element, "description");
+
       const text1 = document.createElement("p");
       text1.className = "item-first-card-mets";
       card.appendChild(text1);
-      text1.textContent = element.subcategory
-        ? element.subcategory
-        : element.name;
+      text1.textContent = subcat ? subcat : name;
 
       const text2 = document.createElement("p");
       text2.className = "item-first-card-mets1";
       card.appendChild(text2);
-      text2.textContent = element.subcategory
-        ? `${element.name} — ${element.description}`
-        : element.description;
+      text2.textContent = subcat ? `${name} — ${desc}` : desc;
 
       const button = document.createElement("div");
       button.className = "container-for-button-catalog2";
@@ -146,11 +145,10 @@ if (!currentUser) {
       const total = price * currentAmount;
       cost.textContent = total + " ₽";
     });
+    window.translatePage();
   }
 
-  // Динамическое модальное окно для оформления записи на услугу
   async function showBookingModal(product) {
-    // Подгружаем библиотеку Flatpickr перед открытием
     await loadFlatpickr();
 
     let masters = [];
@@ -168,25 +166,27 @@ if (!currentUser) {
       console.error("Ошибка при получении данных бронирования:", e);
     }
 
-    const nameLower = product.name.toLowerCase().replace(/ё/g, "е");
+    const nameLower = (product.name_ru || product.name || "")
+      .toLowerCase()
+      .replace(/ё/g, "е");
 
     let targetCategory = "";
-    if (nameLower.includes("стриж")) {
+    if (nameLower.includes("стриж") || nameLower.includes("haircut")) {
       targetCategory = "haircut";
-    } else if (nameLower.includes("уклад")) {
+    } else if (nameLower.includes("уклад") || nameLower.includes("styling")) {
       targetCategory = "styling";
-    } else if (nameLower.includes("окраш")) {
+    } else if (nameLower.includes("окраш") || nameLower.includes("coloring")) {
       targetCategory = "coloring";
-    } else if (nameLower.includes("уход")) {
+    } else if (nameLower.includes("уход") || nameLower.includes("care")) {
       targetCategory = "care";
     }
 
     let targetQualification = "";
-    if (nameLower.includes("стажер")) {
+    if (nameLower.includes("стажер") || nameLower.includes("intern")) {
       targetQualification = "стажер";
-    } else if (nameLower.includes("профи")) {
+    } else if (nameLower.includes("профи") || nameLower.includes("pro")) {
       targetQualification = "профи";
-    } else if (nameLower.includes("мастер")) {
+    } else if (nameLower.includes("мастер") || nameLower.includes("master")) {
       targetQualification = "мастер";
     }
 
@@ -295,43 +295,43 @@ if (!currentUser) {
       masterOptions = filteredMasters
         .map(
           (m) =>
-            `<option value="${m.id}">${m.name} (${m.qualification})</option>`,
+            `<option value="${m.id}">${window.getLocalizedValue(m, "name")} (${window.getLocalizedValue(m, "qualification")})</option>`,
         )
         .join("");
     } else {
-      const qualText = targetQualification
-        ? `категории "${targetQualification}"`
-        : "данной категории";
-      masterOptions = `<option value="">Нет свободных мастеров ${qualText} для этой услуги</option>`;
+      masterOptions = `<option value="" data-i18n="cart.not_available_masters">Нет свободных мастеров для этой услуги</option>`;
     }
+
+    const localizedProductName = window.getLocalizedValue(product, "name");
 
     modal.innerHTML = `
       <div class="modal-box">
-        <h2>Оформление услуги</h2>
+        <h2 data-i18n="cart.booking_title">Оформление услуги</h2>
         <form id="booking-modal-form">
           <div class="modal-field">
-            <label>Выбранная услуга</label>
-            <input type="text" value="${product.name}" readonly style="opacity: 0.7;">
+            <label data-i18n="cart.selected_service">Выбранная услуга</label>
+            <input type="text" value="${localizedProductName}" readonly style="opacity: 0.7;">
           </div>
           <div class="modal-field">
-            <label for="modal-master">Желаемый мастер</label>
+            <label for="modal-master" data-i18n="cart.desired_master">Желаемый мастер</label>
             <select id="modal-master" required>
               ${masterOptions}
             </select>
           </div>
           <div class="modal-field">
-            <label for="modal-date">Желаемая дата записи</label>
-            <input type="text" id="modal-date" placeholder="Выберите свободный день" required>
+            <label for="modal-date" data-i18n="cart.desired_date">Желаемая дата записи</label>
+            <input type="text" id="modal-date" data-i18n-placeholder="cart.select_day_placeholder" required>
           </div>
           <div class="modal-actions">
-            <button type="button" class="modal-btn modal-btn-cancel" id="modal-cancel-btn">Отмена</button>
-            <button type="submit" class="modal-btn modal-btn-primary" id="booking-submit-btn" disabled style="opacity:0.5; cursor:not-allowed;">Записаться</button>
+            <button type="button" class="modal-btn modal-btn-cancel" id="modal-cancel-btn" data-i18n="cart.cancel">Отмена</button>
+            <button type="submit" class="modal-btn modal-btn-primary" id="booking-submit-btn" disabled style="opacity:0.5; cursor:not-allowed;" data-i18n="cart.book">Записаться</button>
           </div>
         </form>
       </div>
     `;
 
     document.body.appendChild(modal);
+    window.translatePage();
 
     const masterSelect = modal.querySelector("#modal-master");
     const dateInput = modal.querySelector("#modal-date");
@@ -339,11 +339,8 @@ if (!currentUser) {
 
     let datepickerInstance = null;
 
-    // Логика обновления активных дат календаря на основе выбранного мастера
     function updateCalendarAvailability() {
       const selectedMasterId = masterSelect.value;
-
-      // Выбираем из базы все занятые дни конкретно для этого мастера
       const disabledDates = [];
       orders.forEach((order) => {
         if (order.items && Array.isArray(order.items)) {
@@ -355,16 +352,15 @@ if (!currentUser) {
         }
       });
 
-      // Пересоздаем календарь под выбранного мастера
       if (datepickerInstance) {
         datepickerInstance.destroy();
       }
 
       datepickerInstance = flatpickr(dateInput, {
-        locale: "ru",
+        locale: window.getLang() === "ru" ? "ru" : "en",
         dateFormat: "Y-m-d",
         minDate: "today",
-        disable: disabledDates, // Передаем занятые дни — они будут заблокированы в календаре
+        disable: disabledDates,
         onChange: function (selectedDates, dateStr) {
           if (dateStr) {
             submitBtn.disabled = false;
@@ -379,7 +375,6 @@ if (!currentUser) {
       });
     }
 
-    // При изменении мастера очищаем поле даты и пересчитываем доступность дней
     masterSelect.addEventListener("change", () => {
       dateInput.value = "";
       submitBtn.disabled = true;
@@ -388,7 +383,6 @@ if (!currentUser) {
       updateCalendarAvailability();
     });
 
-    // Первоначальная сборка календаря при открытии окна
     updateCalendarAvailability();
 
     const cancelBtn = modal.querySelector("#modal-cancel-btn");
@@ -412,8 +406,10 @@ if (!currentUser) {
           items: [
             {
               productId: product.productId,
-              name: product.name,
-              subcategory: product.subcategory || null,
+              name_ru: product.name_ru || product.name,
+              name_en: product.name_en || product.name,
+              subcategory_ru: product.subcategory_ru || null,
+              subcategory_en: product.subcategory_en || null,
               price: product.price,
               amount: product.amount || 1,
               masterId: selectedMasterId,
@@ -438,13 +434,21 @@ if (!currentUser) {
           method: "DELETE",
         });
 
-        alert("Запись на услугу успешно оформлена!");
+        alert(
+          window.getLang() === "ru"
+            ? "Запись на услугу успешно оформлена!"
+            : "Service booking successfully processed!",
+        );
         if (datepickerInstance) datepickerInstance.destroy();
         modal.remove();
         loadProduct();
       } catch (error) {
         console.error("Ошибка:", error);
-        alert("Произошла ошибка при оформлении записи");
+        alert(
+          window.getLang() === "ru"
+            ? "Произошла ошибка при оформлении записи"
+            : "An error occurred during booking",
+        );
       }
     });
   }
@@ -462,7 +466,8 @@ if (!currentUser) {
           items: [
             {
               productId: product.productId,
-              name: product.name,
+              name_ru: product.name_ru || product.name,
+              name_en: product.name_en || product.name,
               price: product.price,
               amount: product.amount || 1,
             },
@@ -480,11 +485,19 @@ if (!currentUser) {
         await fetch(`http://localhost:3000/cart/${product.id}`, {
           method: "DELETE",
         });
-        alert("Покупка товара успешно оформлена!");
+        alert(
+          window.getLang() === "ru"
+            ? "Покупка товара успешно оформлена!"
+            : "Purchase successfully processed!",
+        );
         loadProduct();
       } catch (error) {
         console.error("Ошибка:", error);
-        alert("Произошла ошибка при оформлении покупки товара");
+        alert(
+          window.getLang() === "ru"
+            ? "Произошла ошибка при оформлении покупки товара"
+            : "Error processing purchase",
+        );
       }
     }
   }
@@ -497,11 +510,15 @@ if (!currentUser) {
       if (!url.ok) {
         throw new Error("Не удалось удалить товар из корзины");
       }
-      alert(`Товар "${product.name}" успешно удален из корзины!`);
+      const localizedName = window.getLocalizedValue(product, "name");
+      alert(
+        window.getLang() === "ru"
+          ? `Товар "${localizedName}" успешно удален из корзины!`
+          : `Product "${localizedName}" deleted from cart!`,
+      );
       loadProduct();
     } catch (error) {
       console.error("Ошибка:", error);
-      alert("Произошла ошибка при удалении из корзины");
     }
   }
 
@@ -520,6 +537,8 @@ if (!currentUser) {
       console.error("Ошибка:", error);
     }
   }
+
+  window.addEventListener("languageChanged", loadProduct);
 
   loadProduct();
 }

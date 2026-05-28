@@ -16,17 +16,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     const pricesBox = document.querySelector(".costs-master");
     const menuItems = document.querySelectorAll(".kinds-hairStyle");
 
+    let activeService = services[0];
+    let activeSubcategory = null;
+
     async function AddToCart(product) {
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
       if (!currentUser) {
-        alert("Пожалуйста, сначала авторизуйтесь!");
+        alert(
+          window.getLang() === "ru"
+            ? "Пожалуйста, сначала авторизуйтесь!"
+            : "Please log in first!",
+        );
         location.href = "pages/auth.html";
         return;
       }
 
       try {
         const checkRes = await fetch(
-          `http://localhost:3000/cart?userId=${currentUser.id}&name=${encodeURIComponent(product.name)}`,
+          `http://localhost:3000/cart?userId=${currentUser.id}&productId=${encodeURIComponent("service_" + product.id)}`,
         );
         const existing = await checkRes.json();
 
@@ -38,17 +45,22 @@ document.addEventListener("DOMContentLoaded", async () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ amount: updatedAmount }),
           });
-          alert(`Количество услуги "${product.name}" в корзине обновлено!`);
+          alert(
+            window.getLang() === "ru"
+              ? `Количество услуги в корзине обновлено!`
+              : `Service quantity in cart updated!`,
+          );
         } else {
           const cartItem = {
             userId: currentUser.id,
-            productId:
-              "service_" +
-              product.name.toLowerCase().replace(/[^a-z0-9]/gi, "_"),
-            name: product.name,
-            subcategory: product.subcategory || null, // Сохранение подкатегории в БД
+            productId: "service_" + product.id,
+            name_ru: product.name_ru || product.name,
+            name_en: product.name_en || product.name,
+            subcategory_ru: product.subcategory_ru || null,
+            subcategory_en: product.subcategory_en || null,
             price: product.price,
-            description: "Услуга салона красоты Annetka.Hair",
+            description_ru: "Услуга салона красоты Annetka.Hair",
+            description_en: "Beauty salon service Annetka.Hair",
             photo:
               product.photo ||
               "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80",
@@ -59,7 +71,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(cartItem),
           });
-          alert(`Услуга "${product.name}" добавлена в корзину!`);
+          alert(
+            window.getLang() === "ru"
+              ? `Услуга добавлена в корзину!`
+              : `Service added to cart!`,
+          );
         }
       } catch (error) {
         console.error("Ошибка при добавлении в корзину:", error);
@@ -69,30 +85,40 @@ document.addEventListener("DOMContentLoaded", async () => {
     async function AddToFavorite(product) {
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
       if (!currentUser) {
-        alert("Пожалуйста, сначала авторизуйтесь!");
+        alert(
+          window.getLang() === "ru"
+            ? "Пожалуйста, сначала авторизуйтесь!"
+            : "Please log in first!",
+        );
         location.href = "pages/auth.html";
         return;
       }
 
       try {
         const checkRes = await fetch(
-          `http://localhost:3000/favorites?userId=${currentUser.id}&name=${encodeURIComponent(product.name)}`,
+          `http://localhost:3000/favorites?userId=${currentUser.id}&productId=${encodeURIComponent("service_" + product.id)}`,
         );
         const existing = await checkRes.json();
 
         if (existing.length > 0) {
-          alert(`Услуга "${product.name}" уже добавлена в избранное!`);
+          alert(
+            window.getLang() === "ru"
+              ? `Услуга уже добавлена в избранное!`
+              : `Service is already in favorites!`,
+          );
           return;
         }
 
         const favItem = {
           userId: currentUser.id,
-          productId:
-            "service_" + product.name.toLowerCase().replace(/[^a-z0-9]/gi, "_"),
-          name: product.name,
-          subcategory: product.subcategory || null, // Сохранение подкатегории в БД
+          productId: "service_" + product.id,
+          name_ru: product.name_ru || product.name,
+          name_en: product.name_en || product.name,
+          subcategory_ru: product.subcategory_ru || null,
+          subcategory_en: product.subcategory_en || null,
           price: product.price,
-          description: "Услуга салона красоты Annetka.Hair",
+          description_ru: "Услуга салона красоты Annetka.Hair",
+          description_en: "Beauty salon service Annetka.Hair",
           photo:
             product.photo ||
             "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=600&q=80",
@@ -103,13 +129,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(favItem),
         });
-        alert(`Услуга "${product.name}" добавлена в избранное!`);
+        alert(
+          window.getLang() === "ru"
+            ? `Услуга добавлена в избранное!`
+            : `Service added to favorites!`,
+        );
       } catch (error) {
         console.error("Ошибка при добавлении в избранное:", error);
       }
     }
 
-    const renderPrices = (items, subcategoryName = null) =>
+    const renderPrices = (items) =>
       items
         .map((item, index) => {
           const gapClass =
@@ -119,12 +149,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 ? "haircut-masterCost2"
                 : "";
 
-          // Привязываем подкатегорию к объекту услуги перед кодированием в data-атрибут
-          const itemData = { ...item, subcategory: subcategoryName };
-          const safeItem = encodeURIComponent(JSON.stringify(itemData));
+          const safeItem = encodeURIComponent(JSON.stringify(item));
+          const hasSubcategory = item.subcategory_ru || item.subcategory_en;
 
-          // Если подкатегория не выбрана (subcategoryName === null), кнопки корзины и избранного скрываются (не рендерятся)
-          const actionButtons = subcategoryName
+          const actionButtons = hasSubcategory
             ? `
               <div class="buttons-row">
                 <button class="btn-cart" data-item="${safeItem}" style="cursor:pointer;background:transparent">🛒</button>
@@ -134,9 +162,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             : "";
 
           return `
-             <div class="with-line">
+              <div class="with-line">
               <div class="haircut-masterCost ${gapClass}">
-                <p class="master-hair">${item.name}</p>
+                <p class="master-hair">${window.getLocalizedValue(item, "name")}</p>
                 <div class="price-and-buttons">
                   <p class="cost-hair">${item.price} ₽</p>
                   ${actionButtons}
@@ -149,40 +177,57 @@ document.addEventListener("DOMContentLoaded", async () => {
         .join("");
 
     const updateView = (service, subcategory = null) => {
+      activeService = service;
+      activeSubcategory = subcategory;
+
       const target = subcategory ?? service;
       descriptionBox.innerHTML = `
-        <p class="tittle">${target.title}</p>
-        <p class="description-hairCut">${target.description ?? ""}</p>
+        <p class="tittle">${window.getLocalizedValue(target, "title")}</p>
+        <p class="description-hairCut">${window.getLocalizedValue(target, "description")}</p>
       `;
 
       if (subcategory?.items) {
-        // Передаем название выбранной подкатегории
-        pricesBox.innerHTML = renderPrices(
-          subcategory.items,
-          subcategory.title,
-        );
+        const subTitleRu = subcategory.title_ru || subcategory.title;
+        const subTitleEn = subcategory.title_en || subcategory.title;
+
+        const subcatItems = subcategory.items.map((item, index) => ({
+          id: `${service.id}_sub_${index}`,
+          name_ru: item.name_ru || item.name,
+          name_en: item.name_en || item.name,
+          subcategory_ru: subTitleRu,
+          subcategory_en: subTitleEn,
+          price: item.price,
+          photo: item.photo,
+        }));
+        pricesBox.innerHTML = renderPrices(subcatItems);
       } else {
         const mainItems = [
           {
-            name: service.fromstash,
+            id: `${service.id}_stash`,
+            name_ru: service.fromstash_ru || service.fromstash,
+            name_en: service.fromstash_en || service.fromstash,
             price: service.startingPricestach,
             photo: service.photo,
           },
           {
-            name: service.frommast,
+            id: `${service.id}_mast`,
+            name_ru: service.frommast_ru || service.frommast,
+            name_en: service.frommast_en || service.frommast,
             price: service.startingPricemast,
             photo: service.photo,
           },
           {
-            name: service.frompro,
+            id: `${service.id}_pro`,
+            name_ru: service.frompro_ru || service.frompro,
+            name_en: service.frompro_en || service.frompro,
             price: service.startingPricepro,
             photo: service.photo,
           },
         ];
-        // Подкатегория не выбрана — передаем null, кнопки будут скрыты
-        pricesBox.innerHTML = renderPrices(mainItems, null);
+        pricesBox.innerHTML = renderPrices(mainItems);
       }
       attachButtonListeners();
+      window.translatePage();
     };
 
     function attachButtonListeners() {
@@ -222,7 +267,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         service.subcategories?.forEach((sub) => {
           const li = document.createElement("li");
-          li.textContent = sub.title;
+          li.textContent = window.getLocalizedValue(sub, "title");
           li.addEventListener("click", () => updateView(service, sub));
           list.appendChild(li);
         });
@@ -267,6 +312,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       firstLink.classList.add("active");
       updateView(firstService);
     }
+
+    window.addEventListener("languageChanged", () => {
+      updateView(activeService, activeSubcategory);
+    });
   } catch (err) {
     console.error("Ошибка инициализации услуг:", err);
   }

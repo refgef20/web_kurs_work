@@ -1,7 +1,29 @@
-/* ==========================================================================
-   ИМПОРТ ШРИФТОВ И СТИЛЕЙ
-   (Шрифты импортируются на основе структуры main.css)
-   ========================================================================== */
+:root {
+  --color-bg-deep: #010101;
+  --color-bg-card: #111111;
+  --color-bg-input-alt: rgba(255, 255, 255, 0.04);
+  --color-bg-tab: #222222;
+  --color-accent: #71165b;
+  --color-white: #ffffff;
+  --color-border-dark: #333333;
+  --color-text-gray: rgba(255, 255, 255, 0.6);
+
+  --font-family-title: "Vera Humana", sans-serif;
+  --font-family-body: "Circe", sans-serif;
+
+  --size-h1: clamp(2.5rem, 8vw, 6.875rem);
+  --size-h2: clamp(1.75rem, 4.5vw, 3.25rem);
+  --size-h3: clamp(1.05rem, 1.8vw, 1.125rem);
+  --size-body: clamp(0.9rem, 1.25vw, 1rem);
+
+  --pad-container: clamp(1rem, 5vw, 6.25rem);
+  --gap-large: clamp(1.5rem, 4vw, 3.5rem);
+  --gap-medium: clamp(1rem, 2vw, 2rem);
+  --gap-small: clamp(0.5rem, 1.2vw, 1rem);
+
+  --color-accent-shadow-alt: rgba(113, 22, 91, 0.15);
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 @font-face {
@@ -17,33 +39,10 @@
   font-style: normal;
 }
 
-/* Переменные UI KIT */
-:root {
-  --color-bg-deep: #010101; /* Из UI KIT: #010101 */
-  --color-bg-card: #111111; /* Из UI KIT: #111111 */
-  --color-accent: #71165b; /* Из UI KIT: #71165b */
-  --color-white: #ffffff;
-  --color-border-dark: #333333; /* Границы полей из admin.css */
-  --color-text-gray: rgba(255, 255, 255, 0.6);
-
-  --font-family-title: "Vera Humana", sans-serif;
-  --font-family-body: "Circe", sans-serif;
-
-  --size-h1: clamp(2.5rem, 8vw, 6.875rem);
-  --size-h2: clamp(1.75rem, 4.5vw, 3.25rem);
-  --size-h3: clamp(1.05rem, 1.8vw, 1.125rem);
-  --size-body: clamp(0.9rem, 1.25vw, 1rem);
-
-  --pad-container: clamp(1rem, 5vw, 6.25rem);
-  --gap-large: clamp(1.5rem, 4vw, 3.5rem);
-  --gap-medium: clamp(1rem, 2vw, 2rem);
-  --gap-small: clamp(0.5rem, 1.2vw, 1rem);
-}
-
 .error-message {
   display: none;
   color: var(--color-white);
-  background-color: rgba(113, 22, 91, 0.15);
+  background-color: var(--color-accent-shadow-alt);
   border-left: 3px solid var(--color-accent);
   padding: 8px 12px;
   font-size: 0.85rem;
@@ -67,7 +66,7 @@ body {
 }
 
 .profile-container {
-  background-color: #010101;
+  background-color: var(--color-bg-deep);
   width: 100%;
   max-width: 100rem;
   margin: 0 auto;
@@ -90,7 +89,6 @@ body {
   align-items: start;
 }
 
-/* Сайдбар-карта пользователя */
 .profile-card {
   background-color: var(--color-bg-card);
   border: 1px solid var(--color-border-dark);
@@ -133,7 +131,7 @@ body {
   display: inline-block;
   padding: 6px 16px;
   border-radius: 20px;
-  background-color: #222;
+  background-color: var(--color-bg-tab);
   border: 1px solid var(--color-border-dark);
   color: var(--color-white);
   font-size: 0.85rem;
@@ -142,7 +140,6 @@ body {
   margin-top: 5px;
 }
 
-/* Форма полей */
 .profile-fields-section {
   background-color: var(--color-bg-card);
   border: 1px solid var(--color-border-dark);
@@ -181,9 +178,8 @@ body {
   color: var(--color-text-gray);
 }
 
-/* Текстура инпутов по структуре admin.css */
 .input-group input {
-  background-color: rgba(255, 255, 255, 0.04);
+  background-color: var(--color-bg-input-alt);
   border: 1px solid var(--color-border-dark);
   border-radius: 8px;
   padding: 12px;
@@ -201,7 +197,6 @@ body {
   box-shadow: 0 0 8px rgba(113, 22, 92, 0.4);
 }
 
-/* Кнопка отправки формы из UI KIT */
 .profile-submit-btn {
   display: inline-flex;
   justify-content: center;

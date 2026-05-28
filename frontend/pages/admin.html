@@ -4,49 +4,81 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Панель управления - Annetka.Hair</title>
+    <link rel="stylesheet" href="path/to/bvi.min.css" type="text/css" />
+    <link rel="stylesheet" href="../css/light.css" />
     <link rel="stylesheet" href="../css/main.css" />
     <link rel="stylesheet" href="../css/auth.css" />
     <link rel="stylesheet" href="../css/media_catalog.css" />
     <link rel="stylesheet" href="../css/catalog.css" />
     <link rel="stylesheet" href="../css/admin.css" />
+    <script type="module" src="../js/pages/language.js"></script>
     <script type="module" src="../js/pages/components.js"></script>
     <script type="module" src="../js/pages/admin.js"></script>
+    <script src="path/to/bvi.min.js"></script>
   </head>
   <body>
     <site-header></site-header>
     <main>
       <section class="container-for-catalog">
         <div class="admin-layout">
-          <h1>Панель управления</h1>
+          <h1 data-i18n="admin.title">Панель управления</h1>
 
           <div class="admin-tabs">
-            <button id="tab-products-btn" class="tab-btn active">Товары</button>
-            <button id="tab-services-btn" class="tab-btn">Услуги</button>
+            <button
+              id="tab-products-btn"
+              class="tab-btn active"
+              data-i18n="admin.tab_products"
+            >
+              Товары
+            </button>
+            <button
+              id="tab-services-btn"
+              class="tab-btn"
+              data-i18n="admin.tab_services"
+            >
+              Услуги
+            </button>
           </div>
 
           <!-- СЕКЦИЯ УПРАВЛЕНИЯ ТОВАРАМИ -->
           <div id="products-admin-section" class="admin-tab-content">
-            <h2 id="form-mode-title">Создать новый товар</h2>
+            <h2 id="form-mode-title" data-i18n="admin.create_product">
+              Создать новый товар
+            </h2>
             <form id="product-form" class="admin-form" novalidate>
               <input type="hidden" id="prod-id" />
               <div class="input-group">
-                <label for="prod-name" style="color: #fff"
+                <label
+                  for="prod-name"
+                  style="color: #fff"
+                  data-i18n="admin.prod_name"
                   >Название товара *</label
                 >
                 <input type="text" id="prod-name" required />
               </div>
               <div class="input-group">
-                <label for="prod-cost" style="color: #fff">Цена (₽) *</label>
+                <label
+                  for="prod-cost"
+                  style="color: #fff"
+                  data-i18n="admin.prod_price"
+                  >Цена (₽) *</label
+                >
                 <input type="number" id="prod-cost" min="1" required />
               </div>
               <div class="input-group span-2">
-                <label for="prod-desc" style="color: #fff"
+                <label
+                  for="prod-desc"
+                  style="color: #fff"
+                  data-i18n="admin.prod_desc"
                   >Описание товара *</label
                 >
                 <textarea id="prod-desc" required></textarea>
               </div>
               <div class="input-group">
-                <label for="prod-category" style="color: #fff"
+                <label
+                  for="prod-category"
+                  style="color: #fff"
+                  data-i18n="admin.prod_category"
                   >Категория *</label
                 >
                 <select id="prod-category" required>
@@ -58,7 +90,10 @@
                 </select>
               </div>
               <div class="input-group">
-                <label for="prod-photo" style="color: #fff"
+                <label
+                  for="prod-photo"
+                  style="color: #fff"
+                  data-i18n="admin.prod_photo"
                   >Ссылка на фото *</label
                 >
                 <input type="text" id="prod-photo" required />
@@ -68,6 +103,7 @@
                   type="submit"
                   id="product-submit-btn"
                   class="submit-btn"
+                  data-i18n="admin.save_product_btn"
                   disabled
                 >
                   Сохранить товар
@@ -75,68 +111,97 @@
               </div>
             </form>
 
-            <h2>Текущий каталог товаров</h2>
+            <h2 data-i18n="admin.current_products">Текущий каталог товаров</h2>
             <div id="admin-products-container" class="prod-grid"></div>
           </div>
 
           <!-- СЕКЦИЯ УПРАВЛЕНИЯ УСЛУГАМИ -->
           <div id="services-admin-section" class="admin-tab-content hidden">
-            <h2 id="service-form-mode-title">Создать новую услугу</h2>
+            <h2 id="service-form-mode-title" data-i18n="admin.create_service">
+              Создать новую услугу
+            </h2>
             <form id="service-form" class="admin-form" novalidate>
               <input type="hidden" id="serv-id" />
               <div class="input-group">
-                <label for="serv-title" style="color: #fff"
+                <label
+                  for="serv-title"
+                  style="color: #fff"
+                  data-i18n="admin.serv_title"
                   >Название услуги *</label
                 >
                 <input type="text" id="serv-title" required />
               </div>
               <div class="input-group">
-                <label for="serv-photo" style="color: #fff"
+                <label
+                  for="serv-photo"
+                  style="color: #fff"
+                  data-i18n="admin.prod_photo"
                   >Ссылка на фото *</label
                 >
                 <input type="text" id="serv-photo" required />
               </div>
               <div class="input-group span-2">
-                <label for="serv-desc" style="color: #fff"
+                <label
+                  for="serv-desc"
+                  style="color: #fff"
+                  data-i18n="admin.serv_desc"
                   >Описание услуги *</label
                 >
                 <textarea id="serv-desc" required></textarea>
               </div>
 
               <div class="input-group">
-                <label for="serv-stash-name" style="color: #fff"
+                <label
+                  for="serv-stash-name"
+                  style="color: #fff"
+                  data-i18n="admin.stash_name"
                   >Тариф (Стажер) - Название *</label
                 >
                 <input type="text" id="serv-stash-name" required />
               </div>
               <div class="input-group">
-                <label for="serv-stash-price" style="color: #fff"
+                <label
+                  for="serv-stash-price"
+                  style="color: #fff"
+                  data-i18n="admin.stash_price"
                   >Тариф (Стажер) - Цена *</label
                 >
                 <input type="number" id="serv-stash-price" min="1" required />
               </div>
 
               <div class="input-group">
-                <label for="serv-mast-name" style="color: #fff"
+                <label
+                  for="serv-mast-name"
+                  style="color: #fff"
+                  data-i18n="admin.mast_name"
                   >Тариф (Мастер) - Название *</label
                 >
                 <input type="text" id="serv-mast-name" required />
               </div>
               <div class="input-group">
-                <label for="serv-mast-price" style="color: #fff"
+                <label
+                  for="serv-mast-price"
+                  style="color: #fff"
+                  data-i18n="admin.mast_price"
                   >Тариф (Мастер) - Цена *</label
                 >
                 <input type="number" id="serv-mast-price" min="1" required />
               </div>
 
               <div class="input-group">
-                <label for="serv-pro-name" style="color: #fff"
+                <label
+                  for="serv-pro-name"
+                  style="color: #fff"
+                  data-i18n="admin.pro_name"
                   >Тариф (Профи) - Название *</label
                 >
                 <input type="text" id="serv-pro-name" required />
               </div>
               <div class="input-group">
-                <label for="serv-pro-price" style="color: #fff"
+                <label
+                  for="serv-pro-price"
+                  style="color: #fff"
+                  data-i18n="admin.pro_price"
                   >Тариф (Профи) - Цена *</label
                 >
                 <input type="number" id="serv-pro-price" min="1" required />
@@ -147,6 +212,7 @@
                   type="submit"
                   id="service-submit-btn"
                   class="submit-btn"
+                  data-i18n="admin.save_service_btn"
                   disabled
                 >
                   Сохранить услугу
@@ -154,13 +220,13 @@
               </div>
             </form>
 
-            <h2>Текущий каталог услуг</h2>
+            <h2 data-i18n="admin.current_services">Текущий каталог услуг</h2>
             <div id="admin-services-container" class="prod-grid"></div>
           </div>
 
           <!-- СЕКЦИЯ УПРАВЛЕНИЯ ОТЗЫВАМИ -->
           <div class="admin-section" style="margin-top: 40px">
-            <h2>Управление отзывами</h2>
+            <h2 data-i18n="admin.review_control">Управление отзывами</h2>
             <div
               style="
                 display: flex;
@@ -170,7 +236,10 @@
               "
             >
               <div class="input-group2 input-group">
-                <label for="filter-by-product" style="color: #fff"
+                <label
+                  for="filter-by-product"
+                  style="color: #fff"
+                  data-i18n="admin.filter_product"
                   >Фильтр по товару</label
                 >
                 <select
@@ -184,11 +253,16 @@
                     width: 100%;
                   "
                 >
-                  <option value="">Все товары</option>
+                  <option value="" data-i18n="admin.all_products">
+                    Все товары
+                  </option>
                 </select>
               </div>
               <div class="input-group2 input-group">
-                <label for="filter-by-user" style="color: #fff"
+                <label
+                  for="filter-by-user"
+                  style="color: #fff"
+                  data-i18n="admin.filter_user"
                   >Фильтр по клиенту</label
                 >
                 <select
@@ -202,7 +276,9 @@
                     width: 100%;
                   "
                 >
-                  <option value="">Все клиенты</option>
+                  <option value="" data-i18n="admin.all_users">
+                    Все клиенты
+                  </option>
                 </select>
               </div>
             </div>

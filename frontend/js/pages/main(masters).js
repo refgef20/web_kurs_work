@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const btnLeft = document.querySelector(".arrow-left");
   const btnRight = document.querySelector(".arrow-right");
 
-  // Безопасная проверка наличия элементов в DOM
   if (!container || !btnLeft || !btnRight) {
     console.warn("Элементы слайдера мастеров не найдены в DOM.");
     return;
@@ -12,33 +11,31 @@ document.addEventListener("DOMContentLoaded", async () => {
   let masters = [];
   let currentIndex = 0;
 
-  // Декларативная отрисовка карточек
   const renderMasters = () => {
     if (!masters.length) return;
 
-    // Создаем массив из 3 элементов и сразу маппим его в HTML-строку
     container.innerHTML = Array.from({ length: 3 }, (_, i) => {
       const index = (currentIndex + i) % masters.length;
+      const master = masters[index];
 
-      // Деструктуризация свойств объекта мастера
-      const { name, photo, experience, price, qualification } = masters[index];
+      const name = window.getLocalizedValue(master, "name");
+      const qualification = window.getLocalizedValue(master, "qualification");
+      const expList = window.getLocalizedValue(master, "experience");
 
-      // Безопасный рендеринг списка опыта с помощью опциональной цепочки
-      const experienceHTML =
-        experience
-          ?.map((item) => `<p class="item-who">- ${item}</p>`)
-          .join("") ?? "";
+      const experienceHTML = Array.isArray(expList)
+        ? expList.map((item) => `<p class="item-who">- ${item}</p>`).join("")
+        : "";
 
       return `
         <div class="card">
-          <img src="${photo}" alt="${name}" />
+          <img src="${master.photo}" alt="${name}" />
           <div class="container-review-master">
             <div class="review-master">
               <div class="name-and-who">
                 <p class="name">${name}</p>
                 <div class="who">
                   ${experienceHTML}
-                  <p class="item-who" style="margin-top: 5px; color: #930270; font-weight: bold;">от ${price} ₽</p>
+                  <p class="item-who" style="margin-top: 5px; color: #930270; font-weight: bold;"><span data-i18n="main_js.from">от</span> ${master.price} ₽</p>
                 </div>
               </div>
               <p class="qualification">${qualification}</p>
@@ -47,20 +44,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
       `;
     }).join("");
+    window.translatePage();
   };
 
-  // Асинхронная загрузка данных
   const fetchMasters = async () => {
     try {
       const response = await fetch("http://localhost:3000/masters");
-
       if (!response.ok) {
         throw new Error(`Ошибка HTTP: ${response.status}`);
       }
-
       const data = await response.json();
-
-      // Извлекаем массив мастеров (поддержка формата json-server и статического файла)
       masters = data.masters ?? data;
 
       if (masters?.length > 0) {
@@ -71,7 +64,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   };
 
-  // Навешивание слушателей событий
   btnLeft.addEventListener("click", () => {
     if (!masters.length) return;
     currentIndex = (currentIndex - 1 + masters.length) % masters.length;
@@ -84,6 +76,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderMasters();
   });
 
-  // Запуск асинхронной инициализации
+  window.addEventListener("languageChanged", renderMasters);
+
   await fetchMasters();
 });

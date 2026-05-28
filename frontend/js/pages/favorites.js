@@ -3,9 +3,9 @@ const section = document.querySelector(".container-for-catalog");
 
 if (!currentUser) {
   section.innerHTML = `
-      <div style="text-align: center; margin-top: 50px; color: #fff;">
-        <h2>Пожалуйста, авторизуйтесь для просмотра Избранного.</h2>
-        <button class="my-custom-button" onclick="location.href='auth.html'" style="margin-top: 15px; background: #fff;">Страница входа</button>
+       <div style="text-align: center; margin-top: 50px; color: #fff;">
+        <h2 data-i18n="cart.please_auth">Пожалуйста, авторизуйтесь для просмотра Избранного.</h2>
+        <button class="my-custom-button" onclick="location.href='auth.html'" style="margin-top: 15px; background: #fff;" data-i18n="cart.login_page">Страница входа</button>
       </div>
     `;
 } else {
@@ -26,7 +26,8 @@ if (!currentUser) {
     } catch (error) {
       console.error("Ошибка при получении данных:", error);
       container.innerHTML =
-        "<p style='color: #fff;'>Не удалось загрузить избранное.</p>";
+        "<p style='color: #fff;' data-i18n='catalog.error_loading'>Не удалось загрузить избранное.</p>";
+      window.translatePage();
     }
   }
 
@@ -34,7 +35,8 @@ if (!currentUser) {
     container.innerHTML = "";
     if (!input || input.length === 0) {
       container.innerHTML =
-        "<p style='color: #fff;'>Список избранного пуст</p>";
+        "<p style='color: #fff;' data-i18n='cart.empty'>Список избранного пуст</p>";
+      window.translatePage();
       return;
     }
     input.forEach((element) => {
@@ -50,12 +52,12 @@ if (!currentUser) {
       const text1 = document.createElement("p");
       text1.className = "item-first-card-mets";
       card.appendChild(text1);
-      text1.textContent = element.name;
+      text1.textContent = window.getLocalizedValue(element, "name");
 
       const text2 = document.createElement("p");
       text2.className = "item-first-card-mets1";
       card.appendChild(text2);
-      text2.textContent = element.description;
+      text2.textContent = window.getLocalizedValue(element, "description");
 
       const button = document.createElement("div");
       button.className = "container-for-button-catalog2";
@@ -74,6 +76,7 @@ if (!currentUser) {
       button.appendChild(cost);
       cost.textContent = element.price + " ₽";
     });
+    window.translatePage();
   }
 
   async function Delete(product) {
@@ -84,13 +87,27 @@ if (!currentUser) {
       if (!url.ok) {
         throw new Error("Не удалось удалить товар из избранного");
       }
-      alert(`Товар "${product.name}" успешно удален из избранного!`);
+      const localizedName = window.getLocalizedValue(product, "name");
+      alert(
+        window.getLang() === "ru"
+          ? `Товар "${localizedName}" успешно удален из избранного!`
+          : `Product "${localizedName}" successfully removed from favorites!`,
+      );
       loadProduct();
     } catch (error) {
       console.error("Ошибка:", error);
-      alert("Произошла ошибка при удалении из избранного");
+      alert(
+        window.getLang() === "ru"
+          ? "Произошла ошибка при удалении из избранного"
+          : "An error occurred while removing from favorites",
+      );
     }
   }
+
+  // Обновление интерфейса при переключении RU/EN на странице
+  window.addEventListener("languageChanged", () => {
+    loadProduct();
+  });
 
   loadProduct();
 }

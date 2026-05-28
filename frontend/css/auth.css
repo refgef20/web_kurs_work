@@ -1,3 +1,16 @@
+:root {
+  --color-bg-deep: #010101;
+  --color-bg-white: #ffffff;
+  --color-bg-black: #000000;
+  --color-bg-tab-light: #f2f2f2;
+  --color-text-main: #ffffff;
+  --color-text-input-label: #333333;
+  --color-accent: #71165b;
+  --color-border-light: #cccccc;
+  --color-border-wrapper: #dddddd;
+  --color-overlay: rgba(0, 0, 0, 0.5);
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("D:/2 курс/web/web_kurs_work/frontend/set/fonts/circe_light.woff");
 @font-face {
@@ -20,21 +33,21 @@
 }
 .tab-btn {
   border-radius: 120px;
-  background-color: #f2f2f2;
+  background-color: var(--color-bg-tab-light);
   padding: 10px 24px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border-light);
   font-size: 1rem;
   cursor: pointer;
   transition: 0.3s;
 }
 .tab-btn.active {
-  background-color: #71165b;
-  color: #ffffff;
-  border-color: #71165b;
+  background-color: var(--color-accent);
+  color: var(--color-text-main);
+  border-color: var(--color-accent);
 }
 .form-wrapper {
-  background: #ffffff;
-  border: 1px solid #ddd;
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border-wrapper);
   border-radius: 16px;
   padding: 30px;
   width: 100%;
@@ -62,7 +75,7 @@
   font-size: 0.9rem;
   font-weight: 500;
   margin-bottom: 6px;
-  color: #333;
+  color: var(--color-text-input-label);
 }
 #review-text,
 #char-counter,
@@ -76,7 +89,7 @@
 .input-group input[type="email"],
 .input-group input[type="date"] {
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border-light);
   padding: 10px;
   font-size: 0.95rem;
 }
@@ -88,8 +101,8 @@
   flex: 1;
 }
 .nickname-control button {
-  background-color: #000;
-  color: #ffffff;
+  background-color: var(--color-bg-black);
+  color: var(--color-text-main);
   border: none;
   border-radius: 8px;
   padding: 0 15px;
@@ -105,8 +118,8 @@
   gap: 10px;
 }
 .submit-btn {
-  background-color: #71165b;
-  color: #ffffff;
+  background-color: var(--color-accent);
+  color: var(--color-text-main);
   border: none;
   border-radius: 30px;
   padding: 12px;
@@ -117,11 +130,11 @@
   transition: opacity 0.3s;
 }
 .submit-btn:disabled {
-  background-color: #ccc;
+  background-color: var(--color-border-light);
   cursor: not-allowed;
 }
 .error-message {
-  color: #71165b;
+  color: var(--color-accent);
   font-size: 0.8rem;
   margin-top: 5px;
   display: none;
@@ -135,14 +148,14 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--color-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 .modal-content {
-  background: #ffffff;
+  background: var(--color-bg-white);
   padding: 30px;
   border-radius: 16px;
   max-width: 400px;
@@ -161,8 +174,8 @@
     top: 60px;
     left: 0;
     width: 100%;
-    background: #010101;
-    border-bottom: 2px solid #71165b;
+    background: var(--color-bg-deep);
+    border-bottom: 2px solid var(--color-accent);
     padding: 20px;
     z-index: 999;
     gap: 15px;

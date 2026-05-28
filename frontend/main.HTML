@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Document</title>
+    <link rel="stylesheet" href="css/letsee.css" />
+
+    <link rel="stylesheet" href="css/media_catalog.css" />
+    <link rel="stylesheet" href="css/light.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <script src="js/letsee.js"></script>
+    <script type="module" src="js/pages/language.js"></script>
     <script type="module" src="js/pages/components(for main).js"></script>
     <script type="module" src="js/pages/main(masters).js"></script>
     <script type="module" src="js/pages/main.js"></script>
@@ -23,21 +29,27 @@
         <div class="annetka-zapis">
           <div class="sign">
             <hr class="line-sign" />
-            <p class="item-sign">Салон красоты премиум класса</p>
+            <p class="item-sign" data-i18n="main.premium_salon">
+              Салон красоты премиум класса
+            </p>
           </div>
           <div class="annetka-texts-buttons">
             <p class="annet-item">Annetka.Hair</p>
             <div class="desc-but">
-              <p class="annet-inem2">
+              <p class="annet-inem2" data-i18n="main.annetka_mission">
                 Annetka Hair - эксклюзивный салон красоты премиум класса,
                 основная миссия которого - подарить Вам красивые волосы
               </p>
               <div class="buttons-annet">
                 <button class="write-button">
-                  <p class="items-button-annet">Записаться</p>
+                  <p class="items-button-annet" data-i18n="main.write_btn">
+                    Записаться
+                  </p>
                 </button>
                 <button class="favor-button">
-                  <p class="items-button-annet">Наши услуги</p>
+                  <p class="items-button-annet" data-i18n="main.our_services">
+                    Наши услуги
+                  </p>
                 </button>
               </div>
             </div>
@@ -45,21 +57,30 @@
         </div>
       </div>
       <div class="phone-address">
-        <p class="address">Москва, м. Парк Победы, Улица 1812 года, дом 1</p>
-        <p class="phone-number">+7 (995) 099-27-57</p>
+        <p class="address" data-i18n="header.address">
+          Москва, м. Парк Победы, Улица 1812 года, дом 1
+        </p>
+        <p class="phone-number" data-i18n="header.phone">+7 (995) 099-27-57</p>
       </div>
     </header>
 
     <main>
       <section class="favors-costs" id="favor">
         <div class="container-hairStyle-favors">
-          <p class="item-favorsCosts">услуги и цены</p>
+          <p class="item-favorsCosts" data-i18n="main.services_prices_title">
+            услуги и цены
+          </p>
           <div class="hair-style">
             <div class="hair">
               <ul class="container-kinds-hairStyle">
                 <div class="list-subcat">
                   <li class="kinds-hairStyle" data-id="haircut">
-                    <a href="!#" class="items-kinds-hair">стрижка</a>
+                    <a
+                      href="!#"
+                      class="items-kinds-hair"
+                      data-i18n="main.haircut"
+                      >стрижка</a
+                    >
                     <img
                       src="../frontend/set/icon/plus.svg"
                       alt=""
@@ -68,7 +89,9 @@
                   </li>
                 </div>
                 <li class="kinds-hairStyle kinds-styling" data-id="styling">
-                  <a href="!#" class="items-kinds-hair">укладка</a>
+                  <a href="!#" class="items-kinds-hair" data-i18n="main.styling"
+                    >укладка</a
+                  >
                   <img
                     src="../frontend/set/icon/plus.svg"
                     alt=""
@@ -76,7 +99,12 @@
                   />
                 </li>
                 <li class="kinds-hairStyle kinds-dye" data-id="coloring">
-                  <a href="!#" class="items-kinds-hair">окрашивание</a>
+                  <a
+                    href="!#"
+                    class="items-kinds-hair"
+                    data-i18n="main.coloring"
+                    >окрашивание</a
+                  >
                   <img
                     src="../frontend/set/icon/plus.svg"
                     alt=""
@@ -84,7 +112,9 @@
                   />
                 </li>
                 <li class="kinds-hairStyle kinds-care" data-id="care">
-                  <a href="" class="items-kinds-hair">уход</a>
+                  <a href="" class="items-kinds-hair" data-i18n="main.care"
+                    >уход</a
+                  >
                   <img
                     src="../frontend/set/icon/plus.svg"
                     alt=""
@@ -92,7 +122,7 @@
                   />
                 </li>
               </ul>
-              <p class="view-favor">Стрижка</p>
+              <p class="view-favor" data-i18n="main.haircut">Стрижка</p>
               <img src="../frontend/set/icon/Polygon 1.svg" alt="ojojojojojo" />
             </div>
             <hr class="line-style" />
@@ -101,8 +131,13 @@
               <div class="cost-with-button">
                 <div class="costs-master"></div>
                 <div class="buttons-written-master">
-                  <button class="write-button-style">Записаться</button>
-                  <button class="write-button-style master-button">
+                  <button class="write-button-style" data-i18n="main.write_btn">
+                    Записаться
+                  </button>
+                  <button
+                    class="write-button-style master-button"
+                    data-i18n="main.masters_title"
+                  >
                     Наши мастера
                   </button>
                 </div>
@@ -125,7 +160,7 @@
             style="cursor: pointer"
           />
           <div class="master">
-            <p class="tittle-master">мастера</p>
+            <p class="tittle-master" data-i18n="main.masters_title">мастера</p>
             <div class="cards-masters" id="masters-container"></div>
             <img
               style="align-self: center"
@@ -144,7 +179,9 @@
       <section class="container-for-review">
         <div class="review-clients">
           <div class="container-for-review-with-title">
-            <p class="tittle-review">Отзывы клиентов</p>
+            <p class="tittle-review" data-i18n="main.clients_feedback">
+              Отзывы клиентов
+            </p>
             <div class="container-cards-review">
               <img src="/frontend/set/image/review1.jpg" alt="" />
               <img src="/frontend/set/image/review2.jpg" alt="" />
@@ -155,8 +192,8 @@
       </section>
       <section class="container-our-works">
         <div class="our-works">
-          <p class="tittle-works">Наши Работы</p>
-          <p class="inst">
+          <p class="tittle-works" data-i18n="main.our_works">Наши Работы</p>
+          <p class="inst" data-i18n="main.instagram_more">
             - Больше работ у нас в<span class="highlight"> instagram</span>
           </p>
           <div class="our-works-ex">
@@ -174,8 +211,10 @@
           <div class="card-product">
             <div class="product-buttons">
               <div class="product-name-description">
-                <p class="tittle-product">Продукция</p>
-                <p class="description-product">
+                <p class="tittle-product" data-i18n="main.products">
+                  Продукция
+                </p>
+                <p class="description-product" data-i18n="main.products_desc">
                   На сколько Вы готовы к переменам? Измените свой цвет волос за
                   15 мин! Тонирующая маска для волос Annetka.hair с кератином,
                   витамином Е, пчелиным воском изготавливается из органической
@@ -187,8 +226,10 @@
                 </p>
               </div>
               <div class="buttons-buy">
-                <button class="button-ozon item-buy">Купить на ozon</button>
-                <button class="button-wild item-buy">
+                <button class="button-ozon item-buy" data-i18n="main.buy_ozon">
+                  Купить на ozon
+                </button>
+                <button class="button-wild item-buy" data-i18n="main.buy_wb">
                   купить на wildberries
                 </button>
               </div>

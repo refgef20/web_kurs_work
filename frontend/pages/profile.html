@@ -6,8 +6,9 @@
     <title>Профиль — Annetka.Hair</title>
     <link rel="stylesheet" href="../css/main.css" />
     <link rel="stylesheet" href="../css/media_catalog.css" />
-
+    <link rel="stylesheet" href="../css/light.css" />
     <link rel="stylesheet" href="../css/profile.css" />
+    <script type="module" src="../js/pages/language.js"></script>
     <script type="module" src="../js/pages/components.js"></script>
     <script type="module" src="../js/pages/profile.js"></script>
   </head>
@@ -15,7 +16,9 @@
     <site-header></site-header>
 
     <main class="profile-container">
-      <h1 class="profile-main-title">Личный кабинет</h1>
+      <h1 class="profile-main-title" data-i18n="profile.title">
+        Личный кабинет
+      </h1>
 
       <div class="profile-layout">
         <aside class="profile-card">
@@ -26,11 +29,15 @@
         </aside>
 
         <section class="profile-fields-section">
-          <h2 class="section-title">Персональные данные</h2>
+          <h2 class="section-title" data-i18n="profile.personal_data">
+            Персональные данные
+          </h2>
           <form id="profile-form" class="profile-form">
             <div class="profile-form-grid">
               <div class="input-group">
-                <label for="p-lastname">Фамилия</label>
+                <label for="p-lastname" data-i18n="profile.lastname"
+                  >Фамилия</label
+                >
                 <input
                   type="text"
                   id="p-lastname"
@@ -40,7 +47,9 @@
               </div>
 
               <div class="input-group">
-                <label for="p-firstname">Имя</label>
+                <label for="p-firstname" data-i18n="profile.firstname"
+                  >Имя</label
+                >
                 <input
                   type="text"
                   id="p-firstname"
@@ -50,7 +59,9 @@
               </div>
 
               <div class="input-group">
-                <label for="p-patronymic">Отчество</label>
+                <label for="p-patronymic" data-i18n="profile.patronymic"
+                  >Отчество</label
+                >
                 <input
                   type="text"
                   id="p-patronymic"
@@ -59,17 +70,19 @@
               </div>
 
               <div class="input-group">
-                <label for="p-phone">Телефон</label>
+                <label for="p-phone" data-i18n="profile.phone">Телефон</label>
                 <input
                   type="tel"
                   id="p-phone"
-                  placeholder="+375 (__) ___-__-__"
+                  placeholder="+7 (___) ___-__-__"
                   required
                 />
               </div>
 
               <div class="input-group">
-                <label for="p-email">Электронная почта</label>
+                <label for="p-email" data-i18n="profile.email"
+                  >Электронная почта</label
+                >
                 <input
                   type="email"
                   id="p-email"
@@ -79,12 +92,16 @@
               </div>
 
               <div class="input-group">
-                <label for="p-birthdate">Дата рождения</label>
+                <label for="p-birthdate" data-i18n="profile.birthdate"
+                  >Дата рождения</label
+                >
                 <input type="date" id="p-birthdate" required />
               </div>
 
               <div class="input-group">
-                <label for="p-username">Имя пользователя (Никнейм)</label>
+                <label for="p-username" data-i18n="profile.username"
+                  >Имя пользователя (Никнейм)</label
+                >
                 <input
                   type="text"
                   id="p-username"
@@ -94,7 +111,9 @@
               </div>
 
               <div class="input-group">
-                <label for="p-role">Статус доступа (Роль)</label>
+                <label for="p-role" data-i18n="profile.role"
+                  >Статус доступа (Роль)</label
+                >
                 <input
                   type="text"
                   id="p-role"
@@ -104,15 +123,17 @@
               </div>
             </div>
 
-            <button type="submit" class="profile-submit-btn">
+            <button
+              type="submit"
+              class="profile-submit-btn"
+              data-i18n="profile.save_btn"
+            >
               Сохранить изменения
             </button>
           </form>
         </section>
       </div>
     </main>
-
-    <!-- Кастомный подвал из components.js -->
     <site-footer></site-footer>
   </body>
 </html>

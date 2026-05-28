@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="../css/light.css" />
     <link rel="stylesheet" href="../css/main.css" />
     <link rel="stylesheet" href="../css/catalog.css" />
     <link rel="stylesheet" href="../css/media_catalog.css" />
     <link rel="stylesheet" href="../css/auth.css" />
-
+    <script type="module" src="../js/pages/language.js"></script>
     <script type="module" src="/frontend/js/pages/components.js"></script>
     <script type="module" src="/frontend/js/pages/feedback.js"></script>
   </head>
@@ -17,10 +18,12 @@
     <main>
       <section class="container-for-catalog" style="align-items: center">
         <div class="form-wrapper">
-          <h2 class="form-title">Оставьте отзыв</h2>
+          <h2 class="form-title" data-i18n="feedback.title">Оставьте отзыв</h2>
           <form id="feedback-form" novalidate>
             <div class="input-group">
-              <label for="review-product">Выберите продукт*</label>
+              <label for="review-product" data-i18n="feedback.select_product"
+                >Выберите продукт*</label
+              >
               <select
                 id="review-product"
                 style="
@@ -30,12 +33,16 @@
                 "
                 required
               >
-                <option value="">Выберите купленный продукт</option>
+                <option value="" data-i18n="feedback.select_placeholder">
+                  Выберите купленный продукт
+                </option>
               </select>
             </div>
 
             <div class="input-group">
-              <label for="review-text">Ваш отзыв (Минимум 20 символов) *</label>
+              <label for="review-text" data-i18n="feedback.review_text"
+                >Ваш отзыв (Минимум 20 символов) *</label
+              >
               <textarea
                 id="review-text"
                 rows="5"
@@ -57,6 +64,7 @@
               type="submit"
               id="feedback-submit-btn"
               class="submit-btn"
+              data-i18n="feedback.submit_btn"
               disabled
             >
               Submit Review

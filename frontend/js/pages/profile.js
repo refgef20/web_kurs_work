@@ -54,7 +54,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       errorSpan.className = "error-message";
       input.parentNode.appendChild(errorSpan);
     }
-    errorSpan.textContent = text;
+    errorSpan.setAttribute("data-i18n", text);
+    window.translatePage();
     errorSpan.style.display = "block";
   }
 
@@ -62,50 +63,50 @@ document.addEventListener("DOMContentLoaded", async () => {
     const errorSpan = input.parentNode.querySelector(".error-message");
     if (errorSpan) {
       errorSpan.style.display = "none";
+      errorSpan.removeAttribute("data-i18n");
     }
   }
 
   // Единая функция валидации конкретного поля
   function validateField(input, show = true) {
     let isValid = true;
-    let errorMsg = "";
+    let errorKey = "";
 
     if (input === inputLastName) {
       if (!inputLastName.value.trim()) {
         isValid = false;
-        errorMsg = "Фамилия обязательна к заполнению";
+        errorKey = "auth_errors.lastname_req";
       }
     } else if (input === inputFirstName) {
       if (!inputFirstName.value.trim()) {
         isValid = false;
-        errorMsg = "Имя обязательно к заполнению";
+        errorKey = "auth_errors.firstname_req";
       }
     } else if (input === inputPhone) {
       const val = inputPhone.value.trim();
       const phoneRegex = /^\+375(25|29|33|44|17)\d{7}$/;
       if (!val) {
         isValid = false;
-        errorMsg = "Номер телефона обязателен";
+        errorKey = "auth_errors.phone_req";
       } else if (!phoneRegex.test(val)) {
         isValid = false;
-        errorMsg =
-          "Некорректный номер РБ. Пример: +375XXXXXXXXX (25, 29, 33, 44, 17)";
+        errorKey = "auth_errors.phone_invalid";
       }
     } else if (input === inputEmail) {
       const val = inputEmail.value.trim();
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!val) {
         isValid = false;
-        errorMsg = "Email обязателен";
+        errorKey = "auth_errors.email_req";
       } else if (!emailRegex.test(val)) {
         isValid = false;
-        errorMsg = "Неверный формат email адреса";
+        errorKey = "auth_errors.email_invalid";
       }
     } else if (input === inputBirthDate) {
       const val = inputBirthDate.value;
       if (!val) {
         isValid = false;
-        errorMsg = "Укажите дату рождения";
+        errorKey = "auth_errors.birthdate_req";
       } else {
         const bDate = new Date(val);
         const curDate = new Date();
@@ -116,18 +117,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         if (age < 16) {
           isValid = false;
-          errorMsg = "Изменение данных доступно только с 16 лет";
+          errorKey = "auth_errors.birthdate_invalid";
         }
       }
     } else if (input === inputUsername) {
       if (!inputUsername.value.trim()) {
         isValid = false;
-        errorMsg = "Никнейм обязателен к заполнению";
+        errorKey = "auth_errors.username_req";
       }
     }
 
     if (!isValid && show) {
-      showError(input, errorMsg);
+      showError(input, errorKey);
     } else if (isValid) {
       hideError(input);
     }
@@ -162,7 +163,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-  // Загрузка первичных данных пользователя из db.json
   async function loadUserData() {
     try {
       const res = await fetch(`http://localhost:3000/users/${currentUser.id}`);
@@ -182,8 +182,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         `${user.lastName || ""} ${user.firstName || ""} ${user.patronymic || ""}`.trim() ||
         "Пользователь";
       displayUsername.textContent = `@${user.username}`;
-      displayRole.textContent =
-        user.role === "admin" ? "Администратор" : "Клиент";
+      displayRole.setAttribute(
+        "data-i18n",
+        user.role === "admin" ? "profile.admin_role" : "profile.client_role",
+      );
 
       inputLastName.value = user.lastName || "";
       inputFirstName.value = user.firstName || "";
@@ -192,9 +194,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       inputEmail.value = user.email || "";
       inputBirthDate.value = user.birthDate || "";
       inputUsername.value = user.username || "";
-      inputRole.value = user.role === "admin" ? "Администратор" : "Клиент";
+      inputRole.setAttribute(
+        "data-i18n-placeholder",
+        user.role === "admin" ? "profile.admin_role" : "profile.client_role",
+      );
 
       validateForm(); // Вызов первичной проверки валидности полей
+      window.translatePage();
     } catch (error) {
       console.error("Ошибка при получении профиля:", error);
       alert("Не удалось загрузить данные личного кабинета.");
@@ -253,6 +259,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.error("Ошибка при обновлении профиля:", error);
       alert("Произошла ошибка при сохранении изменений.");
     }
+  });
+
+  // Автоматический перевод элементов личного кабинета при смене языка
+  window.addEventListener("languageChanged", () => {
+    loadUserData();
   });
 
   loadUserData();

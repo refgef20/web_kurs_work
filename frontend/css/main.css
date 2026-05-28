@@ -1,5 +1,40 @@
+:root {
+  --gap-haircut: 5.25rem;
+  --gap-styling: 5.94rem;
+  --gap-dye: 2.06rem;
+  --gap-care: 7.75rem;
+  --gap-master: clamp(16.6rem, 34vw, 24.44rem);
+  --gap-profi: clamp(17.25rem, 38vw, 25.17rem);
+  --gap-time-work: 0.9125rem;
+  --gap-contact: 0.91375rem;
+  --gap-revmast: 2.575rem;
+  --haircut: var(--gap-haircut);
+  --styling: var(--gap-styling);
+  --dye: var(--gap-dye);
+  --care: var(--gap-care);
+  --master: var(--gap-master);
+  --profi: var(--gap-profi);
+  --time-work: var(--gap-time-work);
+  --contact: var(--gap-contact);
+  --revmast: var(--gap-revmast);
+
+  --color-bg-deep: #010101;
+  --color-bg-card: #111111;
+  --color-bg-black: #000000;
+  --color-white: #ffffff;
+  --color-accent: #71165b;
+  --color-accent-shadow: rgba(113, 22, 92, 0.3);
+  --color-border-haircut: #727272;
+  --color-border-translucent: rgba(255, 255, 255, 0.08);
+  --color-border-map: rgba(255, 255, 255, 0.1);
+
+  --color-brand-ozon: #1b1bf8;
+  --color-brand-wb-start: #cb11ab;
+  --color-brand-wb-end: #5f2a87;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("D:/2 курс/web/web_kurs_work/frontend/set/fonts/circe_light.woff");
+
 @font-face {
   font-family: "Vera Humana";
   src: url("../set/fonts/verahumana95.ttf") format("truetype");
@@ -22,28 +57,7 @@
 button {
   border: none;
 }
-:root {
-  --gap-haircut: 5.25rem;
-  --gap-styling: 5.94rem;
-  --gap-dye: 2.06rem;
-  --gap-care: 7.75rem;
-  --gap-master: clamp(16.6rem, 34vw, 24.44rem);
-  --gap-profi: clamp(17.25rem, 38vw, 25.17rem);
-  --gap-time-work: 0.9125rem;
-  --gap-contact: 0.91375rem;
-  --gap-revmast: 2.575rem;
-  --haircut: var(--gap-haircut);
-  --styling: var(--gap-styling);
-  --dye: var(--gap-dye);
-  --care: var(--gap-care);
-  --master: var(--gap-master);
-  --profi: var(--gap-profi);
-  --time-work: var(--gap-time-work);
-  --contact: var(--gap-contact);
-  --revmast: var(--gap-revmast);
-}
 
-/* Определение кастомного тега в качестве блочной обертки */
 site-header {
   display: block;
   width: 100%;
@@ -56,12 +70,13 @@ site-header {
   align-items: center;
 }
 .button-login {
-  border-radius: 120px;
-  background-color: #ffffff;
+  border-radius: 10px;
+  background-color: var(--color-accent);
   width: 5.8125rem;
   height: 3.1875rem;
-  border: 1px solid #000000;
   font-size: 0.9375rem;
+  font-family: Circe;
+  color: var(--color-white);
 }
 header {
   display: flex;
@@ -74,7 +89,7 @@ header {
   flex-direction: column;
   align-items: flex-start;
   gap: 10.96rem;
-  background-color: #010101;
+  background-color: var(--color-bg-deep);
 }
 .head {
   display: flex;
@@ -86,7 +101,7 @@ header {
   z-index: 1002;
 }
 .item-icon {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana", sans-serif;
   font-size: 1.25rem;
   font-style: normal;
@@ -94,8 +109,8 @@ header {
   line-height: 180%;
   text-transform: uppercase;
   z-index: 1002;
-  flex-shrink: 0; /* Запрет на сжатие логотипа */
-  margin-right: clamp(15px, 2.5vw, 40px); /* Безопасный интервал до ссылок */
+  flex-shrink: 0;
+  margin-right: clamp(15px, 2.5vw, 40px);
 }
 .navigation {
   list-style: none;
@@ -108,7 +123,7 @@ header {
 }
 .navigation-item {
   text-decoration: none;
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
@@ -132,7 +147,7 @@ header {
 .item-social {
   align-self: stretch;
   align-content: center;
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 1.25rem;
   font-style: normal;
@@ -158,7 +173,7 @@ header {
   height: 0.0625rem;
 }
 .item-sign {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
@@ -181,7 +196,7 @@ header {
   position: absolute;
   height: 2px;
   width: 100%;
-  background: #ffffff;
+  background: var(--color-white);
   border-radius: 9px;
   opacity: 1;
   left: 0;
@@ -247,14 +262,14 @@ header {
   font-size: clamp(0.85rem, 0.95vw, 1rem);
   font-family: "Circe", sans-serif;
   font-weight: 500;
-  color: #ffffff;
+  color: var(--color-white);
 }
 .admin-nav-link {
-  color: #71165b !important;
+  color: var(--color-accent) !important;
   font-weight: bold;
 }
 .admin-nav-link:hover {
-  color: #ffffff !important;
+  color: var(--color-white) !important;
 }
 
 .annetka-texts-buttons {
@@ -271,7 +286,7 @@ header {
   gap: 1.9rem;
 }
 .annet-item {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 6.875rem;
   font-style: normal;
@@ -281,7 +296,7 @@ header {
 }
 .annet-inem2 {
   align-self: stretch;
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 1.25rem;
   font-style: normal;
@@ -302,8 +317,8 @@ header {
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
-  background: #71165b;
-  box-shadow: 0 22px 44px 0 rgba(113, 22, 92, 0.3);
+  background: var(--color-accent);
+  box-shadow: 0 22px 44px 0 var(--color-accent-shadow);
 }
 .favor-button {
   display: flex;
@@ -312,15 +327,15 @@ header {
   align-items: center;
   gap: 0.625rem;
   background: none;
-  border: 1px solid #ffffff;
+  border: 1px solid var(--color-white);
 }
 .favor-button:hover {
-  background-color: #71165b !important;
-  border-color: #71165b !important;
-  color: #ffffff !important;
+  background-color: var(--color-accent) !important;
+  border-color: var(--color-accent) !important;
+  color: var(--color-white) !important;
 }
 .items-button-annet {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 1.125rem;
   font-style: normal;
@@ -339,7 +354,7 @@ header {
   padding-bottom: 46px;
 }
 .address {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
@@ -348,7 +363,7 @@ header {
   opacity: 0.6;
 }
 .phone-number {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 1.25rem;
   font-style: normal;
@@ -365,7 +380,7 @@ header {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.625rem;
-  background-color: #111111;
+  background-color: var(--color-bg-card);
 }
 .container-hairStyle-favors {
   display: flex;
@@ -376,7 +391,7 @@ header {
 }
 .item-favorsCosts {
   align-self: stretch;
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 3.25rem;
   font-style: normal;
@@ -420,7 +435,7 @@ header {
 }
 .items-kinds-hair {
   text-decoration: none;
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 1.125rem;
   font-style: normal;
@@ -429,7 +444,7 @@ header {
   text-transform: uppercase;
 }
 .view-favor {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 1.125rem;
   font-style: normal;
@@ -443,7 +458,7 @@ header {
 }
 .line-style {
   opacity: 0.2;
-  background: #ffffff;
+  background: var(--color-white);
   width: 0.005rem;
   height: 26.68781rem;
 }
@@ -460,7 +475,7 @@ header {
   gap: 1.55rem;
 }
 .tittle {
-  color: #ffffff;
+  color: var(--color-white);
   opacity: 0.7;
   font-family: "Vera Humana";
   font-size: 1.125rem;
@@ -472,7 +487,7 @@ header {
 }
 .description-hairCut {
   align-self: stretch;
-  color: #ffffff;
+  color: var(--color-white);
   opacity: 0.6;
   width: 100%;
   max-width: 29rem;
@@ -502,7 +517,7 @@ header {
   gap: var(--profi);
 }
 .master-hair {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 1.125rem;
   font-style: normal;
@@ -510,7 +525,7 @@ header {
   line-height: 130%;
 }
 .cost-hair {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
@@ -522,7 +537,7 @@ header {
   max-width: 36.75rem;
   max-height: 0.0625rem;
   opacity: 0.4;
-  background: #727272;
+  background: var(--color-border-haircut);
   height: 100%;
 }
 .with-line {
@@ -536,9 +551,9 @@ header {
   display: flex;
   padding: 16px 57px 15px 57px;
   align-items: center;
-  filter: drop-shadow(0 22px 44px rgba(113, 22, 92, 0.3));
-  background-color: #71165b;
-  color: #ffffff;
+  filter: drop-shadow(0 22px 44px var(--color-accent-shadow));
+  background-color: var(--color-accent);
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
@@ -555,7 +570,7 @@ header {
   padding: 16px 45px 15px 45px;
   filter: none;
   background: none;
-  border: 1px solid #ffffff;
+  border: 1px solid var(--color-white);
 }
 .buttons-written-master {
   display: flex;
@@ -572,7 +587,7 @@ header {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.625rem;
-  background-color: #111111;
+  background-color: var(--color-bg-card);
 }
 .our-master {
   display: flex;
@@ -590,7 +605,7 @@ header {
   display: none;
 }
 .tittle-master {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 3.25rem;
   font-style: normal;
@@ -614,7 +629,7 @@ header {
   padding: 1.875rem 1.875rem 2rem 1.875rem;
   align-items: flex-start;
   gap: 0.625rem;
-  background: #010101;
+  background: var(--color-bg-deep);
 }
 .review-master {
   display: flex;
@@ -630,7 +645,7 @@ header {
   gap: 1rem;
 }
 .name {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 1.125rem;
   font-style: normal;
@@ -646,7 +661,7 @@ header {
   align-self: stretch;
 }
 .item-who {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
@@ -656,7 +671,7 @@ header {
   opacity: 0.6;
 }
 .qualification {
-  color: #71165b;
+  color: var(--color-accent);
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
@@ -673,7 +688,7 @@ header {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.625rem;
-  background-color: #111111;
+  background-color: var(--color-bg-card);
 }
 .review-clients {
   display: flex;
@@ -688,7 +703,7 @@ header {
   gap: 3.6375rem;
 }
 .tittle-review {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 3.25rem;
   font-style: normal;
@@ -714,7 +729,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  background-color: #111111;
+  background-color: var(--color-bg-card);
 }
 .our-works {
   display: flex;
@@ -723,7 +738,7 @@ header {
   gap: 2.6rem;
 }
 .tittle-works {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 3.25rem;
   font-style: normal;
@@ -732,7 +747,7 @@ header {
   text-transform: uppercase;
 }
 .inst {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: Circe;
   font-size: 1.125rem;
   font-style: normal;
@@ -748,7 +763,7 @@ header {
   flex-wrap: wrap;
 }
 .highlight {
-  color: #71165b;
+  color: var(--color-accent);
   font-family: Circe;
   font-size: 1.125rem;
   font-style: normal;
@@ -773,7 +788,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #111111;
+  background-color: var(--color-bg-card);
   flex-shrink: 0;
 }
 .product-buttons {
@@ -791,7 +806,7 @@ header {
   align-self: stretch;
 }
 .tittle-product {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 3.25rem;
   font-style: normal;
@@ -800,7 +815,7 @@ header {
   text-transform: uppercase;
 }
 .description-product {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 1rem;
   width: 100%;
@@ -821,7 +836,7 @@ header {
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
-  background: #1b1bf8;
+  background: var(--color-brand-ozon);
 }
 .button-wild {
   display: flex;
@@ -830,10 +845,14 @@ header {
   align-items: center;
   gap: 0.625rem;
   align-self: stretch;
-  background: linear-gradient(91deg, #cb11ab 2.31%, #5f2a87 95.78%);
+  background: linear-gradient(
+    91deg,
+    var(--color-brand-wb-start) 2.31%,
+    var(--color-brand-wb-end) 95.78%
+  );
 }
 .item-buy {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 1.125rem;
   font-style: normal;
@@ -856,7 +875,7 @@ footer {
   display: flex;
   width: 100%;
   max-width: 100rem;
-  background-color: #010101;
+  background-color: var(--color-bg-deep);
   padding: 6.25rem 0rem 8rem 6.25rem;
   flex-direction: column;
   align-items: flex-start;
@@ -898,7 +917,7 @@ footer {
   gap: var(--time-work);
 }
 .item-punkt1 {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 1.125rem;
   font-style: normal;
@@ -907,7 +926,7 @@ footer {
   text-transform: uppercase;
 }
 .item-punkt2 {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 1rem;
   font-style: normal;
@@ -920,7 +939,7 @@ footer {
   display: flex;
   flex-direction: row;
   gap: 2.75rem;
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 1.25rem;
   font-style: normal;
@@ -935,9 +954,9 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
-  background: #71165b;
-  box-shadow: 0 22px 44px 0 rgba(113, 22, 92, 0.3);
-  color: #ffffff;
+  background: var(--color-accent);
+  box-shadow: 0 22px 44px 0 var(--color-accent-shadow);
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 1.125rem;
   font-style: normal;
@@ -951,7 +970,7 @@ footer {
   gap: 0.9375rem;
 }
 .tittle-card {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 1.125rem;
   font-style: normal;
@@ -962,7 +981,7 @@ footer {
 .item-social2 {
   align-self: stretch;
   align-content: center;
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 1.25rem;
   font-style: normal;
@@ -975,7 +994,7 @@ footer {
   max-width: 87.5rem;
   height: 0;
   stroke-width: 1px;
-  stroke: #ffffff;
+  stroke: var(--color-white);
   opacity: 0.2;
 }
 .footer-with-line {
@@ -993,7 +1012,7 @@ footer {
   grid-template-columns: 1fr 2fr 1fr;
 }
 .logo {
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Vera Humana";
   font-size: 1.25rem;
   font-style: normal;
@@ -1011,7 +1030,7 @@ footer {
 }
 .year {
   direction: ltr;
-  color: #ffffff;
+  color: var(--color-white);
   font-family: "Circe";
   font-size: 0.75rem;
   font-style: normal;
@@ -1079,7 +1098,7 @@ footer {
   }
 }
 
-/* --- ВЫДВИЖНОЙ СЛАЙДЕР DRAWER (ПОРOГ УВЕЛИЧЕН ДО 1366PX ДЛЯ ИДЕАЛЬНОЙ РАБОТЫ НА НОУТБУКАХ) --- */
+/* --- ВЫДВИЖНОЙ СЛАЙДЕР DRAWER --- */
 @media (max-width: 1366px) {
   .head {
     padding: clamp(15px, 2vh, 25px) clamp(15px, 5vw, 90px);
@@ -1100,7 +1119,7 @@ footer {
     width: 80%;
     max-width: 400px;
     height: 100vh;
-    background: #010101; /* UI KIT Темно-черный */
+    background: var(--color-bg-deep);
     padding: clamp(80px, 12vh, 120px) clamp(20px, 5vw, 45px)
       clamp(20px, 4vh, 40px) clamp(20px, 5vw, 45px);
     z-index: 999;
@@ -1109,7 +1128,7 @@ footer {
 
     transform: translateX(100%);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 1px solid var(--color-border-translucent);
   }
 
   .navigation.active {
@@ -1119,19 +1138,19 @@ footer {
   .navigation-item {
     font-size: clamp(1.1rem, 1.5vw + 0.5rem, 1.35rem);
     font-family: "Circe", sans-serif;
-    color: #ffffff;
+    color: var(--color-white);
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
   .navigation-item:hover {
-    color: #71165b;
+    color: var(--color-accent);
   }
 
   .container-for-button {
     width: 100%;
     padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid var(--color-border-translucent);
     display: flex;
     justify-content: flex-start;
   }
@@ -1146,10 +1165,10 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-top: auto; /* Контакты прижаты вниз шторки */
+    margin-top: auto;
     width: 100%;
     padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid var(--color-border-translucent);
   }
 
   .drawer-address {
@@ -1174,7 +1193,7 @@ footer {
   }
 
   .drawer-socials span:hover {
-    color: #71165b;
+    color: var(--color-accent);
   }
 }
 
@@ -1351,7 +1370,7 @@ svg {
     display: none;
   }
   .hair {
-    border: 1px solid #ffffff;
+    border: 1px solid var(--color-white);
     padding: 1rem 1.25rem 0.9375rem 1.25rem;
     align-items: center;
     gap: 9.6875rem;
@@ -1467,7 +1486,7 @@ svg {
 }
 
 .items-kinds-hair.active {
-  color: #71165b;
+  color: var(--color-accent);
   opacity: 1;
 }
 
@@ -1483,7 +1502,7 @@ svg {
   max-height: 300px;
 }
 .subcategories-list li {
-  color: #ffffff;
+  color: var(--color-white);
   opacity: 0.7;
   font-family: "Circe", sans-serif;
   font-size: 0.95rem;
@@ -1494,7 +1513,7 @@ svg {
     padding-left 0.2s;
 }
 .subcategories-list li:hover {
-  color: #71165b;
+  color: var(--color-accent);
   padding-left: 5px;
 }
 
@@ -1508,13 +1527,115 @@ svg {
 }
 .map-wrapper {
   width: 100%;
-  max-width: clamp(
-    300px,
-    100%,
-    600px
-  ); /* Полная совместимость со стилями изображений */
+  max-width: clamp(300px, 100%, 600px);
   height: clamp(200px, 30vh, 350px);
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--color-border-map);
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg-deep, #010101);
+  color: var(--color-white, #ffffff);
+  font-family: var(--font-family-body, "Circe"), sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.error-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--pad-container, clamp(1rem, 5vw, 6.25rem));
+  box-sizing: border-box;
+}
+
+.error-container {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.error-code {
+  font-family: var(--font-family-title, "Vera Humana"), sans-serif;
+  font-size: clamp(5rem, 18vw, 11rem); /* Соответствует ~110px-180px */
+  line-height: 0.85;
+  margin: 0;
+  color: var(--color-accent, #71165b);
+  text-shadow: 0 0 50px rgba(113, 22, 92, 0.3);
+  animation: floatPulse 4s infinite ease-in-out;
+}
+
+.error-title {
+  font-family: var(--font-family-title, "Vera Humana"), sans-serif;
+  font-size: var(
+    --size-h2,
+    clamp(1.75rem, 4.5vw, 3.25rem)
+  ); /* Соответствует ~52px */
+  text-transform: uppercase;
+  margin: 10px 0 0 0;
+  line-height: 1.2;
+  letter-spacing: 1px;
+}
+
+.error-description {
+  color: var(--color-text-gray, rgba(255, 255, 255, 0.6));
+  font-size: var(
+    --size-body,
+    clamp(0.9rem, 1.25vw, 1rem)
+  ); /* Соответствует ~16px */
+  line-height: 1.6;
+  margin: 0 0 25px 0;
+  max-width: 480px;
+}
+
+.error-btn {
+  text-decoration: none;
+  border-radius: 30px; /* Скругление углов по UI Kit */
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.error-btn:hover {
+  transform: translateY(-3px);
+}
+
+.error-btn:active {
+  transform: scale(0.97);
+}
+
+@keyframes floatPulse {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+@media (max-width: 480px) {
+  .buttons-annet {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .error-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
 }

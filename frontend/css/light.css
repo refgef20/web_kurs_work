@@ -1,0 +1,68 @@
+/* ==========================================================================
+   ПЕРЕОПРЕДЕЛЕНИЕ ПЕРЕМЕННЫХ ДЛЯ СВЕТЛОЙ ТЕМЫ
+   ========================================================================== */
+html[data-theme="white"] {
+  /* Фоновые цвета */
+  --color-bg-deep: #f5f5f7; /* Мягкий светло-серый фон для страниц */
+  --color-bg-card: #ffffff; /* Чистый белый фон для карточек и блоков */
+  --color-bg-input: #ffffff; /* Белый фон для полей ввода и текстовых областей */
+  --color-bg-input-alt: rgba(
+    0,
+    0,
+    0,
+    0.03
+  ); /* Легкая тень вместо прозрачного белого */
+  --color-bg-tab: #e5e5ea; /* Серые неактивные вкладки */
+  --color-bg-tab-light: #ffffff; /* Светлые вкладки в формах авторизации */
+  --color-bg-white: #ffffff; /* Сохраняем белый для контентных оберток */
+  --color-bg-black: #111111; /* Инвертируем черный в темно-серый для кнопок типа никнейма */
+
+  /* Цвета текста */
+  --color-text-main: #1c1c1e; /* Основной темный цвет текста */
+  --color-text-dark: #ffffff; /* Белый текст для контрастных элементов */
+  --color-text-muted: #8e8e93; /* Приглушенный серый текст для неактивных вкладок */
+  --color-text-gray-alt: #48484a; /* Серый для элементов списков и подкатегорий */
+  --color-text-gray: rgba(28, 28, 30, 0.6); /* Полупрозрачный темный текст */
+  --color-text-input-label: #1c1c1e; /* Темный цвет для названий полей ввода */
+  --color-white: #1c1c1e; /* Переменная --color-white теперь отдает темный цвет для читаемости текста */
+
+  /* Акцентные цвета и тени */
+  --color-accent: #71165b; /* Фирменный пурпурный цвет остается для контрастности */
+  --color-accent-shadow: rgba(
+    113,
+    22,
+    92,
+    0.15
+  ); /* Мягкая тень вокруг кнопок */
+  --color-accent-shadow-alt: rgba(113, 22, 91, 0.08);
+
+  /* Границы (Borders) */
+  --color-border-dark: #e5e5ea; /* Тонкие серые рамки вокруг блоков */
+  --color-border-light: #d1d1d6; /* Границы инпутов */
+  --color-border-wrapper: #e5e5ea;
+  --color-border-haircut: #c7c7cc; /* Линии-разделители услуг */
+  --color-border-dashed: #d1d1d6; /* Пунктирные линии */
+  --color-border-translucent: rgba(
+    0,
+    0,
+    0,
+    0.08
+  ); /* Полупрозрачные темные границы */
+  --color-border-map: rgba(0, 0, 0, 0.12);
+
+  /* UI/Overlay */
+  --color-overlay: rgba(
+    0,
+    0,
+    0,
+    0.4
+  ); /* Полупрозрачная подложка модальных окон */
+}
+html[data-theme="light"] header {
+  background-image:
+    linear-gradient(to right, var(--color-bg-deep) 30%, transparent),
+    url("/frontend/set/image/Womanfon.jpg");
+}
+html[data-theme="light"] .some-white-icon-class {
+  filter: invert(1); /* Превратит белую иконку в темную */
+}

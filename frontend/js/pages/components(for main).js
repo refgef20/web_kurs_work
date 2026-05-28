@@ -1,44 +1,61 @@
 class SiteHeader extends HTMLElement {
   connectedCallback() {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    let authSection = `<button class="button-login" id="login-nav-btn">Войти</button>`;
+    let authSection = `<button class="button-login" id="login-nav-btn" data-i18n="header.login">Войти</button>`;
     let adminLink = "";
 
     if (currentUser) {
       authSection = `
         <div class="user-profile-nav">
           <span class="user-profile-username">@${currentUser.username}</span>
-          <button class="button-login" id="logout-btn">Выйти</button>
+          <button class="button-login" id="logout-btn" data-i18n="header.logout">Выйти</button>
         </div>
       `;
       if (currentUser.role === "admin") {
-        adminLink = `<li><a class="navigation-item admin-nav-link" href="pages/admin.html">Админ</a></li>`;
+        adminLink = `<li><a class="navigation-item admin-nav-link" href="pages/admin.html" data-i18n="header.admin">Админ</a></li>`;
       }
     }
     this.innerHTML = `
+     <header>
       <div class="head">
         <p class="item-icon">Annetka.Hair</p>
+        
+        <div style="display:flex; gap:10px; align-items:center; margin-right:15px; margin-left: auto;">
+          <!-- Селектор языков -->
+          <div class="lang-selector-container" style="display:flex; gap:10px; align-items:center;">
+            <button class="lang-switch-btn" data-lang="ru" style="background:none; border:none; color:#fff; cursor:pointer; font-size:13px;">RU</button>
+            <span style="color:rgba(255,255,255,0.3)">|</span>
+            <button class="lang-switch-btn" data-lang="en" style="background:none; border:none; color:#fff; cursor:pointer; font-size:13px;">EN</button>
+          </div>
+
+          <!-- Переключатель темы -->
+          <button id="theme-toggle-btn" style="background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#fff; padding:5px;">
+            <span id="theme-icon-container" style="display:flex; align-items:center; justify-content:center;"></span>
+          </button>
+        </div>
+
         <div class="burger" id="burger-btn">
           <span></span>
           <span></span>
           <span></span>
         </div>
         <ul class="navigation" id="nav-menu">
-          <li><a class="navigation-item" href="#favor">Услуги</a></li>
-          <li><a class="navigation-item" href="#master">Мастера</a></li>
-          <li><a class="navigation-item" href="pages/feedback.html">Отзывы</a></li>
-          <li><a class="navigation-item" href="main.HTML">Главная</a></li>
-          <li><a class="navigation-item" href="pages/cart.html">Корзина</a></li>
-          <li><a class="navigation-item" href="pages/catalog.html">Каталог</a></li>
-          <li><a class="navigation-item" href="pages/favorites.html">Избранное</a></li>
-          <li><a class="navigation-item" href="pages/history.html">История заказов</a></li>
-          <li><a class="navigation-item" href="pages/profile.html">Личный кабинет</a></li>
+          <li><a class="navigation-item" href="#favor" data-i18n="header.services">Услуги</a></li>
+          <li><a class="navigation-item" href="#master" data-i18n="header.masters">Мастера</a></li>
+          <li><a class="navigation-item" href="pages/feedback.html" data-i18n="header.reviews">Отзывы</a></li>
+          <li><a class="navigation-item" href="main.HTML" data-i18n="header.main">Главная</a></li>
+          <li><a class="navigation-item" href="pages/cart.html" data-i18n="header.cart">Корзина</a></li>
+          <li><a class="navigation-item" href="pages/catalog.html" data-i18n="header.catalog">Каталог</a></li>
+          <li><a class="navigation-item" href="pages/favorites.html" data-i18n="header.favorites">Избранное</a></li>
+          <li><a class="navigation-item" href="pages/history.html" data-i18n="header.history">Заказы</a></li>
+          <li><a class="navigation-item" href="pages/profile.html" data-i18n="header.profile">Мой кабинет</a></li>
+    <li> <a href="javascript:void(0)" onclick="letsee_toggle_panel()">Версия для слабовидящих</a></li>
           ${adminLink}
           <li class="container-for-button">
              ${authSection}
           </li>
           <li class="mobile-drawer-footer">
-            <p class="drawer-address">Москва, м. Парк Победы<br>Улица 1812 года, дом 1</p>
+            <p class="drawer-address" data-i18n="header.address">Москва, м. Парк Победы<br>Улица 1812 года, дом 1</p>
             <div class="drawer-socials">
               <span>IN</span>
               <span>VK</span>
@@ -48,6 +65,7 @@ class SiteHeader extends HTMLElement {
         </ul>
         <div class="drawer-overlay" id="menu-overlay"></div>
       </div>
+    </header>
     `;
 
     const burgerBtn = this.querySelector("#burger-btn");
@@ -79,8 +97,66 @@ class SiteHeader extends HTMLElement {
         location.href = "pages/auth.html";
       });
     }
+
+    this.querySelectorAll(".lang-switch-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const targetLang = e.target.getAttribute("data-lang");
+        window.setLanguage(targetLang);
+      });
+    });
+
+    // Логика переключения тем оформления
+    const themeToggleBtn = this.querySelector("#theme-toggle-btn");
+    const themeIconContainer = this.querySelector("#theme-icon-container");
+
+    const sunIcon = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-svg" style="color: inherit;">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    `;
+
+    const moonIcon = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-svg" style="color: inherit;">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    `;
+
+    const applyTheme = (theme) => {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+      if (theme === "white") {
+        themeIconContainer.innerHTML = moonIcon;
+      } else {
+        themeIconContainer.innerHTML = sunIcon;
+      }
+    };
+
+    const currentTheme = localStorage.getItem("theme") || "black";
+    applyTheme(currentTheme);
+
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener("click", () => {
+        const activeTheme =
+          document.documentElement.getAttribute("data-theme") || "black";
+        const newTheme = activeTheme === "black" ? "white" : "black";
+        applyTheme(newTheme);
+      });
+    }
+
+    if (window.translatePage) {
+      window.translatePage();
+    }
   }
 }
+
 customElements.define("site-header", SiteHeader);
 
 class SiteFooter extends HTMLElement {
@@ -92,22 +168,22 @@ class SiteFooter extends HTMLElement {
           <div class="menu-with-bitton">
             <div class="menu">
               <div class="punkt">
-                <p class="item-punkt1">Адрес</p>
-                <p class="item-punkt2">
+                <p class="item-punkt1" data-i18n="footer.address_lbl">Адрес</p>
+                <p class="item-punkt2" data-i18n="header.address">
                   Москва, м. Парк Победы, Улица 1812 года, дом 1
                 </p>
               </div>
               <div class="punkt">
-                <p class="item-punkt1">Телефон</p>
-                <p class="item-punkt2">+7 (995) 099-27-57</p>
+                <p class="item-punkt1" data-i18n="footer.phone_lbl">Телефон</p>
+                <p class="item-punkt2" data-i18n="header.phone">+7 (995) 099-27-57</p>
               </div>
               <div class="punkt punkt1">
-                <p class="item-punkt1">Время работы</p>
-                <p class="item-punkt2">пн-пт 7:00 - 23:00</p>
-                <p class="item-punkt2">сб-вс: 11:00 - 22:00</p>
+                <p class="item-punkt1" data-i18n="footer.hours_lbl">Время работы</p>
+                <p class="item-punkt2" data-i18n="footer.hours_workdays">пн-пт 7:00 - 23:00</p>
+                <p class="item-punkt2" data-i18n="footer.hours_weekends">сб-вс: 11:00 - 22:00</p>
               </div>
               <div class="punkt">
-                <p class="item-punkt1">соц. сети</p>
+                <p class="item-punkt1" data-i18n="footer.socials_lbl">соц. сети</p>
                 <div class="social-media2">
                   <p class="item-social2">in</p>
                   <p class="item-social2">vk</p>
@@ -115,41 +191,41 @@ class SiteFooter extends HTMLElement {
                 </div>
               </div>
             </div>
-            <button class="button-under-menu">Записаться</button>
+            <button class="button-under-menu" data-i18n="main.write_btn">Записаться</button>
           </div>
-      <div class="cards-navigation">
-  <p class="tittle-card">Карта</p>
-  <div class="map-wrapper">
-    <iframe 
-      src="https://yandex.ru/map-widget/v1/?ll=37.523528%2C55.734658&mode=search&oid=1107572718&ol=biz&z=16" 
-      width="100%" 
-      height="100%" 
-      frameborder="0" 
-      allowfullscreen="true">
-    </iframe>
-  </div>
-</div>
+          <div class="cards-navigation">
+            <p class="tittle-card" data-i18n="footer.map_title">Карта</p>
+            <iframe 
+              src="https://yandex.ru/map-widget/v1/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%201812%20%D0%B3%D0%BE%D0%B4%D0%B0%2C%20%D0%B4%D0%BE%D0%BC%201&z=16" 
+              width="100%" 
+              height="250" 
+              style="border:0; border-radius: 8px;" 
+              allowfullscreen="true">
+            </iframe>
+          </div>
         </div>
         <div class="footer-with-line">
           <hr class="line-footer" />
           <div class="footer-with-nav">
             <p class="logo">annetka.hair</p>
             <ul class="navigation2">
-              <li><a class="navigation-item" href="!#">Услуги</a></li>
-              <li><a class="navigation-item" href="">Мастера</a></li>
-              <li><a class="navigation-item" href="">Отзывы</a></li>
-              <li><a class="navigation-item" href="">Работы</a></li>
-              <li><a class="navigation-item" href="">Контакты</a></li>
+              <li><a class="navigation-item" href="!#" data-i18n="header.services">Услуги</a></li>
+              <li><a class="navigation-item" href="" data-i18n="header.masters">Мастера</a></li>
+              <li><a class="navigation-item" href="" data-i18n="header.reviews">Отзывы</a></li>
+              <li><a class="navigation-item" href="" data-i18n="footer.works">Работы</a></li>
+              <li><a class="navigation-item" href="" data-i18n="footer.contacts">Контакты</a></li>
             </ul>
             <div class="copyright">
               <p class="year">2014-2022</p>
-              <p class="year">Политика конфидициальности</p>
+              <p class="year" data-i18n="footer.privacy">Политика конфидициальности</p>
             </div>
           </div>
         </div>
       </div>
     </footer>
     `;
+    if (window.translatePage) {
+      window.translatePage();
+    }
   }
 }
-customElements.define("site-footer", SiteFooter);
