@@ -15,6 +15,20 @@
     <script type="module" src="js/pages/main(masters).js"></script>
     <script type="module" src="js/pages/main.js"></script>
     <script type="module" src="js/pages/load.js"></script>
+    <style>
+      :root {
+        --color-bg-deep: #010101;
+        --color-bg-card: #111111;
+        --color-bg-input: #1a1a1a;
+        --color-bg-tab: #222222;
+        --color-text-main: #ffffff;
+        --color-text-muted: #999999;
+        --color-text-gray-alt: #bbbbbb;
+        --color-accent: #71165b;
+        --color-border-dark: #333333;
+        --color-border-dashed: #444444;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -40,18 +54,6 @@
                 Annetka Hair - эксклюзивный салон красоты премиум класса,
                 основная миссия которого - подарить Вам красивые волосы
               </p>
-              <div class="buttons-annet">
-                <button class="write-button">
-                  <p class="items-button-annet" data-i18n="main.write_btn">
-                    Записаться
-                  </p>
-                </button>
-                <button class="favor-button">
-                  <p class="items-button-annet" data-i18n="main.our_services">
-                    Наши услуги
-                  </p>
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -81,22 +83,14 @@
                       data-i18n="main.haircut"
                       >стрижка</a
                     >
-                    <img
-                      src="../frontend/set/icon/plus.svg"
-                      alt=""
-                      class="toggle-icon"
-                    />
+                    <img src="set/icon/plus.svg" alt="" class="toggle-icon" />
                   </li>
                 </div>
                 <li class="kinds-hairStyle kinds-styling" data-id="styling">
                   <a href="!#" class="items-kinds-hair" data-i18n="main.styling"
                     >укладка</a
                   >
-                  <img
-                    src="../frontend/set/icon/plus.svg"
-                    alt=""
-                    class="toggle-icon"
-                  />
+                  <img src="set/icon/plus.svg" alt="" class="toggle-icon" />
                 </li>
                 <li class="kinds-hairStyle kinds-dye" data-id="coloring">
                   <a
@@ -105,25 +99,17 @@
                     data-i18n="main.coloring"
                     >окрашивание</a
                   >
-                  <img
-                    src="../frontend/set/icon/plus.svg"
-                    alt=""
-                    class="toggle-icon"
-                  />
+                  <img src="set/icon/plus.svg" alt="" class="toggle-icon" />
                 </li>
                 <li class="kinds-hairStyle kinds-care" data-id="care">
                   <a href="" class="items-kinds-hair" data-i18n="main.care"
                     >уход</a
                   >
-                  <img
-                    src="../frontend/set/icon/plus.svg"
-                    alt=""
-                    class="toggle-icon"
-                  />
+                  <img src="set/icon/plus.svg" alt="" class="toggle-icon" />
                 </li>
               </ul>
               <p class="view-favor" data-i18n="main.haircut">Стрижка</p>
-              <img src="../frontend/set/icon/Polygon 1.svg" alt="ojojojojojo" />
+              <img src="set/icon/Polygon 1.svg" alt="ojojojojojo" />
             </div>
             <hr class="line-style" />
             <div class="description-hairstyle">
@@ -131,14 +117,19 @@
               <div class="cost-with-button">
                 <div class="costs-master"></div>
                 <div class="buttons-written-master">
-                  <button class="write-button-style" data-i18n="main.write_btn">
-                    Записаться
-                  </button>
                   <button
                     class="write-button-style master-button"
                     data-i18n="main.masters_title"
                   >
-                    Наши мастера
+                    <a
+                      style="
+                        color: var(--color-text-main);
+                        text-decoration: none;
+                      "
+                      href="#master"
+                      data-i18n="main.masters_title"
+                      >Наши мастера</a
+                    >
                   </button>
                 </div>
               </div>

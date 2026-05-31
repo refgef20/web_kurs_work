@@ -31,6 +31,10 @@ if (!currentUser) {
         <button class="my-custom-button" onclick="location.href='auth.html'" style="margin-top: 15px; background: #fff;" data-i18n="cart.login_page">Страница входа</button>
       </div>
     `;
+  // Принудительно запускаем перевод для вновь вставленного блока
+  if (typeof window.translatePage === "function") {
+    window.translatePage();
+  }
 } else {
   const container = document.createElement("div");
   container.className = "container-for-catalog-cards";
@@ -63,6 +67,8 @@ if (!currentUser) {
       return;
     }
 
+    const lang = window.getLang();
+
     input.forEach((element) => {
       const currentAmount = element.amount || 1;
       const card = document.createElement("div");
@@ -83,7 +89,10 @@ if (!currentUser) {
       image.src = element.photo;
 
       const name = window.getLocalizedValue(element, "name");
-      const subcat = window.getLocalizedValue(element, "subcategory");
+
+      // Если у элемента нет subcategory (это товар), подставляем обычную категорию
+      const subcat =
+        window.getLocalizedValue(element, "subcategory") || element.category;
       const desc = window.getLocalizedValue(element, "description");
 
       const text1 = document.createElement("p");
@@ -143,7 +152,8 @@ if (!currentUser) {
 
       const price = parseFloat(element.price || 0);
       const total = price * currentAmount;
-      cost.textContent = total + " ₽";
+      // Отображаем знак валюты в зависимости от выбранного языка
+      cost.textContent = total + (lang === "ru" ? " ₽" : " RUB");
     });
     window.translatePage();
   }
@@ -166,6 +176,8 @@ if (!currentUser) {
       console.error("Ошибка при получении данных бронирования:", e);
     }
 
+    const lang = window.getLang();
+
     const nameLower = (product.name_ru || product.name || "")
       .toLowerCase()
       .replace(/ё/g, "е");
@@ -183,20 +195,22 @@ if (!currentUser) {
 
     let targetQualification = "";
     if (nameLower.includes("стажер") || nameLower.includes("intern")) {
-      targetQualification = "стажер";
+      targetQualification = lang === "ru" ? "стажер" : "intern";
     } else if (nameLower.includes("профи") || nameLower.includes("pro")) {
-      targetQualification = "профи";
+      targetQualification = lang === "ru" ? "профи" : "pro";
     } else if (nameLower.includes("мастер") || nameLower.includes("master")) {
-      targetQualification = "мастер";
+      targetQualification = lang === "ru" ? "мастер" : "master";
     }
 
     const filteredMasters = masters.filter((m) => {
-      const matchesCategory = !targetCategory || m.category === targetCategory;
+      const matchesCategory = !targetCategory || m.category == targetCategory;
+      const masterQual = m[`qualification_${lang}`];
       const matchesQualification =
-        !targetQualification || m.qualification === targetQualification;
+        !targetQualification || masterQual == targetQualification;
       return matchesCategory && matchesQualification;
     });
 
+    console.log(filteredMasters);
     const modal = document.createElement("div");
     modal.className = "custom-booking-modal";
 
@@ -537,7 +551,6 @@ if (!currentUser) {
       console.error("Ошибка:", error);
     }
   }
-
   window.addEventListener("languageChanged", loadProduct);
 
   loadProduct();

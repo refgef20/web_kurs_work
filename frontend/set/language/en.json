@@ -9,6 +9,7 @@
     "favorites": "Favorites",
     "history": "Order History",
     "profile": "Profile",
+    "accessibility": "Accessible version",
     "admin": "Admin",
     "login": "Sign In",
     "logout": "Sign Out",
@@ -91,8 +92,6 @@
     "avatar_loading": "U"
   },
   "catalog": {
-    "cat_treatment": "Hear Treatment",
-    "cat_prof": "Professional care",
     "prev_btn": "Back",
     "next_btn": "Next",
     "sort_lbl": "Sorting",
@@ -105,7 +104,9 @@
     "not_found": "Products not found",
     "error_loading": "Oops! Something went wrong loading the products.",
     "cat_styling_tools": "Styling tools",
-    "cat_daily_care": "Daily care"
+    "cat_daily_care": "Daily care",
+    "cat_prof": "Professional care",
+    "cat_treatment": "Hear Treatment"
   },
   "feedback": {
     "title": "Leave a Review",

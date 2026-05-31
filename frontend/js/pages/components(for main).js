@@ -1,3 +1,4 @@
+import "./accessibility.js";
 class SiteHeader extends HTMLElement {
   connectedCallback() {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -57,7 +58,7 @@ class SiteHeader extends HTMLElement {
           <li><a class="navigation-item" href="pages/favorites.html" data-i18n="header.favorites">Избранное</a></li>
           <li><a class="navigation-item" href="pages/history.html" data-i18n="header.history">Заказы</a></li>
           <li><a class="navigation-item" href="pages/profile.html" data-i18n="header.profile">Мой кабинет</a></li>
-    <li> <a href="javascript:void(0)" onclick="letsee_toggle_panel()">Версия для слабовидящих</a></li>
+          <li><button class="navigation-item accessibility-open-btn" type="button" data-i18n="header.accessibility">Версия для слабовидящих</button></li>
           ${adminLink}
           <li class="container-for-button">
              ${authSection}
@@ -112,6 +113,13 @@ class SiteHeader extends HTMLElement {
         window.setLanguage(targetLang);
       });
     });
+
+    const accessibilityBtn = this.querySelector(".accessibility-open-btn");
+    if (accessibilityBtn) {
+      accessibilityBtn.addEventListener("click", () => {
+        window.openAccessibilityPanel();
+      });
+    }
 
     // Логика переключения тем оформления
     const themeToggleBtn = this.querySelector("#theme-toggle-btn");
@@ -199,7 +207,7 @@ class SiteFooter extends HTMLElement {
                 </div>
               </div>
             </div>
-            <button class="button-under-menu" data-i18n="main.write_btn">Записаться</button>
+            <button class="button-under-menu" data-i18n="main.write_btn">Наши услуги</button>
           </div>
           <div class="cards-navigation">
             <p class="tittle-card" data-i18n="footer.map_title">Карта</p>

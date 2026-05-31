@@ -1,3 +1,5 @@
+import "./accessibility.js";
+
 class SiteHeader extends HTMLElement {
   connectedCallback() {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -18,9 +20,9 @@ class SiteHeader extends HTMLElement {
     this.innerHTML = `
     <div id="preloader" class="preloader">
     <div class="preloader-content">
-        <!-- Текст бренда (можно заменить на <img src="/путь/к/лого.png" alt="logo">) -->
+       
         <div class="preloader-logo">ANNETKA</div>
-        <!-- Крутящийся элемент -->
+
         <div class="preloader-spinner"></div>
     </div>
 </div>
@@ -29,14 +31,13 @@ class SiteHeader extends HTMLElement {
         <p class="item-icon">Annetka.Hair</p>
         
         <div style="display:flex; gap:10px; align-items:center; margin-right:15px; margin-left: auto;">
-          <!-- Селектор языков -->
+
           <div class="lang-selector-container" style="display:flex; gap:10px; align-items:center;">
             <button class="lang-switch-btn" data-lang="ru" style="background:none; border:none; color:#fff; cursor:pointer; font-size:13px;">RU</button>
             <span style="color:rgba(255,255,255,0.3)">|</span>
             <button class="lang-switch-btn" data-lang="en" style="background:none; border:none; color:#fff; cursor:pointer; font-size:13px;">EN</button>
           </div>
 
-          <!-- Переключатель темы -->
           <button id="theme-toggle-btn" style="background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#fff; padding:5px;">
             <span id="theme-icon-container" style="display:flex; align-items:center; justify-content:center;"></span>
           </button>
@@ -57,6 +58,7 @@ class SiteHeader extends HTMLElement {
           <li><a class="navigation-item" href="favorites.html" data-i18n="header.favorites">Избранное</a></li>
           <li><a class="navigation-item" href="history.html" data-i18n="header.history">История заказов</a></li>
           <li><a class="navigation-item" href="profile.html" data-i18n="header.profile">Личный кабинет</a></li>
+          <li><button class="navigation-item accessibility-open-btn" type="button" data-i18n="header.accessibility">Версия для слабовидящих</button></li>
           ${adminLink}
           <li class="container-for-button">
              ${authSection}
@@ -111,6 +113,13 @@ class SiteHeader extends HTMLElement {
         window.setLanguage(targetLang);
       });
     });
+
+    const accessibilityBtn = this.querySelector(".accessibility-open-btn");
+    if (accessibilityBtn) {
+      accessibilityBtn.addEventListener("click", () => {
+        window.openAccessibilityPanel();
+      });
+    }
 
     // Логика переключения тем оформления
     const themeToggleBtn = this.querySelector("#theme-toggle-btn");
@@ -197,7 +206,7 @@ class SiteFooter extends HTMLElement {
                 </div>
               </div>
             </div>
-            <button class="button-under-menu" data-i18n="main.write_btn">Записаться</button>
+            <button class="button-under-menu" data-i18n="main.write_btn">Наши услуги</button>
           </div>
           <div class="cards-navigation">
              <p class="tittle-card" data-i18n="footer.map_title">Карта</p>
@@ -219,7 +228,7 @@ class SiteFooter extends HTMLElement {
               <li><a class="navigation-item" href="" data-i18n="header.masters">Мастера</a></li>
               <li><a class="navigation-item" href="" data-i18n="header.reviews">Отзывы</a></li>
               <li><a class="navigation-item" href="" data-i18n="footer.works">Работы</a></li>
-              <li><a class="navigation-item" href="" data-i18n="footer.contacts">Контакты</a></li>
+              
             </ul>
             <div class="copyright">
               <p class="year">2014-2022</p>

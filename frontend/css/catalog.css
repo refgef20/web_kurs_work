@@ -116,6 +116,7 @@
   align-items: center;
   align-content: center;
   gap: 24px;
+  flex-wrap: wrap;
 }
 .button-login1 {
   border-radius: 120px;

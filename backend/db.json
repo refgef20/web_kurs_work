@@ -438,22 +438,64 @@
       "description_ru": "Услуга салона красоты Annetka.Hair",
       "description_en": "Beauty salon service Annetka.Hair",
       "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=400&q=80",
-      "amount": 1,
+      "amount": 2,
       "id": "enowM2f37lE"
     },
     {
       "userId": "u2",
-      "productId": "service_haircut_sub_1",
-      "name_ru": "Стрижка у мастера",
-      "name_en": "Haircut by a master",
-      "subcategory_ru": "Мужская стрижка",
-      "subcategory_en": "Men's Haircut",
-      "price": 1899,
+      "productId": "service_care_sub_2",
+      "name_ru": "Уход у профи",
+      "name_en": "Care by a pro",
+      "subcategory_ru": "Базовый уход",
+      "subcategory_en": "Basic Care",
+      "price": 4399,
       "description_ru": "Услуга салона красоты Annetka.Hair",
       "description_en": "Beauty salon service Annetka.Hair",
-      "photo": "https://images.unsplash.com/photo-1503951914875-452162b7f744?auto=format&fit=crop&w=400&q=80",
-      "amount": 2,
-      "id": "vz-_VZBamjk"
+      "photo": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=400&q=80",
+      "amount": 1,
+      "id": "ZlCLsNl3AuQ"
+    },
+    {
+      "userId": "u1",
+      "productId": "service_styling_sub_0",
+      "name_ru": "Укладка у стажёра",
+      "name_en": "Styling by an intern",
+      "subcategory_ru": "Повседневная укладка",
+      "subcategory_en": "Everyday Styling",
+      "price": 899,
+      "description_ru": "Услуга салона красоты Annetka.Hair",
+      "description_en": "Beauty salon service Annetka.Hair",
+      "photo": "https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=400&q=80",
+      "amount": 1,
+      "id": "luISHxtZyJ0"
+    },
+    {
+      "userId": "u1",
+      "productId": "service_coloring_sub_2",
+      "name_ru": "Окрашивание корней (профи)",
+      "name_en": "Root coloring (pro)",
+      "subcategory_ru": "Однотонное окрашивание",
+      "subcategory_en": "One Tone Coloring",
+      "price": 4399,
+      "description_ru": "Услуга салона красоты Annetka.Hair",
+      "description_en": "Beauty salon service Annetka.Hair",
+      "photo": "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=600&q=80",
+      "amount": 1,
+      "id": "3vIe570lHzQ"
+    },
+    {
+      "userId": "u1",
+      "productId": "service_care_sub_0",
+      "name_ru": "Уход у стажёра",
+      "name_en": "Care by an intern",
+      "subcategory_ru": "Базовый уход",
+      "subcategory_en": "Basic Care",
+      "price": 1499,
+      "description_ru": "Услуга салона красоты Annetka.Hair",
+      "description_en": "Beauty salon service Annetka.Hair",
+      "photo": "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=400&q=80",
+      "amount": 1,
+      "id": "RHRNah_Y0Fs"
     }
   ],
   "favorites": [
@@ -505,84 +547,7 @@
       "description_ru": "Революционный стайлер, который завивает, создаёт волны, разглаживает и сушит без экстремально высоких температур. Использует эффект Коанда для универсальной укладки.",
       "description_en": "Revolutionary styler that curls, waves, smooths, and dries without extreme heat. Uses the Coanda effect for versatile styling.",
       "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80",
-      "id": "imEeFQGr97U"
-    },
-    {
-      "userId": "u2",
-      "productId": "3",
-      "name_ru": "Dyson Airwrap Multi-styler",
-      "name_en": "Dyson Airwrap Multi-styler",
-      "price": 59900,
-      "description_ru": "Революционный стайлер, который завивает, создаёт волны, разглаживает и сушит без экстремально высоких температур. Использует эффект Коанда для универсальной укладки.",
-      "description_en": "Revolutionary styler that curls, waves, smooths, and dries without extreme heat. Uses the Coanda effect for versatile styling.",
-      "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80",
-      "id": "CxbbnajwFM4"
-    },
-    {
-      "userId": "u2",
-      "productId": "3",
-      "name_ru": "Dyson Airwrap Multi-styler",
-      "name_en": "Dyson Airwrap Multi-styler",
-      "price": 59900,
-      "description_ru": "Революционный стайлер, который завивает, создаёт волны, разглаживает и сушит без экстремально высоких температур. Использует эффект Коанда для универсальной укладки.",
-      "description_en": "Revolutionary styler that curls, waves, smooths, and dries without extreme heat. Uses the Coanda effect for versatile styling.",
-      "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80",
-      "id": "qNPCOnKBVbI"
-    },
-    {
-      "userId": "u2",
-      "productId": "3",
-      "name_ru": "Dyson Airwrap Multi-styler",
-      "name_en": "Dyson Airwrap Multi-styler",
-      "price": 59900,
-      "description_ru": "Революционный стайлер, который завивает, создаёт волны, разглаживает и сушит без экстремально высоких температур. Использует эффект Коанда для универсальной укладки.",
-      "description_en": "Revolutionary styler that curls, waves, smooths, and dries without extreme heat. Uses the Coanda effect for versatile styling.",
-      "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80",
-      "id": "LLf3l7cnjrQ"
-    },
-    {
-      "userId": "u2",
-      "productId": "3",
-      "name_ru": "Dyson Airwrap Multi-styler",
-      "name_en": "Dyson Airwrap Multi-styler",
-      "price": 59900,
-      "description_ru": "Революционный стайлер, который завивает, создаёт волны, разглаживает и сушит без экстремально высоких температур. Использует эффект Коанда для универсальной укладки.",
-      "description_en": "Revolutionary styler that curls, waves, smooths, and dries without extreme heat. Uses the Coanda effect for versatile styling.",
-      "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80",
-      "id": "TCbxavNI9E8"
-    },
-    {
-      "userId": "u2",
-      "productId": "3",
-      "name_ru": "Dyson Airwrap Multi-styler",
-      "name_en": "Dyson Airwrap Multi-styler",
-      "price": 59900,
-      "description_ru": "Революционный стайлер, который завивает, создаёт волны, разглаживает и сушит без экстремально высоких температур. Использует эффект Коанда для универсальной укладки.",
-      "description_en": "Revolutionary styler that curls, waves, smooths, and dries without extreme heat. Uses the Coanda effect for versatile styling.",
-      "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80",
-      "id": "NQ8uHt4qb-Q"
-    },
-    {
-      "userId": "u2",
-      "productId": "3",
-      "name_ru": "Dyson Airwrap Multi-styler",
-      "name_en": "Dyson Airwrap Multi-styler",
-      "price": 59900,
-      "description_ru": "Революционный стайлер, который завивает, создаёт волны, разглаживает и сушит без экстремально высоких температур. Использует эффект Коанда для универсальной укладки.",
-      "description_en": "Revolutionary styler that curls, waves, smooths, and dries without extreme heat. Uses the Coanda effect for versatile styling.",
-      "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80",
-      "id": "ww3isy_wpHo"
-    },
-    {
-      "userId": "u2",
-      "productId": "3",
-      "name_ru": "Dyson Airwrap Multi-styler",
-      "name_en": "Dyson Airwrap Multi-styler",
-      "price": 59900,
-      "description_ru": "Революционный стайлер, который завивает, создаёт волны, разглаживает и сушит без экстремально высоких температур. Использует эффект Коанда для универсальной укладки.",
-      "description_en": "Revolutionary styler that curls, waves, smooths, and dries without extreme heat. Uses the Coanda effect for versatile styling.",
-      "photo": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80",
-      "id": "37evkfSH3I0"
+      "id": "fKcaQXjanP4"
     }
   ],
   "masters": [
@@ -599,7 +564,7 @@
       "qualification_ru": "мастер",
       "qualification_en": "master",
       "experience_ru": [
-        "Парикмахер-стилист",
+        "Мужская стрижка",
         "Опыт более 5 лет"
       ],
       "experience_en": [
@@ -858,6 +823,25 @@
       ],
       "date": "26.05.2026",
       "id": "oQP4y41mojc"
+    },
+    {
+      "userId": "u1",
+      "items": [
+        {
+          "productId": "service_haircut_sub_1",
+          "name_ru": "Стрижка у мастера",
+          "name_en": "Haircut by a master",
+          "subcategory_ru": "Мужская стрижка",
+          "subcategory_en": "Men's Haircut",
+          "price": 1899,
+          "amount": 1,
+          "masterId": "m4",
+          "masterName": "Дима Волков (мастер)",
+          "bookingDate": "2026-06-02"
+        }
+      ],
+      "date": "30.05.2026",
+      "id": "kr2HyNMug7w"
     }
   ],
   "feedback": [
