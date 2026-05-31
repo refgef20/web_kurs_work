@@ -164,7 +164,7 @@
       "title_en": "Coloring",
       "description_ru": "Профессиональное окрашивание премиальными красителями.",
       "description_en": "Professional coloring with premium dyes.",
-      "photo": "https://images.unsplash.com/photo-1504198453312-84a5c4d15c89?auto=format&fit=crop&w=600&q=80",
+      "photo": "https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=400&q=80",
       "fromstash_ru": "Окрашивание у стажёра",
       "fromstash_en": "Coloring by an intern",
       "frommast_ru": "Окрашивание у мастера",
@@ -563,14 +563,8 @@
       "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
       "qualification_ru": "мастер",
       "qualification_en": "master",
-      "experience_ru": [
-        "Мужская стрижка",
-        "Опыт более 5 лет"
-      ],
-      "experience_en": [
-        "Hair stylist",
-        "Experience over 5 years"
-      ]
+      "experience_ru": ["Мужская стрижка", "Опыт более 5 лет"],
+      "experience_en": ["Hair stylist", "Experience over 5 years"]
     },
     {
       "id": "m2",
@@ -584,14 +578,8 @@
       "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
       "qualification_ru": "стажер",
       "qualification_en": "intern",
-      "experience_ru": [
-        "Младший стилист",
-        "Опыт 1 год"
-      ],
-      "experience_en": [
-        "Junior stylist",
-        "1 year of experience"
-      ]
+      "experience_ru": ["Младший стилист", "Опыт 1 год"],
+      "experience_en": ["Junior stylist", "1 year of experience"]
     },
     {
       "id": "m3",
@@ -605,14 +593,8 @@
       "photo": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80",
       "qualification_ru": "профи",
       "qualification_en": "pro",
-      "experience_ru": [
-        "Колорист-эксперт",
-        "Опыт более 8 лет"
-      ],
-      "experience_en": [
-        "Colorist expert",
-        "Experience over 8 years"
-      ]
+      "experience_ru": ["Колорист-эксперт", "Опыт более 8 лет"],
+      "experience_en": ["Colorist expert", "Experience over 8 years"]
     },
     {
       "id": "m4",
@@ -626,14 +608,8 @@
       "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
       "qualification_ru": "мастер",
       "qualification_en": "master",
-      "experience_ru": [
-        "Мужской стилист",
-        "Опыт более 4 лет"
-      ],
-      "experience_en": [
-        "Men's stylist",
-        "Experience over 4 years"
-      ]
+      "experience_ru": ["Мужской стилист", "Опыт более 4 лет"],
+      "experience_en": ["Men's stylist", "Experience over 4 years"]
     },
     {
       "id": "m5",
@@ -647,14 +623,8 @@
       "photo": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
       "qualification_ru": "стажер",
       "qualification_en": "intern",
-      "experience_ru": [
-        "Мастер по уходу",
-        "Опыт 2 года"
-      ],
-      "experience_en": [
-        "Hair care specialist",
-        "2 years of experience"
-      ]
+      "experience_ru": ["Мастер по уходу", "Опыт 2 года"],
+      "experience_en": ["Hair care specialist", "2 years of experience"]
     },
     {
       "id": "m6",
@@ -668,14 +638,8 @@
       "photo": "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=600&q=80",
       "qualification_ru": "профи",
       "qualification_en": "pro",
-      "experience_ru": [
-        "Топ-стилист",
-        "Опыт более 7 лет"
-      ],
-      "experience_en": [
-        "Top stylist",
-        "Experience over 7 years"
-      ]
+      "experience_ru": ["Топ-стилист", "Опыт более 7 лет"],
+      "experience_en": ["Top stylist", "Experience over 7 years"]
     }
   ],
   "users": [

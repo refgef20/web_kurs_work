@@ -184,3 +184,8 @@
     display: flex !important;
   }
 }
+@media (max-width: 320px) {
+  #reg-username {
+    max-width: 100px;
+  }
+}
