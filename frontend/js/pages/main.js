@@ -16,6 +16,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const pricesBox = document.querySelector(".costs-master");
     const menuItems = document.querySelectorAll(".kinds-hairStyle");
 
+    // Элементы выпадающего списка для мобильной версии
+    const hairContainer = document.querySelector(".hair");
+    const kindsList = document.querySelector(".container-kinds-hairStyle");
+    const dropdownArrow = document.querySelector(
+      ".hair > img[alt='ojojojojojo']",
+    );
+    const viewFavor = document.querySelector(".view-favor");
+
     let activeService = services[0];
     let activeSubcategory = null;
 
@@ -186,6 +194,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         <p class="description-hairCut">${window.getLocalizedValue(target, "description")}</p>
       `;
 
+      // Синхронизация текста в выпадающем списке
+      if (viewFavor) {
+        viewFavor.textContent = window.getLocalizedValue(service, "title");
+        viewFavor.setAttribute("data-i18n", `main.${service.id}`);
+      }
+
       if (subcategory?.items) {
         const subTitleRu = subcategory.title_ru || subcategory.title;
         const subTitleEn = subcategory.title_en || subcategory.title;
@@ -268,7 +282,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         service.subcategories?.forEach((sub) => {
           const li = document.createElement("li");
           li.textContent = window.getLocalizedValue(sub, "title");
-          li.addEventListener("click", () => updateView(service, sub));
+          li.addEventListener("click", () => {
+            updateView(service, sub);
+            // Закрываем меню на мобильном после выбора подкатегории
+            kindsList?.classList.remove("open-dropdown");
+            dropdownArrow?.classList.remove("rotate-arrow");
+          });
           list.appendChild(li);
         });
 
@@ -296,12 +315,38 @@ document.addEventListener("DOMContentLoaded", async () => {
           .forEach((a) => a.classList.remove("active"));
         link.classList.add("active");
         updateView(service);
+
+        // Сворачиваем мобильное меню при выборе основной категории (если нет подкатегорий)
+        if (!service.subcategories || service.subcategories.length === 0) {
+          kindsList?.classList.remove("open-dropdown");
+          dropdownArrow?.classList.remove("rotate-arrow");
+        }
       });
 
-      icon?.addEventListener("click", () =>
-        toggleSubcategories(menuItem, service),
-      );
+      icon?.addEventListener("click", (e) => {
+        e.stopPropagation(); // Предотвращаем закрытие меню при клике на иконку подкатегории
+        toggleSubcategories(menuItem, service);
+      });
     });
+
+    // Логика открытия/закрытия выпадающего списка на мобильных устройствах
+    if (hairContainer && kindsList) {
+      hairContainer.addEventListener("click", (e) => {
+        // Открываем/закрываем только если клик пришёлся не по самому списку услуг
+        if (!kindsList.contains(e.target)) {
+          kindsList.classList.toggle("open-dropdown");
+          dropdownArrow?.classList.toggle("rotate-arrow");
+        }
+      });
+
+      // Закрытие меню при клике в любую пустую область экрана
+      document.addEventListener("click", (e) => {
+        if (!hairContainer.contains(e.target)) {
+          kindsList.classList.remove("open-dropdown");
+          dropdownArrow?.classList.remove("rotate-arrow");
+        }
+      });
+    }
 
     const firstService = services[0];
     const firstLink = document.querySelector(

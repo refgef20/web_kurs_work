@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("masters-container");
   const btnLeft = document.querySelector(".arrow-left");
   const btnRight = document.querySelector(".arrow-right");
+  const dotsContainer = document.querySelector(".slider-dots");
 
   if (!container || !btnLeft || !btnRight) {
     console.warn("Элементы слайдера мастеров не найдены в DOM.");
@@ -10,6 +11,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let masters = [];
   let currentIndex = 0;
+
+  const renderDots = () => {
+    if (!dotsContainer || !masters.length) return;
+
+    dotsContainer.innerHTML = masters
+      .map((_, index) => {
+        const isActive = index === currentIndex;
+        return `<span class="dot ${isActive ? "active" : ""}" data-index="${index}"></span>`;
+      })
+      .join("");
+
+    // Добавляем возможность переключения слайдера по клику на точку
+    dotsContainer.querySelectorAll(".dot").forEach((dot) => {
+      dot.addEventListener("click", () => {
+        currentIndex = parseInt(dot.dataset.index, 10);
+        renderMasters();
+      });
+    });
+  };
 
   const renderMasters = () => {
     if (!masters.length) return;
@@ -44,6 +64,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
       `;
     }).join("");
+
+    // Обновляем состояние точек
+    renderDots();
     window.translatePage();
   };
 

@@ -28,6 +28,94 @@
         --color-border-dark: #333333;
         --color-border-dashed: #444444;
       }
+      @media (max-width: 768px) {
+        .hair {
+          position: relative;
+          cursor: pointer;
+          user-select: none;
+        }
+
+        /* Плавный поворот стрелочки */
+        .hair > img[alt="ojojojojojo"] {
+          transition: transform 0.3s ease;
+        }
+
+        .hair > img[alt="ojojojojojo"].rotate-arrow {
+          transform: rotate(180deg);
+        }
+
+        /* Скрываем список по умолчанию на мобильных устройствах */
+        .container-kinds-hairStyle {
+          display: none !important;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background-color: var(--color-bg-card);
+          border: 1px solid var(--color-border-dark);
+          z-index: 1000;
+          box-sizing: border-box;
+          padding: 10px;
+          list-style: none;
+          margin: 0;
+          flex-direction: column;
+        }
+
+        /* Отображаем список при активации */
+        .container-kinds-hairStyle.open-dropdown {
+          display: flex !important;
+        }
+
+        /* Корректные отступы для подкатегорий внутри списка */
+        .subcategories-list {
+          padding-left: 15px;
+          margin: 5px 0 10px 0;
+          list-style: none;
+        }
+
+        .subcategories-list li {
+          padding: 8px 0;
+          color: var(--color-text-gray-alt);
+          cursor: pointer;
+        }
+
+        .subcategories-list li:hover {
+          color: var(--color-accent);
+        }
+      }
+
+      @media (min-width: 769px) {
+        .container-kinds-hairStyle {
+          display: flex !important;
+        }
+        .view-favor,
+        .hair > img[alt="ojojojojojo"] {
+          display: none !important;
+        }
+      }
+      .slider-dots {
+        align-self: center;
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .slider-dots .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid var(--color-text-main, #ffffff);
+        background-color: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+      }
+
+      .slider-dots .dot.active {
+        background-color: var(--color-accent, #71165b);
+        border-color: var(--color-accent, #71165b);
+      }
     </style>
   </head>
   <body>
@@ -149,7 +237,7 @@
           <div class="master">
             <p class="tittle-master" data-i18n="main.masters_title">мастера</p>
             <div class="cards-masters" id="masters-container"></div>
-            <img style="align-self: center" src="set/icon/табы.svg" alt="" />
+            <div class="slider-dots"></div>
           </div>
           <img
             src="set/icon/right.svg"
