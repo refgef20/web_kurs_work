@@ -140,9 +140,12 @@
     margin: 0;
     padding-top: 1px;
   }
-
+  .container-for-buttons {
+    min-height: 180px;
+    padding: 0px;
+  }
   .nav-bar-for-mets {
-    height: 63px;
+    min-height: 163px;
     gap: 0.625rem 0.875rem;
   }
 

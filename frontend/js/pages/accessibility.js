@@ -6,11 +6,14 @@ const defaultSettings = {
   scheme: "black-white",
   images: "on",
 };
-
+// Класс для текстовой заглушки, которая будет вставляться вместо скрытых картинок
 const imagePlaceholderClass = "a11y-image-placeholder";
 let lastFocusedElement = null;
+// Переменная для экземпляра MutationObserver (следит за динамическим появлением новых картинок)
 let observer = null;
+// Набор уникальных изображений, ожидающих обработки (скрытия)
 const queuedImages = new Set();
+// Переменная для хранения идентификатора кадра анимации (requestAnimationFrame)
 let queuedImagesFrame = null;
 
 const readSettings = () => {
@@ -41,7 +44,7 @@ const hideImage = (image) => {
   if (shouldSkipImage(image)) {
     return;
   }
-
+  // Ищем элемент заглушки, идущий сразу за картинкой
   let placeholder = image.nextElementSibling;
   if (!placeholder || !placeholder.classList.contains(imagePlaceholderClass)) {
     placeholder = document.createElement("span");
@@ -79,8 +82,9 @@ const syncImages = (imagesAreHidden) => {
     }
   });
 };
-
+// Функция для очистки очереди и скрытия накопившихся картинок
 const flushQueuedImages = () => {
+  // Сбрасываем идентификатор кадра анимации
   queuedImagesFrame = null;
   const settings = readSettings();
 
@@ -90,6 +94,7 @@ const flushQueuedImages = () => {
   }
 
   queuedImages.forEach((image) => {
+    // Если картинка все еще присутствует в документе (не удалена из DOM)
     if (image.isConnected) {
       hideImage(image);
     }
@@ -105,6 +110,7 @@ const queueImage = (image) => {
   queuedImages.add(image);
 
   if (!queuedImagesFrame) {
+    // Это предотвращает зависание интерфейса (Layout Thrashing) при массовом добавлении картинок.
     queuedImagesFrame = window.requestAnimationFrame(flushQueuedImages);
   }
 };
@@ -114,14 +120,14 @@ const updateModalControls = (settings) => {
   if (!modal) {
     return;
   }
-
+  // Устанавливаем атрибут aria-pressed ("true" или "false"), сообщающий, нажата ли кнопка в данный момент
   modal.querySelectorAll("[data-a11y-font]").forEach((button) => {
     button.setAttribute(
       "aria-pressed",
       String(button.dataset.a11yFont === settings.font),
     );
   });
-
+  //для кнопок выбора цветовой схемы
   modal.querySelectorAll("[data-a11y-scheme]").forEach((button) => {
     button.setAttribute(
       "aria-pressed",
@@ -152,12 +158,15 @@ const applySettings = (settings = readSettings()) => {
 
   syncImages(settings.enabled && settings.images === "off");
   updateModalControls(settings);
+  // Создаем и отправляем глобальное JS-событие "accessibilityChanged",
+  // чтобы другие скрипты на сайте могли среагировать на изменение темы
   window.dispatchEvent(
     new CustomEvent("accessibilityChanged", { detail: settings }),
   );
 };
 
 const updateSettings = (changes) => {
+  // Объединяем старые настройки, принудительно ставим enabled: true и подмешиваем новые изменения (changes)
   const nextSettings = { ...readSettings(), enabled: true, ...changes };
   saveSettings(nextSettings);
   applySettings(nextSettings);
@@ -227,6 +236,9 @@ const ensureImageObserver = () => {
     });
   });
 
+  // Запускаем слежку за тегом body:
+  // childList: true — следить за добавлением/удалением дочерних тегов
+  // subtree: true — следить глубоко по всей вложенности дерева тегов
   observer.observe(document.body, { childList: true, subtree: true });
 };
 

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/main.css" />
 
     <script type="module" src="js/pages/language.js"></script>
-    <script type="module" src="js/pages/components(for main).js"></script>
+    <script type="module" src="js/pages/components(main).js"></script>
     <script type="module" src="js/pages/main(masters).js"></script>
     <script type="module" src="js/pages/main.js"></script>
     <script type="module" src="js/pages/load.js"></script>
@@ -35,16 +35,14 @@
           user-select: none;
         }
 
-        /* Плавный поворот стрелочки */
-        .hair > img[alt="ojojojojojo"] {
+        .hair > img[alt="direct"] {
           transition: transform 0.3s ease;
         }
 
-        .hair > img[alt="ojojojojojo"].rotate-arrow {
+        .hair > img[alt="direct"].rotate-arrow {
           transform: rotate(180deg);
         }
 
-        /* Скрываем список по умолчанию на мобильных устройствах */
         .container-kinds-hairStyle {
           display: none !important;
           position: absolute;
@@ -162,23 +160,18 @@
           </p>
           <div class="hair-style">
             <div class="hair">
-              <ul class="container-kinds-hairStyle">
-                <div class="list-subcat">
-                  <li class="kinds-hairStyle" data-id="haircut">
-                    <a
-                      href="!#"
-                      class="items-kinds-hair"
-                      data-i18n="main.haircut"
-                      >стрижка</a
-                    >
-                    <img src="set/icon/plus.svg" alt="" class="toggle-icon" />
-                  </li>
-                </div>
+              <ul class="container-kinds-hairStyle list-subcat">
+                <li class="kinds-hairStyle" data-id="haircut">
+                  <a href="!#" class="items-kinds-hair" data-i18n="main.haircut"
+                    >стрижка</a
+                  >
+                  <img src="set/icon/plus.svg" alt="plus" class="toggle-icon" />
+                </li>
                 <li class="kinds-hairStyle kinds-styling" data-id="styling">
                   <a href="!#" class="items-kinds-hair" data-i18n="main.styling"
                     >укладка</a
                   >
-                  <img src="set/icon/plus.svg" alt="" class="toggle-icon" />
+                  <img src="set/icon/plus.svg" alt="plus" class="toggle-icon" />
                 </li>
                 <li class="kinds-hairStyle kinds-dye" data-id="coloring">
                   <a
@@ -187,7 +180,7 @@
                     data-i18n="main.coloring"
                     >окрашивание</a
                   >
-                  <img src="set/icon/plus.svg" alt="" class="toggle-icon" />
+                  <img src="set/icon/plus.svg" alt="plus" class="toggle-icon" />
                 </li>
                 <li class="kinds-hairStyle kinds-care" data-id="care">
                   <a href="" class="items-kinds-hair" data-i18n="main.care"
@@ -197,7 +190,7 @@
                 </li>
               </ul>
               <p class="view-favor" data-i18n="main.haircut">Стрижка</p>
-              <img src="set/icon/Polygon 1.svg" alt="ojojojojojo" />
+              <img src="set/icon/Polygon1.svg" alt="direct" />
             </div>
             <hr class="line-style" />
             <div class="description-hairstyle">
@@ -205,20 +198,13 @@
               <div class="cost-with-button">
                 <div class="costs-master"></div>
                 <div class="buttons-written-master">
-                  <button
+                  <a
                     class="write-button-style master-button"
+                    style="color: var(--color-text-main); text-decoration: none"
+                    href="#master"
                     data-i18n="main.masters_title"
+                    >Наши мастера</a
                   >
-                    <a
-                      style="
-                        color: var(--color-text-main);
-                        text-decoration: none;
-                      "
-                      href="#master"
-                      data-i18n="main.masters_title"
-                      >Наши мастера</a
-                    >
-                  </button>
                 </div>
               </div>
             </div>
